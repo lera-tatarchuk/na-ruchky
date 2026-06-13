@@ -6,93 +6,35 @@
 <title>Хочу на ручки — підтримка прийомних батьків і ДБСТ</title>
 <meta name="description" content="Безоплатні ресурсні ретрити, національне дослідження вигорання та поради психологів для прийомних батьків і батьків-вихователів.">
 <meta property="og:title" content="Хочу на ручки — підтримка прийомних батьків">
-<meta property="og:description" content="Простір підтримки для прийомних батьків і батьків-вихователів. Ресурсні ретрити, дослідження, поради психологів.">
+<meta property="og:description" content="Простір підтримки для прийомних батьків і батьків-вихователів.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --terracotta:#C85A3C; --sage:#7BA693; --ink:#2F4A3F;
-    --cream:#FBF4EC; --bg:#FCF9F3; --line:#EADFD2; --muted:#8A9A8F;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-  .cav{font-family:'Caveat','Segoe Script',cursive;font-weight:700;line-height:1}
-
-  /* header */
-  header{position:sticky;top:0;background:rgba(252,249,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-  .brand{display:flex;align-items:center;gap:10px}
-  .brand .name{font-family:'Caveat',cursive;font-weight:700;font-size:30px;color:var(--ink)}
-  .menu{display:flex;gap:18px;flex-wrap:wrap;font-weight:500;font-size:15px}
-  .menu a:hover{color:var(--terracotta)}
-  .btn{display:inline-block;background:var(--terracotta);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;border:2px solid var(--terracotta);transition:.15s}
-  .btn:hover{background:#b14e33;border-color:#b14e33}
-  .btn.ghost{background:transparent;color:var(--terracotta)}
-  .btn.ghost:hover{background:var(--terracotta);color:#fff}
-
-  /* hero */
-  .hero{padding:64px 0 48px;text-align:center}
-  .hero h1{font-family:'Caveat',cursive;font-size:84px;margin:0;color:var(--ink)}
-  .hero .sub{font-size:20px;color:var(--sage);font-weight:600;margin:6px 0 22px}
-  .hero p{max-width:680px;margin:0 auto 26px;font-size:18px}
-  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-
-  /* numbers */
-  .nums{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:40px 0}
-  .num{flex:1 1 180px;max-width:230px;background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
-  .num b{display:block;font-family:'Caveat',cursive;font-size:40px;color:var(--terracotta);line-height:1}
-  .num span{font-size:14px;color:var(--muted);font-weight:600}
-
-  /* sections */
-  section.block{padding:30px 0}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
-  .card h3{margin:0 0 8px;font-size:20px}
-  .card p{margin:0 0 14px;color:#46544c}
-  .card .lnk{color:var(--terracotta);font-weight:600}
-  .tag{color:var(--sage);font-weight:700}
-
-  /* footer */
-  footer{background:var(--ink);color:#E8EFEA;margin-top:50px;padding:36px 0}
-  footer .name{font-family:'Caveat',cursive;font-size:34px;color:#fff}
-  footer p{color:#B9C7BF;font-size:14px;max-width:760px}
-  .donors{background:#fff;border-radius:12px;padding:16px;margin:18px 0;color:var(--muted);font-size:13px;text-align:center}
-  .note{font-size:12.5px;color:#94A59C;font-style:italic;border-top:1px solid #3a554a;padding-top:14px;margin-top:18px}
-
-  @media(max-width:720px){
-    .hero h1{font-size:60px}
-    .menu{display:none}
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <svg width="40" height="40" viewBox="0 0 120 120" aria-hidden="true">
-        <path d="M36 66 Q60 96 84 66" fill="none" stroke="#7BA693" stroke-width="8" stroke-linecap="round"/>
-        <path d="M44 57 Q60 83 76 57" fill="none" stroke="#C85A3C" stroke-width="8" stroke-linecap="round"/>
-        <g transform="translate(51.6 33.6) scale(0.7)" fill="#C85A3C"><path d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z"/></g>
-      </svg>
-      <span class="name">хочу на ручки</span>
-    </div>
-    <nav class="menu">
-      <a href="#pro">Про проєкт</a>
-      <a href="#retreaty">Ретрити</a>
-      <a href="#podcast">Подкаст</a>
-      <a href="#pidtrymka">Підтримка</a>
-      <a href="#biznes">Для бізнесу</a>
-    </nav>
-    <a href="#retreaty" class="btn">Подати заявку</a>
-  </div>
-</header>
+<header><div class="wrap nav">
+  <a class="brand" href="index.html">
+    <svg width="40" height="40" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M36 66 Q60 96 84 66" fill="none" stroke="#7BA693" stroke-width="8" stroke-linecap="round"/>
+      <path d="M44 57 Q60 83 76 57" fill="none" stroke="#C85A3C" stroke-width="8" stroke-linecap="round"/>
+      <g transform="translate(51.6 33.6) scale(0.7)" fill="#C85A3C"><path d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z"/></g>
+    </svg>
+    <span class="name">хочу на ручки</span>
+  </a>
+  <nav class="menu">
+    <a href="pro.html">Про проєкт</a>
+    <a href="retreaty.html">Ретрити</a>
+    <a href="podcast.html">Подкаст</a>
+    <a href="pidtrymka.html">Підтримка</a>
+    <a href="mentory.html">Ментори</a>
+    <a href="dlya-biznesu.html">Для бізнесу</a>
+  </nav>
+  <a href="retreaty.html" class="btn">Подати заявку</a>
+</div></header>
 
 <main>
   <section class="hero wrap">
@@ -100,8 +42,8 @@
     <div class="sub">Простір підтримки для прийомних батьків і батьків-вихователів</div>
     <p>Ви годуєте, втішаєте, лікуєте, виховуєте. Не спите ночами, витримуєте істерики, страхи й довге мовчання. Щодня тримаєте на руках дітей, яким довелося подорослішати надто рано. <b>А хто тримає вас?</b></p>
     <div class="cta">
-      <a href="#retreaty" class="btn">Подати заявку на ретрит</a>
-      <a href="#doslidzhennia" class="btn ghost">Взяти участь у дослідженні</a>
+      <a href="retreaty.html" class="btn">Подати заявку на ретрит</a>
+      <a href="doslidzhennia.html" class="btn ghost">Взяти участь у дослідженні</a>
     </div>
   </section>
 
@@ -114,50 +56,24 @@
     </div>
   </div>
 
-  <section class="block wrap" id="pro">
+  <section class="block wrap">
     <div class="cards">
-      <div class="card">
-        <h3>Про проєкт</h3>
-        <p>Прийомні батьки виховують дітей, які пережили втрату й травму. Витримати таке роками без підтримки не здатен ніхто — і потребувати допомоги тут нормально. Ми хочемо це змінити.</p>
-        <a class="lnk" href="#">Дізнатися більше →</a>
-      </div>
-      <div class="card" id="retreaty">
-        <h3>Ресурсні ретрити</h3>
-        <p>Три дні, щоб нарешті подбати про себе: з психологами, без побуту й поспіху, поряд з родинами, які розуміють вас без слів. За рік — вісім зустрічей. Усе коштом проєкту.</p>
-        <a class="lnk" href="#">Подати заявку →</a>
-      </div>
-      <div class="card" id="podcast">
-        <h3>Подкаст «Хочу на ручки»</h3>
-        <p>Щирі розмови з прийомними родинами, психологами й відомими людьми. А якщо вам є чим поділитися — станьте героєм випуску.</p>
-        <a class="lnk" href="#">Дивитися й розповісти →</a>
-      </div>
-      <div class="card" id="pidtrymka">
-        <h3>Підтримка 💛</h3>
-        <p>Поради психологів, прості практики відновлення на щодень і дбайливий самотест «Чи не вигораю я?».</p>
-        <a class="lnk" href="#">До матеріалів →</a>
-      </div>
-      <div class="card" id="biznes">
-        <h3>Для бізнесу</h3>
-        <p>Підтримайте не установу, а родину. Разом збережемо дітям головне — дім.</p>
-        <a class="lnk" href="#">Стати партнером →</a>
-      </div>
-      <div class="card" id="doslidzhennia">
-        <h3>Дослідження</h3>
-        <p>Перше національне дослідження вигорання прийомних батьків. Конфіденційно, ~15 хвилин — а допоможе сформувати державну підтримку сімей.</p>
-        <a class="lnk" href="#">Взяти участь →</a>
-      </div>
+      <div class="card"><h3>Про проєкт</h3><p>Прийомні батьки виховують дітей, які пережили втрату й травму. Витримати таке роками без підтримки не здатен ніхто — і потребувати допомоги тут нормально.</p><a class="lnk" href="pro.html">Дізнатися більше →</a></div>
+      <div class="card"><h3>Ресурсні ретрити</h3><p>Три дні, щоб нарешті подбати про себе: з психологами, без побуту й поспіху, поряд з родинами, які розуміють вас без слів. За рік — вісім зустрічей.</p><a class="lnk" href="retreaty.html">Подати заявку →</a></div>
+      <div class="card"><h3>Подкаст «Хочу на ручки»</h3><p>Щирі розмови з прийомними родинами, психологами й відомими людьми. А якщо вам є чим поділитися — станьте героєм випуску.</p><a class="lnk" href="podcast.html">Дивитися й розповісти →</a></div>
+      <div class="card"><h3>Підтримка 💛</h3><p>Поради психологів, прості практики відновлення на щодень і дбайливий самотест «Чи не вигораю я?».</p><a class="lnk" href="pidtrymka.html">До матеріалів →</a></div>
+      <div class="card"><h3>Для бізнесу</h3><p>Підтримайте не установу, а родину. Разом збережемо дітям головне — дім.</p><a class="lnk" href="dlya-biznesu.html">Стати партнером →</a></div>
+      <div class="card"><h3>Дослідження</h3><p>Перше національне дослідження вигорання прийомних батьків. Конфіденційно, ~15 хвилин.</p><a class="lnk" href="doslidzhennia.html">Взяти участь →</a></div>
     </div>
   </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="name">хочу на ручки</div>
-    <p>«Хочу на ручки» — подкаст і ресурсні ретрити проєкту «Стійкі сім'ї — стійка система» БФ «Твоя опора». Реалізується за підтримки ІСАР Єднання, Фонду «Аскольд і Дір», урядів Норвегії та Швеції.</p>
-    <div class="donors">[ тут — офіційна плашка донорів: brand/donors/donors-strip ]</div>
-    <p class="note">Для зручності читання ми вживаємо «прийомні батьки» як узагальнення. Залежно від контексту йдеться про прийомних батьків (прийомні сім'ї) і батьків-вихователів дитячих будинків сімейного типу (ДБСТ).</p>
-  </div>
-</footer>
+<footer><div class="wrap">
+  <div class="name">хочу на ручки</div>
+  <p>«Хочу на ручки» — подкаст і ресурсні ретрити проєкту «Стійкі сім'ї — стійка система» БФ «Твоя опора». Реалізується за підтримки ІСАР Єднання, Фонду «Аскольд і Дір», урядів Норвегії та Швеції.</p>
+  <div class="donors">[ тут буде офіційна плашка донорів ]</div>
+  <p class="fnote">Для зручності читання ми вживаємо «прийомні батьки» як узагальнення. Залежно від контексту йдеться про прийомних батьків (прийомні сім'ї) і батьків-вихователів дитячих будинків сімейного типу (ДБСТ).</p>
+</div></footer>
 
 </body>
 </html>

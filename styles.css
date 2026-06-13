@@ -1,0 +1,93 @@
+/* ==== Хочу на ручки — спільні стилі ==== */
+:root{
+  --terracotta:#C85A3C; --terracotta-dark:#b14e33; --sage:#7BA693; --ink:#2F4A3F;
+  --cream:#FBF4EC; --bg:#FCF9F3; --line:#EADFD2; --muted:#8A9A8F;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.cav{font-family:'Caveat','Segoe Script',cursive;font-weight:700;line-height:1}
+
+h1,h2,h3{color:var(--ink)}
+h2.section-title{font-size:30px;margin:0 0 18px}
+.lead{font-size:19px;max-width:760px}
+.muted{color:var(--muted)}
+.tag{color:var(--sage);font-weight:700}
+
+/* header */
+header{position:sticky;top:0;background:rgba(252,249,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .name{font-family:'Caveat',cursive;font-weight:700;font-size:30px;color:var(--ink)}
+.menu{display:flex;gap:16px;flex-wrap:wrap;font-weight:500;font-size:15px}
+.menu a:hover{color:var(--terracotta)}
+.btn{display:inline-block;background:var(--terracotta);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;border:2px solid var(--terracotta);transition:.15s;cursor:pointer}
+.btn:hover{background:var(--terracotta-dark);border-color:var(--terracotta-dark)}
+.btn.ghost{background:transparent;color:var(--terracotta)}
+.btn.ghost:hover{background:var(--terracotta);color:#fff}
+
+/* hero */
+.hero{padding:60px 0 44px;text-align:center}
+.hero h1{font-family:'Caveat',cursive;font-size:80px;margin:0;color:var(--ink)}
+.hero .sub{font-size:20px;color:var(--sage);font-weight:600;margin:6px 0 22px}
+.hero p{max-width:680px;margin:0 auto 26px;font-size:18px}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* page header (inner pages) */
+.page-head{padding:48px 0 10px}
+.page-head h1{font-family:'Caveat',cursive;font-size:58px;margin:0 0 6px}
+.page-head .sub{color:var(--sage);font-weight:600;font-size:18px}
+
+/* numbers */
+.nums{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:40px 0}
+.num{flex:1 1 180px;max-width:230px;background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
+.num b{display:block;font-family:'Caveat',cursive;font-size:40px;color:var(--terracotta);line-height:1}
+.num span{font-size:14px;color:var(--muted);font-weight:600}
+
+/* sections + cards */
+section.block{padding:28px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h3{margin:0 0 8px;font-size:20px}
+.card p{margin:0 0 14px;color:#46544c}
+.card .lnk{color:var(--terracotta);font-weight:600}
+
+/* prose */
+.prose{max-width:760px;font-size:17px}
+.prose h2{font-size:26px;margin:28px 0 10px}
+.prose ul{padding-left:20px}
+.prose li{margin-bottom:6px}
+
+/* form */
+.formwrap{max-width:640px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;margin-top:8px}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:600;margin-bottom:6px;font-size:15px}
+.field input,.field select,.field textarea{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.field textarea{min-height:96px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#46544c}
+.note{font-size:13px;color:var(--muted)}
+.formnote{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;color:#6b6258;margin-bottom:16px}
+
+/* mentors */
+.mentors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.mentor{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
+.mentor .ph{width:84px;height:84px;border-radius:50%;background:var(--cream);border:1px solid var(--line);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+.mentor b{display:block;font-size:16px}
+.mentor span{font-size:13px;color:var(--muted)}
+
+/* footer */
+footer{background:var(--ink);color:#E8EFEA;margin-top:50px;padding:36px 0}
+footer .name{font-family:'Caveat',cursive;font-size:34px;color:#fff}
+footer p{color:#B9C7BF;font-size:14px;max-width:780px}
+footer a{color:#fff;text-decoration:underline}
+.donors{background:#fff;border-radius:12px;padding:16px;margin:18px 0;color:var(--muted);font-size:13px;text-align:center}
+.fnote{font-size:12.5px;color:#94A59C;font-style:italic;border-top:1px solid #3a554a;padding-top:14px;margin-top:18px}
+
+@media(max-width:760px){
+  .hero h1{font-size:58px}
+  .page-head h1{font-size:46px}
+  .menu{display:none}
+}
