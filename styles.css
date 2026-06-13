@@ -80,7 +80,8 @@ section.block{padding:28px 0}
 /* mentors */
 .mentors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .mentor{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
-.mentor .ph{width:84px;height:84px;border-radius:50%;background:var(--cream);border:1px solid var(--line);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+.mentor .ph{width:84px;height:84px;border-radius:50%;background:var(--cream);border:1px solid var(--line);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;overflow:hidden}
+.mentor .ph img{width:100%;height:100%;object-fit:cover}
 .mentor b{display:block;font-size:16px}
 .mentor span{font-size:13px;color:var(--muted)}
 
