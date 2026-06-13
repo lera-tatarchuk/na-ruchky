@@ -30,7 +30,7 @@ header{position:sticky;top:0;background:rgba(252,249,243,.92);backdrop-filter:bl
 .btn.ghost:hover{background:var(--terracotta);color:#fff}
 
 /* hero */
-.hero{padding:60px 0 44px;text-align:center}
+.hero{padding:28px 0 40px;text-align:center}
 .hero h1{font-family:'Caveat',cursive;font-size:80px;margin:0;color:var(--ink)}
 .hero .sub{font-size:20px;color:var(--sage);font-weight:600;margin:6px 0 22px}
 .hero p{max-width:680px;margin:0 auto 26px;font-size:18px}
