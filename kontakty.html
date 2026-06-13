@@ -45,12 +45,11 @@
   </div>
 
   <div class="formwrap">
-    <form>
-      <div class="field"><label>Ваше ім'я</label><input type="text"></div>
-      <div class="field"><label>Email або телефон</label><input type="text"></div>
-      <div class="field"><label>Повідомлення</label><textarea></textarea></div>
-      <button type="button" class="btn">Надіслати</button>
-      <p class="note" style="margin-top:10px">Підключення форми до бази — наступний технічний крок.</p>
+    <form class="sb-form" data-table="contact_messages">
+      <div class="field"><label>Ваше ім'я</label><input type="text" name="name" required></div>
+      <div class="field"><label>Email або телефон</label><input type="text" name="contact" required></div>
+      <div class="field"><label>Повідомлення</label><textarea name="message" required></textarea></div>
+      <button type="submit" class="btn">Надіслати</button>
     </form>
   </div>
 </main>
@@ -63,5 +62,7 @@
 </div></footer>
 
 <script src="nav.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="forms.js" defer></script>
 </body>
 </html>

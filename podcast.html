@@ -47,15 +47,14 @@
   <h2 class="section-title" id="heroyem" style="margin-top:36px">Розкажи свою історію — і стань героєм випуску</h2>
   <div class="prose"><p>У кожної прийомної родини є історія, яка може стати для когось опорою. Якщо ви готові поділитися — напишіть нам трохи про себе. Ми зв'яжемося й усе обережно обговоримо.</p></div>
   <div class="formwrap">
-    <form>
-      <div class="field"><label>Як вас звати?</label><input type="text" placeholder="Ім'я"></div>
-      <div class="field"><label>Звідки ви? (місто або громада, область)</label><input type="text" placeholder="напр. Ворзель, Київська обл."></div>
-      <div class="field"><label>Трохи про вас і вашу сім'ю</label><textarea placeholder="Прийомна сім'я чи ДБСТ, скільки дітей…"></textarea></div>
-      <div class="field"><label>Про що ваша історія? Чим хотіли б поділитися?</label><textarea></textarea></div>
-      <div class="field"><label>Контакт для зв'язку (email або телефон)</label><input type="text" placeholder="email або +380…"></div>
-      <div class="field check"><input type="checkbox" id="zgp"><label for="zgp" style="font-weight:400">Даю згоду на обробку даних і на зв'язок щодо участі в подкасті.</label></div>
-      <button type="button" class="btn">Надіслати історію</button>
-      <p class="note" style="margin-top:10px">Підключення форми до бази — наступний технічний крок.</p>
+    <form class="sb-form" data-table="podcast_stories">
+      <div class="field"><label>Як вас звати?</label><input type="text" name="name" required placeholder="Ім'я"></div>
+      <div class="field"><label>Звідки ви? (місто або громада, область)</label><input type="text" name="location" placeholder="напр. Ворзель, Київська обл."></div>
+      <div class="field"><label>Трохи про вас і вашу сім'ю</label><textarea name="about_family" placeholder="Прийомна сім'я чи ДБСТ, скільки дітей…"></textarea></div>
+      <div class="field"><label>Про що ваша історія? Чим хотіли б поділитися?</label><textarea name="story"></textarea></div>
+      <div class="field"><label>Контакт для зв'язку (email або телефон)</label><input type="text" name="contact" required placeholder="email або +380…"></div>
+      <div class="field check"><input type="checkbox" id="zgp" name="consent" required><label for="zgp" style="font-weight:400">Даю згоду на обробку даних і на зв'язок щодо участі в подкасті.</label></div>
+      <button type="submit" class="btn">Надіслати історію</button>
     </form>
   </div>
 </main>
@@ -68,5 +67,7 @@
 </div></footer>
 
 <script src="nav.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="forms.js" defer></script>
 </body>
 </html>
