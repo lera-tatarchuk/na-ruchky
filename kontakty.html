@@ -51,8 +51,10 @@
 
   <div class="formwrap">
     <form class="sb-form" data-table="contact_messages">
-      <div class="field"><label>Ваше ім'я</label><input type="text" name="name" required></div>
-      <div class="field"><label>Email або телефон</label><input type="text" name="contact" required></div>
+      <div class="field"><label>ПІБ</label><input type="text" name="name" required placeholder="Прізвище, ім'я, по батькові"></div>
+      <div class="field"><label>Email</label><input type="email" name="email" required placeholder="your@email.com"></div>
+      <div class="field"><label>Телефон</label><input type="tel" name="phone" required pattern="[+\d][\d\s()\-]{8,}" title="Введіть коректний номер телефону, напр. +380XXXXXXXXX" placeholder="+380XXXXXXXXX"></div>
+      <div class="field"><label>Компанія / організація</label><input type="text" name="company" required></div>
       <div class="field"><label>Повідомлення</label><textarea name="message" required></textarea></div>
       <button type="submit" class="btn">Надіслати</button>
     </form>
