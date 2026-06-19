@@ -183,8 +183,8 @@
         </select>
       </div>
       <div class="q">
-        <label class="qlabel" for="f_ages">15. Зазначте вік кожної дитини під опікою</label>
-        <input id="f_ages" type="text" name="children_ages" placeholder="напр.: 4, 7, 12, 15">
+        <label class="qlabel" for="f_ages">15. Зазначте вік кожної дитини під опікою <span class="req">*</span></label>
+        <input id="f_ages" type="text" name="children_ages" required placeholder="напр.: 4, 7, 12, 15">
         <p class="hint">Через кому, за віком кожної дитини.</p>
       </div>
       <div class="q">
@@ -226,7 +226,7 @@
         </div>
       </div>
       <div class="q">
-        <span class="qlabel">21. Чи зазнала ваша сім'я впливу війни? <span class="hint" style="display:inline">(можна обрати кілька)</span></span>
+        <span class="qlabel">21. Чи зазнала ваша сім'я впливу війни? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="war_impact" value="Внутрішнє переміщення"> Внутрішнє переміщення (евакуація, зміна місця проживання)</label>
           <label class="opt"><input type="checkbox" name="war_impact" value="Бойові дії / окупація / обстріли"> Перебування на території бойових дій, в окупації або під обстрілами</label>
@@ -244,7 +244,7 @@
     <fieldset class="fblock">
       <span class="legend">3. Мотивація та досвід виховання</span>
       <div class="q">
-        <span class="qlabel">22. Які мотиви вплинули на ваш вибір діяльності, пов'язаної з вихованням дітей? <span class="hint" style="display:inline">(можна обрати кілька)</span></span>
+        <span class="qlabel">22. Які мотиви вплинули на ваш вибір діяльності, пов'язаної з вихованням дітей? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="motyvy" value="Надати дітям любов і турботу"> Надати дітям любов і турботу, коли вони залишилися без батьків</label>
           <label class="opt"><input type="checkbox" name="motyvy" value="Емоційне задоволення та значущість"> Отримати емоційне задоволення від виховання та відчуття значущості</label>
@@ -266,7 +266,7 @@
         </div>
       </div>
       <div class="q">
-        <span class="qlabel">24. З якими труднощами у вихованні ви стикаєтеся найчастіше? <span class="hint" style="display:inline">(можна обрати кілька)</span></span>
+        <span class="qlabel">24. З якими труднощами у вихованні ви стикаєтеся найчастіше? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="difficulties" value="Емоційне виснаження"> Емоційне виснаження — постійна втома та стрес через потреби дітей</label>
           <label class="opt"><input type="checkbox" name="difficulties" value="Проблеми адаптації дитини"> Проблеми адаптації дитини — конфлікти, страхи, агресія, сум через розлуку з рідними</label>
@@ -281,7 +281,7 @@
         </div>
       </div>
       <div class="q">
-        <span class="qlabel">25. Що, на вашу думку, може бути причиною закриття ДБСТ / припинення опіки? <span class="hint" style="display:inline">(можна обрати кілька)</span></span>
+        <span class="qlabel">25. Що, на вашу думку, може бути причиною закриття ДБСТ / припинення опіки? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="closure_reasons" value="Сімейні кризи у вихователів"> Сімейні кризи у вихователів (розлучення, конфлікти в родині)</label>
           <label class="opt"><input type="checkbox" name="closure_reasons" value="Психологічне виснаження та вигорання"> Психологічне виснаження та емоційне вигорання вихователів</label>
@@ -380,9 +380,9 @@
           <label class="opt"><input type="radio" name="transfer" value="Залежить від локації"> Залежить від локації</label>
         </div>
       </div>
-      <div class="q"><label class="qlabel" for="f_needs">33. Особливі потреби (харчування, медичні, доступність, догляд за дітьми на час ретриту)</label><textarea id="f_needs" name="special_needs"></textarea></div>
-      <div class="q"><label class="qlabel" for="f_help">34. Що б вам найбільше допомогло відновити сили?</label><textarea id="f_help" name="what_helps"></textarea></div>
-      <div class="q"><label class="qlabel" for="f_why">35. Чому ви хотіли б взяти участь у ретриті? <span class="hint" style="display:inline">(кілька речень)</span></label><textarea id="f_why" name="why_retreat"></textarea></div>
+      <div class="q"><label class="qlabel" for="f_needs">33. Особливі потреби (харчування, медичні, доступність, догляд за дітьми на час ретриту) <span class="req">*</span></label><textarea id="f_needs" name="special_needs" data-req placeholder="Якщо особливих потреб немає — напишіть «немає»"></textarea></div>
+      <div class="q"><label class="qlabel" for="f_help">34. Що б вам найбільше допомогло відновити сили? <span class="req">*</span></label><textarea id="f_help" name="what_helps" data-req></textarea></div>
+      <div class="q"><label class="qlabel" for="f_why">35. Чому ви хотіли б взяти участь у ретриті? <span class="req">*</span> <span class="hint" style="display:inline">(кілька речень)</span></label><textarea id="f_why" name="why_retreat" data-req></textarea></div>
     </fieldset>
 
     <p class="note" style="max-width:640px">Натискаючи «Надіслати», ви підтверджуєте згоду з умовами, зазначеними вище та в <a href="polityka.html">Політиці конфіденційності</a>.</p>
@@ -442,20 +442,55 @@
     row.appendChild(sc); box.appendChild(row);
   });
 
+  // Множинний вибір — обов'язково хоча б один (нативна валідація браузера)
+  function group(name) { return Array.prototype.slice.call(document.querySelectorAll('input[name="' + name + '"]')); }
+  ['war_impact', 'motyvy', 'difficulties', 'closure_reasons'].forEach(function (name) {
+    var boxes = group(name);
+    function sync() {
+      var any = boxes.some(function (b) { return b.checked; });
+      boxes.forEach(function (b) { b.required = !any; });
+    }
+    boxes.forEach(function (b) { b.addEventListener('change', sync); });
+    sync();
+  });
+
+  // Поля «Інше (вкажіть)» — обов'язкові лише коли обрано «Інше»
+  function reqIf(triggerSel, field, valFn) {
+    var f = document.querySelector(field);
+    if (!f) return;
+    function upd() { f.required = valFn(); }
+    document.querySelectorAll(triggerSel).forEach(function (el) { el.addEventListener('change', upd); });
+    upd();
+  }
+  reqIf('input[name="family_form"]', '[name="family_form_other"]', function () {
+    var s = document.querySelector('input[name="family_form"]:checked'); return s && s.value === 'Інше';
+  });
+  reqIf('input[name="war_impact"]', '[name="war_impact_other"]', function () {
+    var i = document.querySelector('input[name="war_impact"][value="Інше"]'); return i && i.checked;
+  });
+  reqIf('input[name="closure_reasons"]', '[name="closure_other"]', function () {
+    var i = document.querySelector('input[name="closure_reasons"][value="Інше"]'); return i && i.checked;
+  });
+
   // Блок 6 — показ лише для тих, хто подається на ретрит
   var b6 = document.getElementById('block6');
+  var a8cond = document.querySelector('[name="all8_conditions"]');
+  function b6visible() { var s = document.querySelector('input[name="wants_retreat"]:checked'); return s && s.value === 'так'; }
   function setReq(on) {
-    b6.querySelectorAll('[data-req]').forEach(function (el) {
-      if (on) el.setAttribute('required', 'required'); else el.removeAttribute('required');
-    });
+    b6.querySelectorAll('[data-req]').forEach(function (el) { el.required = on; });
+    // умова до питання 30 — обов'язкова лише якщо обрано «З певними умовами»
+    var a8 = document.querySelector('input[name="all8"]:checked');
+    if (a8cond) a8cond.required = on && a8 && a8.value === 'З певними умовами';
   }
   document.querySelectorAll('input[name="wants_retreat"]').forEach(function (r) {
     r.addEventListener('change', function () {
-      var sel = document.querySelector('input[name="wants_retreat"]:checked');
-      var yes = sel && sel.value === 'так';
+      var yes = b6visible();
       b6.style.display = yes ? 'block' : 'none';
       setReq(yes);
     });
+  });
+  document.querySelectorAll('input[name="all8"]').forEach(function (r) {
+    r.addEventListener('change', function () { setReq(b6visible()); });
   });
 })();
 </script>
