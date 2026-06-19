@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Анкета-заявка на ретрит і дослідження | Хочу на ручки</title>
+<meta name="description" content="Заповніть анкету, щоб подати заявку на безоплатний ресурсний ретрит і долучитися до національного дослідження вигорання прийомних батьків. Конфіденційно.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="canonical" href="https://na-ruchky.vercel.app/anketa.html">
+<meta property="og:title" content="Анкета-заявка на ретрит і дослідження | Хочу на ручки">
+<meta property="og:description" content="Подати заявку на безоплатний ресурсний ретрит і долучитися до національного дослідження. Конфіденційно.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:url" content="https://na-ruchky.vercel.app/anketa.html">
+<meta property="og:image" content="https://na-ruchky.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://na-ruchky.vercel.app/og.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Головна","item":"https://na-ruchky.vercel.app/"},
+{"@type":"ListItem","position":2,"name":"Ретрити","item":"https://na-ruchky.vercel.app/retreaty.html"},
+{"@type":"ListItem","position":3,"name":"Анкета-заявка","item":"https://na-ruchky.vercel.app/anketa.html"}]}
+</script>
+</head>
+<body>
+
+<header><div class="wrap nav">
+  <a class="brand" href="index.html">
+    <svg width="40" height="40" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M36 66 Q60 96 84 66" fill="none" stroke="#7BA693" stroke-width="8" stroke-linecap="round"/>
+      <path d="M44 57 Q60 83 76 57" fill="none" stroke="#C85A3C" stroke-width="8" stroke-linecap="round"/>
+      <g transform="translate(51.6 33.6) scale(0.7)" fill="#C85A3C"><path d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z"/></g>
+    </svg>
+    <span class="name">хочу на ручки</span>
+  </a>
+  <nav class="menu">
+    <a href="pro.html">Про проєкт</a>
+    <a href="retreaty.html">Ретрити</a>
+    <a href="podcast.html">Подкаст</a>
+    <a href="pidtrymka.html">Підтримка</a>
+    <a href="mentory.html">Ментори</a>
+    <a href="dlya-biznesu.html">Для бізнесу</a>
+  </nav>
+  <a href="#anketa" class="btn">До анкети</a>
+</div></header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>Анкета-заявка</h1>
+    <div class="sub">Ваш голос має значення для змін</div>
+  </div>
+
+  <div class="prose">
+    <p class="lead">Шановні батьки-вихователі! Ви щодня берете на себе величезну відповідальність, виховуючи дітей, які потребують особливої любові та захисту. Навіть найсильніші серця іноді потребують підтримки, відпочинку та відновлення.</p>
+    <p>Ця анкета має дві мети. По-перше, <b>це ваша заявка</b> на участь у безоплатній програмі психоемоційного відновлення — ресурсних ретритах. По-друге, ваші відповіді стануть основою <b>першого національного дослідження</b> емоційного вигорання прийомних батьків і батьків-вихователів та допоможуть сформувати рекомендації для нових державних стандартів підтримки сімей.</p>
+    <p>Будь ласка, відповідайте відверто — тут немає «правильних» чи «неправильних» відповідей, і ваші слова жодним чином не нашкодять ні вам, ні вашим стосункам із соціальними службами. Усі відповіді <b>знеособлюються</b> і подаються лише в узагальненому вигляді. Контактні дані ми використовуємо виключно для зв'язку щодо ретриту.</p>
+    <p class="note">Орієнтовний час заповнення: 15–20 хвилин. Як ми обробляємо ваші дані — у <a href="polityka.html">Політиці конфіденційності</a>.</p>
+  </div>
+
+  <form id="anketa" class="sb-form anketa" data-table="anketa_zayavky" data-mode="payload" style="margin-top:18px">
+
+    <!-- Блок 0 -->
+    <fieldset class="fblock consent">
+      <span class="legend">Згода на участь</span>
+      <p class="bnote">Обов'язкові пункти — без згоди анкета не приймається.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="consent_info" value="так" required> Я ознайомлений(-а) з метою анкети та розумію, що вона є одночасно заявкою на ретрит і частиною дослідження.</label>
+        <label class="opt"><input type="checkbox" name="consent_data" value="так" required> Я даю згоду на обробку моїх персональних даних у межах проєкту відповідно до Закону України «Про захист персональних даних».</label>
+        <label class="opt"><input type="checkbox" name="consent_confidential" value="так" required> Я розумію, що мої відповіді конфіденційні, не передаються соціальним службам чи іншим організаціям, а в аналітичному звіті використовуються виключно знеособлено.</label>
+        <label class="opt"><input type="checkbox" name="consent_contact" value="так" required> Я погоджуюся, що зі мною можуть зв'язатися представники проєкту щодо результатів відбору на ретрит.</label>
+      </div>
+      <div class="q" style="margin-top:16px">
+        <span class="qlabel">Чи хочете ви подати заявку на участь у ресурсному ретриті? <span class="req">*</span></span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="wants_retreat" value="так" required> Так</label>
+          <label class="opt"><input type="radio" name="wants_retreat" value="ні"> Ні, лише дослідження</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Блок 1 -->
+    <fieldset class="fblock">
+      <span class="legend">1. Контактні дані та регіон</span>
+      <div class="q"><label class="qlabel" for="f_name">Прізвище, ім'я, по батькові <span class="req">*</span></label><input id="f_name" type="text" name="name" required></div>
+      <div class="q"><label class="qlabel" for="f_email">Email <span class="req">*</span></label><input id="f_email" type="email" name="email" required placeholder="your@email.com"></div>
+      <div class="q"><label class="qlabel" for="f_phone">Контактний телефон <span class="req">*</span></label><input id="f_phone" type="tel" name="phone" required pattern="[+\d][\d\s()\-]{8,}" title="напр. +380XXXXXXXXX" placeholder="+380XXXXXXXXX"></div>
+      <div class="q">
+        <label class="qlabel" for="f_oblast">Область проживання <span class="req">*</span></label>
+        <select id="f_oblast" name="oblast" required>
+          <option value="" disabled selected>Оберіть область…</option>
+          <option>Вінницька</option><option>Волинська</option><option>Дніпропетровська</option><option>Донецька</option><option>Житомирська</option><option>Закарпатська</option><option>Запорізька</option><option>Івано-Франківська</option><option>Київська</option><option>Кіровоградська</option><option>Луганська</option><option>Львівська</option><option>Миколаївська</option><option>Одеська</option><option>Полтавська</option><option>Рівненська</option><option>Сумська</option><option>Тернопільська</option><option>Харківська</option><option>Херсонська</option><option>Хмельницька</option><option>Черкаська</option><option>Чернівецька</option><option>Чернігівська</option><option>м. Київ</option>
+        </select>
+      </div>
+      <div class="q"><label class="qlabel" for="f_gromada">Громада / населений пункт <span class="req">*</span></label><input id="f_gromada" type="text" name="gromada" required></div>
+      <div class="q">
+        <span class="qlabel">Тип населеного пункту <span class="req">*</span></span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="settlement_type" value="місто" required> місто</label>
+          <label class="opt"><input type="radio" name="settlement_type" value="смт"> смт</label>
+          <label class="opt"><input type="radio" name="settlement_type" value="село"> село</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">Чи є ваша сім'я внутрішньо переміщеною (ВПО)? <span class="req">*</span></span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="idp" value="так" required> Так</label>
+          <label class="opt"><input type="radio" name="idp" value="ні"> Ні</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">Як би ви описали безпекову ситуацію у вашому регіоні проживання? <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="security" value="Прифронтовий / постраждалий регіон" required> Прифронтовий / постраждалий регіон</label>
+          <label class="opt"><input type="radio" name="security" value="Деокупована територія"> Деокупована територія</label>
+          <label class="opt"><input type="radio" name="security" value="Відносно безпечний (тиловий) регіон"> Відносно безпечний (тиловий) регіон</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Блок 2 -->
+    <fieldset class="fblock">
+      <span class="legend">2. Інформація про сім'ю</span>
+      <div class="q">
+        <span class="qlabel">9. Форма виховання вашої сім'ї <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="family_form" value="Прийомна сім'я (ПС)" required> Прийомна сім'я (ПС)</label>
+          <label class="opt"><input type="radio" name="family_form" value="Дитячий будинок сімейного типу (ДБСТ)"> Дитячий будинок сімейного типу (ДБСТ)</label>
+          <label class="opt"><input type="radio" name="family_form" value="Інше"> Інше (вкажіть):</label>
+        </div>
+        <input type="text" name="family_form_other" placeholder="якщо «Інше»" style="margin-top:8px">
+      </div>
+      <div class="q">
+        <span class="qlabel">10. Стать <span class="req">*</span></span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="gender" value="Жіноча" required> Жіноча</label>
+          <label class="opt"><input type="radio" name="gender" value="Чоловіча"> Чоловіча</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">11. Ваш вік <span class="req">*</span></span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="age" value="20–29" required> 20–29</label>
+          <label class="opt"><input type="radio" name="age" value="30–39"> 30–39</label>
+          <label class="opt"><input type="radio" name="age" value="40–49"> 40–49</label>
+          <label class="opt"><input type="radio" name="age" value="50–59"> 50–59</label>
+          <label class="opt"><input type="radio" name="age" value="60+"> 60+</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">12. Тривалість шлюбу / партнерства <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="marriage" value="0–3 роки" required> 0–3 роки</label>
+          <label class="opt"><input type="radio" name="marriage" value="3–6 років"> 3–6 років</label>
+          <label class="opt"><input type="radio" name="marriage" value="6–10 років"> 6–10 років</label>
+          <label class="opt"><input type="radio" name="marriage" value="10–20 років"> 10–20 років</label>
+          <label class="opt"><input type="radio" name="marriage" value="20 і більше років"> 20 і більше років</label>
+          <label class="opt"><input type="radio" name="marriage" value="Виховую самостійно"> Виховую самостійно</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">13. Скільки часу ви опікуєтесь дітьми <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="care_duration" value="до 6 місяців" required> до 6 місяців</label>
+          <label class="opt"><input type="radio" name="care_duration" value="6–12 місяців"> 6–12 місяців</label>
+          <label class="opt"><input type="radio" name="care_duration" value="1–2 роки"> 1–2 роки</label>
+          <label class="opt"><input type="radio" name="care_duration" value="2–3 роки"> 2–3 роки</label>
+          <label class="opt"><input type="radio" name="care_duration" value="3–6 років"> 3–6 років</label>
+          <label class="opt"><input type="radio" name="care_duration" value="6–10 років"> 6–10 років</label>
+          <label class="opt"><input type="radio" name="care_duration" value="10 і більше років"> 10 і більше років</label>
+        </div>
+      </div>
+      <div class="q">
+        <label class="qlabel" for="f_cc">14. Скільки у вас дітей під опікою? <span class="req">*</span></label>
+        <select id="f_cc" name="children_count" required>
+          <option value="" disabled selected>Оберіть…</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>більше</option>
+        </select>
+      </div>
+      <div class="q">
+        <label class="qlabel" for="f_ages">15. Зазначте вік кожної дитини під опікою</label>
+        <input id="f_ages" type="text" name="children_ages" placeholder="напр.: 4, 7, 12, 15">
+        <p class="hint">Через кому, за віком кожної дитини.</p>
+      </div>
+      <div class="q">
+        <label class="qlabel" for="f_cl">16. Скільки дітей проживає у вашій родині на постійній основі? <span class="req">*</span></label>
+        <select id="f_cl" name="children_living" required>
+          <option value="" disabled selected>Оберіть…</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>більше</option>
+        </select>
+      </div>
+      <div class="q">
+        <span class="qlabel">17. Чи є у вашій родині рідні (біологічні) діти? <span class="req">*</span></span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="bio_children" value="так" required> Так</label>
+          <label class="opt"><input type="radio" name="bio_children" value="ні"> Ні</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">18. Чи виховуєте ви дітей з інвалідністю? <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="disability" value="Ні" required> Ні</label>
+          <label class="opt"><input type="radio" name="disability" value="Так — 1 дитина"> Так — 1 дитина з інвалідністю</label>
+          <label class="opt"><input type="radio" name="disability" value="Так — 2 і більше"> Так — 2 і більше дітей з інвалідністю</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">19. Чи виховуєте ви дітей з особливими освітніми потребами (ООП)? <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="oop" value="Ні" required> Ні</label>
+          <label class="opt"><input type="radio" name="oop" value="Так — 1 дитина"> Так — 1 дитина з ООП</label>
+          <label class="opt"><input type="radio" name="oop" value="Так — 2 і більше"> Так — 2 і більше дітей з ООП</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">20. Чи є серед ваших дітей такі, що мали досвід інституційного догляду (інтернат, дитячий будинок)? <span class="req">*</span></span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="institutional" value="Так" required> Так</label>
+          <label class="opt"><input type="radio" name="institutional" value="Ні"> Ні</label>
+          <label class="opt"><input type="radio" name="institutional" value="Важко відповісти"> Важко відповісти</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">21. Чи зазнала ваша сім'я впливу війни? <span class="hint" style="display:inline">(можна обрати кілька)</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="war_impact" value="Внутрішнє переміщення"> Внутрішнє переміщення (евакуація, зміна місця проживання)</label>
+          <label class="opt"><input type="checkbox" name="war_impact" value="Бойові дії / окупація / обстріли"> Перебування на території бойових дій, в окупації або під обстрілами</label>
+          <label class="opt"><input type="checkbox" name="war_impact" value="Втрата близьких"> Втрата близьких людей</label>
+          <label class="opt"><input type="checkbox" name="war_impact" value="Пошкодження / втрата житла"> Пошкодження або втрата житла/майна</label>
+          <label class="opt"><input type="checkbox" name="war_impact" value="Розлучення членів сім'ї"> Розлучення членів сім'ї через війну (виїзд за кордон, служба в ЗСУ тощо)</label>
+          <label class="opt"><input type="checkbox" name="war_impact" value="Інше"> Інше (вкажіть):</label>
+          <label class="opt"><input type="checkbox" name="war_impact" value="Не зазнала безпосереднього впливу"> Наша сім'я не зазнала безпосереднього впливу війни</label>
+        </div>
+        <input type="text" name="war_impact_other" placeholder="якщо «Інше»" style="margin-top:8px">
+      </div>
+    </fieldset>
+
+    <!-- Блок 3 -->
+    <fieldset class="fblock">
+      <span class="legend">3. Мотивація та досвід виховання</span>
+      <div class="q">
+        <span class="qlabel">22. Які мотиви вплинули на ваш вибір діяльності, пов'язаної з вихованням дітей? <span class="hint" style="display:inline">(можна обрати кілька)</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="motyvy" value="Надати дітям любов і турботу"> Надати дітям любов і турботу, коли вони залишилися без батьків</label>
+          <label class="opt"><input type="checkbox" name="motyvy" value="Емоційне задоволення та значущість"> Отримати емоційне задоволення від виховання та відчуття значущості</label>
+          <label class="opt"><input type="checkbox" name="motyvy" value="Державна підтримка та пільги"> Скористатися державною підтримкою та пільгами</label>
+          <label class="opt"><input type="checkbox" name="motyvy" value="Соціальний розвиток та адаптація дітей"> Підтримати соціальний розвиток та адаптацію дітей у суспільстві</label>
+          <label class="opt"><input type="checkbox" name="motyvy" value="Сімейна атмосфера, традиції, цінності"> Створити сімейну атмосферу, передати традиції та цінності</label>
+          <label class="opt"><input type="checkbox" name="motyvy" value="Розвиток власної родини"> Сприяти розвитку власної родини через колективне виховання</label>
+          <label class="opt"><input type="checkbox" name="motyvy" value="Запобігти наслідкам сирітства"> Запобігти негативним наслідкам сирітства та соціальної ізоляції</label>
+          <label class="opt"><input type="checkbox" name="motyvy" value="Приклад для громади"> Показати позитивний приклад для громади та інших сімей</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">23. Чи легко вам знаходити спільну мову з дитиною/дітьми? <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="common_language" value="Не легко" required> Не легко</label>
+          <label class="opt"><input type="radio" name="common_language" value="Здебільшого складно"> Здебільшого складно</label>
+          <label class="opt"><input type="radio" name="common_language" value="По-різному"> По-різному: іноді легко, іноді важко</label>
+          <label class="opt"><input type="radio" name="common_language" value="Здебільшого легко"> Здебільшого легко</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">24. З якими труднощами у вихованні ви стикаєтеся найчастіше? <span class="hint" style="display:inline">(можна обрати кілька)</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="difficulties" value="Емоційне виснаження"> Емоційне виснаження — постійна втома та стрес через потреби дітей</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Проблеми адаптації дитини"> Проблеми адаптації дитини — конфлікти, страхи, агресія, сум через розлуку з рідними</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Почуття провини або сумніву"> Почуття провини або сумніву — чи роблю достатньо для дитини</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Труднощі з довірою"> Труднощі у встановленні довірчих стосунків — недовіра, дистанція з боку дитини</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Конфлікти всередині сім'ї"> Конфлікти всередині сім'ї — через різні потреби дітей і сімейні обов'язки</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Складна поведінка дітей"> Складна поведінка дітей — агресія, маніпуляції, порушення правил</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Невпевненість у виховних методах"> Невпевненість у власних виховних методах</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Стрес через бюрократію та контроль"> Стрес через бюрократію та контроль органів опіки — перевірки, документи, звіти</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Ізоляція, брак часу для себе"> Відчуття ізоляції чи нестачі соціальної підтримки, брак часу для себе</label>
+          <label class="opt"><input type="checkbox" name="difficulties" value="Поєднання роботи й виховання"> Складнощі з поєднанням роботи, особистого життя та виховання</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">25. Що, на вашу думку, може бути причиною закриття ДБСТ / припинення опіки? <span class="hint" style="display:inline">(можна обрати кілька)</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Сімейні кризи у вихователів"> Сімейні кризи у вихователів (розлучення, конфлікти в родині)</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Психологічне виснаження та вигорання"> Психологічне виснаження та емоційне вигорання вихователів</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Втрата мотивації"> Втрата мотивації або відчуття невдачі у вихованні</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Недостатнє фінансування"> Недостатнє фінансування та матеріальна нестача</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Відсутність державної підтримки"> Відсутність державної або місцевої підтримки та пільг</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Конфлікти між дітьми"> Конфлікти між дітьми або між дітьми та вихователями</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Брак допомоги соцслужб"> Відсутність допомоги чи консультацій від соціальних служб</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Перевищення кількості дітей"> Перевищення допустимої кількості дітей / недотримання стандартів</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Негативні висновки перевірок"> Негативні висновки перевірок органів опіки</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Брак підтримки громади"> Відсутність підтримки від громади та близьких</label>
+          <label class="opt"><input type="checkbox" name="closure_reasons" value="Інше"> Інше (вкажіть):</label>
+        </div>
+        <input type="text" name="closure_other" placeholder="якщо «Інше»" style="margin-top:8px">
+      </div>
+    </fieldset>
+
+    <!-- Блок 4 -->
+    <fieldset class="fblock">
+      <span class="legend">4. Самооцінка стану</span>
+      <div class="q">
+        <span class="qlabel">26. Наскільки вас турбує стан фізичного здоров'я на цей момент? <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="health_concern" value="зовсім не турбує" required> зовсім не турбує</label>
+          <label class="opt"><input type="radio" name="health_concern" value="трохи турбує"> трохи турбує</label>
+          <label class="opt"><input type="radio" name="health_concern" value="помірно турбує"> помірно турбує</label>
+          <label class="opt"><input type="radio" name="health_concern" value="сильно турбує"> сильно турбує</label>
+          <label class="opt"><input type="radio" name="health_concern" value="дуже сильно турбує"> дуже сильно турбує</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">27. Як ви оцінюєте свій фінансовий стан? <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="financial" value="Стабільний" required> Стабільний — достатньо коштів для потреб сім'ї та дітей</label>
+          <label class="opt"><input type="radio" name="financial" value="Переважно стабільний"> Переважно стабільний — покриваю більшість витрат, іноді бувають труднощі</label>
+          <label class="opt"><input type="radio" name="financial" value="Нестабільний"> Нестабільний — часто не вистачає коштів</label>
+          <label class="opt"><input type="radio" name="financial" value="Дуже нестабільний"> Дуже нестабільний — постійний брак коштів, потребую підтримки</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">28. Як ви оцінюєте свій стан психологічного виснаження на цей момент? <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="exhaustion" value="Виснаження не відчуваю" required> Виснаження не відчуваю</label>
+          <label class="opt"><input type="radio" name="exhaustion" value="Легка втома"> Є легка втома</label>
+          <label class="opt"><input type="radio" name="exhaustion" value="Помірна втома"> Помірна втома, але контролюю себе</label>
+          <label class="opt"><input type="radio" name="exhaustion" value="Тривала втома"> Тривала втома</label>
+          <label class="opt"><input type="radio" name="exhaustion" value="Перевтома, виснаження"> Перевтома, відчуваю виснаження</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">29. Як ви оцінюєте свої внутрішні ресурси на цей момент? <span class="req">*</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="resources" value="Маю сили" required> Почуваюся впевнено й маю сили для повноцінного виховання дітей</label>
+          <label class="opt"><input type="radio" name="resources" value="Справляюся з більшістю"> Здатний/-на справлятися з більшістю проблем</label>
+          <label class="opt"><input type="radio" name="resources" value="Іноді перевантаження"> Іноді відчуваю перевантаження, потребую невеликого відпочинку</label>
+          <label class="opt"><input type="radio" name="resources" value="Серйозний дефіцит сил"> Відчуваю серйозний дефіцит сил, часто втомлююсь, потрібна підтримка</label>
+          <label class="opt"><input type="radio" name="resources" value="Думки про відмову"> Відчуваю значні труднощі, з'являються думки про відмову від діяльності</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Блок 5 -->
+    <fieldset class="fblock">
+      <span class="legend">5. Тест на емоційне вигорання</span>
+      <p class="bnote">22 твердження про почуття, пов'язані з вихованням. Оцініть, як часто ви відчуваєте описане. Довго не замислюйтесь — відповідайте за першим враженням.</p>
+      <div class="mbi-legend"><b>Шкала:</b> 0 — ніколи · 1 — дуже рідко · 2 — рідко · 3 — іноді · 4 — часто · 5 — дуже часто · 6 — щодня</div>
+      <div id="mbi" class="mbi"></div>
+    </fieldset>
+
+    <!-- Блок 6 -->
+    <fieldset class="fblock" id="block6" style="display:none">
+      <span class="legend">6. Деталі заявки на ретрит</span>
+      <div class="q">
+        <span class="qlabel">30. Чи готові ви взяти участь у всіх 8 триденних ретритах (п'ятниця–неділя) протягом року?</span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="all8" value="Так, усі 8" data-req> Так, готовий(-а) відвідувати всі 8</label>
+          <label class="opt"><input type="radio" name="all8" value="З певними умовами" data-req> Готовий(-а), але з певними умовами (вкажіть нижче)</label>
+          <label class="opt"><input type="radio" name="all8" value="Лише частину"> Зможу лише частину зустрічей</label>
+          <label class="opt"><input type="radio" name="all8" value="Поки не впевнений"> Поки не впевнений(-на)</label>
+        </div>
+        <input type="text" name="all8_conditions" placeholder="якщо є умови — опишіть" style="margin-top:8px">
+      </div>
+      <div class="q">
+        <span class="qlabel">31. Чи зможуть взяти участь обоє з подружжя/партнерів?</span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="partners" value="Так, обоє" data-req> Так, обоє</label>
+          <label class="opt"><input type="radio" name="partners" value="Лише я"> Лише я</label>
+          <label class="opt"><input type="radio" name="partners" value="Виховую самостійно"> Виховую самостійно</label>
+        </div>
+      </div>
+      <div class="q">
+        <span class="qlabel">32. Чи потрібен вам трансфер до місця проведення?</span>
+        <div class="opts row">
+          <label class="opt"><input type="radio" name="transfer" value="Так" data-req> Так</label>
+          <label class="opt"><input type="radio" name="transfer" value="Ні"> Ні</label>
+          <label class="opt"><input type="radio" name="transfer" value="Залежить від локації"> Залежить від локації</label>
+        </div>
+      </div>
+      <div class="q"><label class="qlabel" for="f_needs">33. Особливі потреби (харчування, медичні, доступність, догляд за дітьми на час ретриту)</label><textarea id="f_needs" name="special_needs"></textarea></div>
+      <div class="q"><label class="qlabel" for="f_help">34. Що б вам найбільше допомогло відновити сили?</label><textarea id="f_help" name="what_helps"></textarea></div>
+      <div class="q"><label class="qlabel" for="f_why">35. Чому ви хотіли б взяти участь у ретриті? <span class="hint" style="display:inline">(кілька речень)</span></label><textarea id="f_why" name="why_retreat"></textarea></div>
+    </fieldset>
+
+    <p class="note" style="max-width:640px">Натискаючи «Надіслати», ви підтверджуєте згоду з умовами, зазначеними вище та в <a href="polityka.html">Політиці конфіденційності</a>.</p>
+    <button type="submit" class="btn">Надіслати анкету</button>
+  </form>
+</main>
+
+<footer><div class="wrap">
+  <div class="name">хочу на ручки</div>
+  <p>«Хочу на ручки» — подкаст і ресурсні ретрити проєкту «Стійкі сім'ї — стійка система» БФ «Твоя опора». Реалізується за підтримки ІСАР Єднання, Фонду «Аскольд і Дір», урядів Норвегії та Швеції.</p>
+  <p><a href="mailto:na-ruchky@tvoya-opora.org.ua">na-ruchky@tvoya-opora.org.ua</a> &middot; <a href="tel:+380443210900">+38 (044) 321 09 00</a> &middot; <a href="kontakty.html">Контакти</a> &middot; <a href="polityka.html">Політика конфіденційності</a></p>
+  <div class="donors"><img src="donors.png" alt="За підтримки урядів Норвегії та Швеції, ІСАР Єднання, Фонду «Аскольд і Дір», БФ «Твоя опора»" style="display:block;margin:0 auto;max-width:100%;height:auto"></div>
+  <p class="fnote">Для зручності читання ми вживаємо «прийомні батьки» як узагальнення. Залежно від контексту йдеться про прийомних батьків (прийомні сім'ї) і батьків-вихователів дитячих будинків сімейного типу (ДБСТ).</p>
+</div></footer>
+
+<script>
+(function () {
+  // Блок 5 — генерація MBI
+  var statements = [
+    "Я відчуваю себе емоційно виснаженим(-ою) через виконання батьківських обов'язків.",
+    "Наприкінці дня я відчуваю себе як «вичавлений лимон».",
+    "Я відчуваю втому, коли прокидаюся вранці і мушу знову займатися вихованням та домашніми справами.",
+    "Я добре розумію, що відчувають мої вихованці (діти), і використовую це для налагодження контакту з ними.",
+    "Я спілкуюся з дітьми суто формально, без зайвих емоцій, і намагаюся звести час спілкування з ними до необхідного мінімуму.",
+    "Я відчуваю себе енергійним(-ою) та емоційно піднесеним(-ою) у ролі батьків.",
+    "Я вмію знаходити правильне рішення в конфліктних ситуаціях із дітьми.",
+    "Я відчуваю пригніченість і апатію стосовно свого життя в сім'ї.",
+    "Я можу позитивно впливати на поведінку та розвиток моїх вихованців (дітей).",
+    "Останнім часом я став(-ла) більш черствим(-ою) (нечутливим) у ставленні до дітей, яких виховую.",
+    "Як правило, оточуючі (діти, партнер, родичі) забагато вимагають від мене; вони скоріше втомлюють, ніж радують мене.",
+    "У мене багато планів на майбутнє моєї родини, і я вірю в їх здійснення.",
+    "У мене все більше життєвих розчарувань, пов'язаних із моєю діяльністю як опікуна/вихователя.",
+    "Я відчуваю байдужість і втрату інтересу до речей, які в сім'ї радували мене раніше.",
+    "Іноді мені дійсно байдуже, що відбувається з деким із моїх вихованців.",
+    "Мені хочеться усамітнитися і відпочити від усіх членів родини та домашніх обов'язків.",
+    "Я можу легко створити атмосферу доброзичливості та співпраці при спілкуванні з дітьми.",
+    "Я легко спілкуюся з дітьми та соціальними працівниками незалежно від їхнього характеру.",
+    "Я багато встигаю зробити по дому та у вихованні дітей.",
+    "Я відчуваю, що мої сили як батька/матері-вихователя на межі можливостей.",
+    "Я вірю, що зможу досягти ще багато чого у вихованні та особистому житті.",
+    "Іноді мені здається, що діти або інші члени родини перекладають на мене вантаж усіх своїх проблем."
+  ];
+  var labels = ['ніколи','дуже рідко','рідко','іноді','часто','дуже часто','щодня'];
+  var box = document.getElementById('mbi');
+  statements.forEach(function (s, i) {
+    var n = i + 1;
+    var row = document.createElement('div'); row.className = 'mbi-row';
+    var st = document.createElement('div'); st.className = 'st';
+    st.innerHTML = '<b>' + n + '.</b>' + s; row.appendChild(st);
+    var sc = document.createElement('div'); sc.className = 'scale';
+    for (var v = 0; v <= 6; v++) {
+      var lab = document.createElement('label');
+      lab.title = v + ' — ' + labels[v];
+      lab.innerHTML = '<input type="radio" name="mbi_' + n + '" value="' + v + '" required><span>' + v + '</span>';
+      sc.appendChild(lab);
+    }
+    row.appendChild(sc); box.appendChild(row);
+  });
+
+  // Блок 6 — показ лише для тих, хто подається на ретрит
+  var b6 = document.getElementById('block6');
+  function setReq(on) {
+    b6.querySelectorAll('[data-req]').forEach(function (el) {
+      if (on) el.setAttribute('required', 'required'); else el.removeAttribute('required');
+    });
+  }
+  document.querySelectorAll('input[name="wants_retreat"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      var sel = document.querySelector('input[name="wants_retreat"]:checked');
+      var yes = sel && sel.value === 'так';
+      b6.style.display = yes ? 'block' : 'none';
+      setReq(yes);
+    });
+  });
+})();
+</script>
+<script src="nav.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="forms.js" defer></script>
+</body>
+</html>
