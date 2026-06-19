@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Експорт анкет — службова сторінка</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header><div class="wrap nav">
+  <a class="brand" href="index.html">
+    <svg width="40" height="40" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M36 66 Q60 96 84 66" fill="none" stroke="#7BA693" stroke-width="8" stroke-linecap="round"/>
+      <path d="M44 57 Q60 83 76 57" fill="none" stroke="#C85A3C" stroke-width="8" stroke-linecap="round"/>
+      <g transform="translate(51.6 33.6) scale(0.7)" fill="#C85A3C"><path d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z"/></g>
+    </svg>
+    <span class="name">хочу на ручки</span>
+  </a>
+</div></header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>Експорт анкет</h1>
+    <div class="sub">Службова сторінка для команди проєкту</div>
+  </div>
+
+  <div class="formwrap" style="max-width:480px">
+    <div class="field">
+      <label for="pass">Пароль доступу</label>
+      <input type="password" id="pass" autocomplete="current-password" placeholder="Введіть пароль">
+    </div>
+    <button id="btn" class="btn" type="button">Завантажити Excel</button>
+    <p id="status" class="note" style="margin-top:14px"></p>
+    <p class="hint" style="margin-top:6px">Файл .xlsx з усіма заявками завантажиться автоматично. Кирилиця й колонки — коректні.</p>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <div class="name">хочу на ручки</div>
+  <p>Службова сторінка. Доступ лише для команди проєкту «Хочу на ручки» БФ «Твоя опора».</p>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+(function () {
+  var SUPABASE_URL = 'https://xfnjxcbnbhqjhsguldnw.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_ZuZI9ySWyA8hFs2T9kAlIg_M5ttOm_l';
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  var btn = document.getElementById('btn');
+  var passEl = document.getElementById('pass');
+  var statusEl = document.getElementById('status');
+
+  function setStatus(msg, color) { statusEl.textContent = msg; statusEl.style.color = color || '#8A9A8F'; }
+
+  function dateStamp() {
+    var d = new Date();
+    var p = function (n) { return (n < 10 ? '0' : '') + n; };
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+  }
+
+  async function run() {
+    var pass = passEl.value.trim();
+    if (!pass) { setStatus('Введіть пароль.', '#C85A3C'); return; }
+    btn.disabled = true; setStatus('Завантажуємо дані…');
+    try {
+      var res = await sb.rpc('export_anketa', { pass: pass });
+      if (res.error) {
+        setStatus('Помилка: ' + (res.error.message || 'невірний пароль').replace(/^.*?:\s*/, ''), '#C85A3C');
+        btn.disabled = false; return;
+      }
+      var rows = res.data || [];
+      if (!rows.length) { setStatus('Поки немає жодної заявки.', '#8A9A8F'); btn.disabled = false; return; }
+      var ws = XLSX.utils.json_to_sheet(rows);
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Анкети');
+      XLSX.writeFile(wb, 'anketa_' + dateStamp() + '.xlsx');
+      setStatus('Готово! Завантажено ' + rows.length + ' заявок. 💛', '#2F4A3F');
+    } catch (e) {
+      setStatus('Не вдалося: ' + e.message, '#C85A3C');
+    }
+    btn.disabled = false;
+  }
+
+  btn.addEventListener('click', run);
+  passEl.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
+})();
+</script>
+</body>
+</html>
