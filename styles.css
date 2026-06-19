@@ -106,6 +106,30 @@ footer a{color:#fff;text-decoration:underline}
 .faq .ans{padding:0 18px 16px;color:#46544c}
 .faq .ans p{margin:0}
 
+/* practices */
+.practice ol{margin:6px 0 0;padding-left:18px}
+.practice li{margin-bottom:5px;color:#46544c}
+.practice h3{display:flex;align-items:center;gap:8px}
+
+/* self-test */
+.test{max-width:760px}
+.test .tq{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;background:#fff}
+.test .tq>.qt{display:block;font-weight:600;margin-bottom:9px;font-size:15px}
+.test .scaleopts{display:flex;flex-wrap:wrap;gap:6px}
+.test .scaleopts label{flex:1 1 120px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13.5px;cursor:pointer;text-align:center;transition:.12s;background:#fff}
+.test .scaleopts label:hover{border-color:var(--sage)}
+.test .scaleopts input{position:absolute;opacity:0;width:0;height:0}
+.test .scaleopts label:has(input:checked){background:var(--terracotta);border-color:var(--terracotta);color:#fff;font-weight:600}
+.test-result{display:none;border-radius:14px;padding:18px 22px;margin-top:16px;border:1px solid var(--line);background:var(--cream)}
+.test-result.low{background:#edf4ef;border-color:#cfe3d6}
+.test-result.mid{background:var(--cream);border-color:var(--line)}
+.test-result.high{background:#fbeae4;border-color:#f0c9bd}
+.test-result h3{margin:0 0 8px;font-size:20px}
+.test-result p{margin:0 0 12px;color:#3a463f}
+.test-result .cta{justify-content:flex-start}
+.support-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;max-width:760px;margin-top:8px}
+.support-box p{margin:0 0 10px}
+
 /* big form (анкета) */
 .anketa{max-width:760px}
 .fblock{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:18px}
