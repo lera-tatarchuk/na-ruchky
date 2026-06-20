@@ -132,6 +132,13 @@ footer a{color:#fff;text-decoration:underline}
   .pull{font-size:20px}
 }
 
+/* таблиця (політика cookies) */
+.ptable-wrap{overflow-x:auto;margin:14px 0;max-width:760px}
+.ptable{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+.ptable th,.ptable td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+.ptable th{background:var(--cream);font-weight:600;color:var(--ink)}
+.ptable td{color:#46544c}
+
 /* practices */
 .practice ol{margin:6px 0 0;padding-left:18px}
 .practice li{margin-bottom:5px;color:#46544c}
