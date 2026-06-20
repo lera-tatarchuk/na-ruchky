@@ -14,6 +14,7 @@ img{max-width:100%}
 
 h1,h2,h3{color:var(--ink)}
 h2.section-title{font-size:30px;margin:0 0 18px}
+h2.section-title::after{content:"";display:block;width:52px;height:4px;background:var(--honey);border-radius:3px;margin-top:10px}
 .lead{font-size:19px;max-width:760px}
 .muted{color:var(--muted)}
 .tag{color:var(--sage);font-weight:700}
@@ -45,13 +46,14 @@ header{position:sticky;top:0;background:rgba(252,249,243,.92);backdrop-filter:bl
 /* numbers */
 .nums{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:40px 0}
 .num{flex:1 1 180px;max-width:230px;background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
-.num b{display:block;font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:30px;color:var(--terracotta);line-height:1.1}
+.num b{display:block;font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:30px;color:var(--honey-dark);line-height:1.1}
 .num span{font-size:14px;color:var(--muted);font-weight:600}
 
 /* sections + cards */
 section.block{padding:28px 0}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:var(--honey);box-shadow:0 4px 16px rgba(227,178,60,.14)}
 .card h3{margin:0 0 8px;font-size:20px}
 .card p{margin:0 0 14px;color:#46544c}
 .card .lnk{color:var(--terracotta);font-weight:600}
@@ -101,7 +103,7 @@ footer a{color:#fff;text-decoration:underline}
 .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
 .faq summary{list-style:none;cursor:pointer;padding:14px 18px;font-weight:600;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";color:var(--terracotta);font-size:22px;font-weight:700;line-height:1;flex:0 0 auto}
+.faq summary::after{content:"+";color:var(--honey-dark);font-size:22px;font-weight:700;line-height:1;flex:0 0 auto}
 .faq details[open] summary::after{content:"−"}
 .faq summary:hover{color:var(--terracotta)}
 .faq .ans{padding:0 18px 16px;color:#46544c}
