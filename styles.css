@@ -2,6 +2,7 @@
 :root{
   --terracotta:#C85A3C; --terracotta-dark:#b14e33; --sage:#7BA693; --ink:#2F4A3F;
   --cream:#FBF4EC; --bg:#FCF9F3; --line:#EADFD2; --muted:#8A9A8F;
+  --honey:#E3B23C; --honey-dark:#C68A1E; --honey-soft:#FBEFD0; --honey-line:#EBD9A8;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -69,7 +70,7 @@ section.block{padding:28px 0}
 .field textarea{min-height:96px;resize:vertical}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#46544c}
 .note{font-size:13px;color:var(--muted)}
-.formnote{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;color:#6b6258;margin-bottom:16px}
+.formnote{background:var(--honey-soft);border:1px solid var(--honey-line);border-radius:10px;padding:10px 14px;font-size:13px;color:#6b5d34;margin-bottom:16px}
 .video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:14px;margin-top:10px;border:1px solid var(--line)}
 .video iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 .partners{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-top:10px}
@@ -109,12 +110,13 @@ footer a{color:#fff;text-decoration:underline}
 /* ==== сторінка «Чому це важливо» ==== */
 .why-hero{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center;margin:8px 0 8px}
 .why-hero .illus{justify-self:center;max-width:280px;width:100%}
-.pull{font-family:'Comfortaa',system-ui,sans-serif;font-weight:600;font-size:24px;line-height:1.45;color:var(--ink);border-left:4px solid var(--terracotta);padding:6px 0 6px 20px;margin:26px 0;max-width:760px}
+.pull{font-family:'Comfortaa',system-ui,sans-serif;font-weight:600;font-size:24px;line-height:1.45;color:var(--ink);border-left:5px solid var(--honey);padding:6px 0 6px 20px;margin:26px 0;max-width:760px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin:20px 0}
 .bigstat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px;text-align:center}
 .bigstat b{display:block;font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:38px;color:var(--terracotta);line-height:1.05}
 .bigstat .lbl{font-size:14.5px;color:#46544c;margin-top:8px;font-weight:500;line-height:1.4}
 .bigstat.sage b{color:var(--sage)}
+.bigstat.honey b{color:var(--honey-dark)}
 .viz-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;max-width:760px;margin:18px 0}
 .viz-card h3{margin:0 0 16px;font-size:18px}
 .barrow{margin-bottom:14px}
