@@ -132,6 +132,22 @@ footer a{color:#fff;text-decoration:underline}
   .pull{font-size:20px}
 }
 
+/* cookie-банер */
+.cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:1000;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 22px rgba(47,74,63,.12)}
+.cookie-banner .cwrap{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.cookie-banner p{margin:0;font-size:13.5px;color:#46544c;flex:1 1 380px;line-height:1.5}
+.cookie-banner a{color:var(--terracotta);text-decoration:underline}
+.cbtns{display:flex;gap:10px;flex-wrap:wrap}
+.cookie-banner .btn{padding:10px 18px;font-size:14px}
+.cookie-modal{position:fixed;inset:0;z-index:1001;background:rgba(47,74,63,.45);display:flex;align-items:center;justify-content:center;padding:20px}
+.cookie-modal .cbox{background:#fff;border-radius:18px;max-width:480px;width:100%;padding:24px 26px;max-height:90vh;overflow:auto}
+.cookie-modal h3{margin:0 0 10px;font-size:24px}
+.cookie-modal .opt{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;font-size:14px;color:#3a463f;line-height:1.45}
+.cookie-modal .opt input{margin-top:3px;flex:0 0 auto}
+.cookie-modal .btn{font-size:14px;padding:10px 18px}
+.yt-ph .yt-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;background:var(--cream)}
+.yt-ph .yt-fallback p{margin:0;font-size:14px;color:#46544c;max-width:380px}
+
 /* таблиця (політика cookies) */
 .ptable-wrap{overflow-x:auto;margin:14px 0;max-width:760px}
 .ptable{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
