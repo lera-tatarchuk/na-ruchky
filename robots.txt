@@ -31,4 +31,4 @@ User-agent: Google-Extended
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://na-ruchky.vercel.app/sitemap.xml
+Sitemap: https://na-ruchky.tvoya-opora.org/sitemap.xml
