@@ -71,6 +71,7 @@ section.block{padding:28px 0}
 .field input,.field select,.field textarea{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
 .field textarea{min-height:96px;resize:vertical}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#46544c}
+.check a,.consent .opt a{color:var(--terracotta);text-decoration:underline}
 .note{font-size:13px;color:var(--muted)}
 .formnote{background:var(--honey-soft);border:1px solid var(--honey-line);border-radius:10px;padding:10px 14px;font-size:13px;color:#6b5d34;margin-bottom:16px}
 .video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:14px;margin-top:10px;border:1px solid var(--line)}
