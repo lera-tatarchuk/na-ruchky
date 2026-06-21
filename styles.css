@@ -30,6 +30,8 @@ header{position:sticky;top:0;background:rgba(254,252,248,.92);backdrop-filter:bl
 .btn:hover{background:var(--terracotta-dark);border-color:var(--terracotta-dark)}
 .btn.ghost{background:transparent;color:var(--terracotta)}
 .btn.ghost:hover{background:var(--terracotta);color:#fff}
+.btn.honey{background:var(--honey);border-color:var(--honey);color:var(--ink)}
+.btn.honey:hover{background:var(--honey-dark);border-color:var(--honey-dark);color:#fff}
 
 /* hero */
 .hero{padding:28px 0 40px;text-align:center}
