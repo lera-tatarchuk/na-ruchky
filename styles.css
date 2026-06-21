@@ -1,7 +1,7 @@
 /* ==== Хочу на ручки — спільні стилі ==== */
 :root{
   --terracotta:#C85A3C; --terracotta-dark:#b14e33; --sage:#7BA693; --ink:#2F4A3F;
-  --cream:#FBF4EC; --bg:#FCF9F3; --line:#EADFD2; --muted:#8A9A8F;
+  --cream:#FBF4EC; --bg:#FEFCF8; --line:#EADFD2; --muted:#8A9A8F;
   --honey:#E3B23C; --honey-dark:#C68A1E; --honey-soft:#FBEFD0; --honey-line:#EBD9A8;
 }
 *{box-sizing:border-box}
@@ -20,7 +20,7 @@ h2.section-title::after{content:"";display:block;width:52px;height:4px;backgroun
 .tag{color:var(--sage);font-weight:700}
 
 /* header */
-header{position:sticky;top:0;background:rgba(252,249,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:20}
+header{position:sticky;top:0;background:rgba(254,252,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:20}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
 .brand{display:flex;align-items:center;gap:10px}
 .brand .name{font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.5px;color:var(--ink)}
