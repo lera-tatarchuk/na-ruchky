@@ -91,6 +91,10 @@ section.block{padding:28px 0}
 .mentor .ph img{width:100%;height:100%;object-fit:cover}
 .mentor b{display:block;font-size:16px}
 .mentor span{font-size:13px;color:var(--muted)}
+a.mentor-invite{display:block;border-style:dashed;border-color:var(--honey-line);transition:border-color .15s}
+a.mentor-invite:hover{border-color:var(--honey)}
+.mentor-invite .ph{background:var(--honey-soft);border-color:var(--honey-line);color:var(--honey-dark);font-size:34px;font-weight:700}
+.mentor-invite b{color:var(--honey-dark)}
 
 /* footer */
 footer{background:var(--ink);color:#E8EFEA;margin-top:50px;padding:36px 0}
