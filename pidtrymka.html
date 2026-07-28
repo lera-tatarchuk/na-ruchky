@@ -172,6 +172,19 @@
       res.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
+    // Правило безпеки: тривожна відповідь на №8 («довго так я не витримаю»)
+    // завжди веде до дбайливого блоку підтримки — незалежно від загальної суми.
+    var q8 = document.querySelector('input[name="q8"]:checked');
+    var q8v = q8 ? parseInt(q8.value, 10) : 0;
+    if (q8v >= 2) {
+      res.className = 'test-result high'; res.style.display = 'block';
+      res.innerHTML = '<h3>Дякуємо за чесність. Будь ласка, подбайте про себе просто зараз 🤍</h3>' +
+        '<p>Ви позначили, що вам дедалі важче триматися. Це важливий сигнал — і вам не треба нести це самотужки. Будь ласка, зверніться по підтримку вже сьогодні: до близької людини, якій довіряєте, або до фахівців (контакти нижче). Це не слабкість, а турбота про себе.</p>' +
+        '<p>Якщо ви відчуваєте, що можете завдати собі шкоди або опинилися в небезпеці — не чекайте: негайно телефонуйте <a href="tel:112"><b>112</b></a> (цілодобово, безкоштовно).</p>' +
+        '<div class="cta"><a class="btn" href="#" onclick="document.querySelectorAll(\'.support-box\')[0].scrollIntoView({behavior:\'smooth\'});return false;">Куди звернутися по підтримку</a></div>';
+      res.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
     var r = RESULTS.find(function (x) { return sum <= x.max; });
     res.className = 'test-result ' + r.cls; res.style.display = 'block';
     res.innerHTML = '<h3>' + r.h + '</h3><p>' + r.p + '</p>' +
