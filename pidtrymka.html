@@ -24,6 +24,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Перейти до основного вмісту</a>
 
 <header><div class="wrap nav">
   <a class="brand" href="index.html">
@@ -46,7 +47,7 @@
   <a href="retreaty.html" class="btn">Подати заявку</a>
 </div></header>
 
-<main class="wrap">
+<main id="main" class="wrap">
   <div class="page-head">
     <h1>Підтримка 💛</h1>
     <div class="sub">Тут можна видихнути</div>
@@ -72,7 +73,7 @@
       <div class="card practice"><h3>🌬️ Дихання «4-7-8»</h3><p>Заспокоює нервову систему за пару хвилин.</p><ol><li>Вдих носом — на 4 рахунки</li><li>Затримайте дихання — на 7</li><li>Повільний видих ротом — на 8</li><li>Повторіть 4 рази</li></ol></div>
       <div class="card practice"><h3>🌿 Заземлення «5-4-3-2-1»</h3><p>Повертає з тривоги в «тут і зараз».</p><ol><li>5 речей, які <b>бачите</b></li><li>4 — які <b>чуєте</b></li><li>3 — яких <b>торкаєтесь</b></li><li>2 — які <b>відчуваєте на запах</b></li><li>1 — на <b>смак</b></li></ol></div>
       <div class="card practice"><h3>☕ Пауза на чай</h3><p>Без телефону, без справ — 5 хвилин просто тримати теплий кухоль і дихати. Це не «нічого не робити». Це відновлення.</p></div>
-      <div class="card practice"><h3>💪 Скинути напругу тілом</h3><p>Тіло «забуває» накопичений стрес.</p><ol><li>Сильно напружте плечі й кулаки — на 5 секунд</li><li>Різко відпустіть</li><li>Повторіть 3 рази</li></ol></div>
+      <div class="card practice"><h3>💪 Скинути напругу тілом</h3><p>Тіло утримує накопичену напругу.</p><ol><li>Сильно напружте плечі й кулаки — на 5 секунд</li><li>Різко відпустіть</li><li>Повторіть 3 рази</li></ol></div>
     </div>
   </section>
 
@@ -139,8 +140,8 @@
   var box = document.getElementById('tquestions');
   Q.forEach(function (text, i) {
     var n = i + 1;
-    var d = document.createElement('div'); d.className = 'tq';
-    var q = document.createElement('span'); q.className = 'qt'; q.textContent = n + '. ' + text; d.appendChild(q);
+    var d = document.createElement('fieldset'); d.className = 'tq';
+    var q = document.createElement('legend'); q.className = 'qt'; q.textContent = n + '. ' + text; d.appendChild(q);
     var so = document.createElement('div'); so.className = 'scaleopts';
     OPTS.forEach(function (o) {
       var lab = document.createElement('label');
