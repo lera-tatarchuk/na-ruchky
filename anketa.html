@@ -28,6 +28,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Перейти до основного вмісту</a>
 
 <header><div class="wrap nav">
   <a class="brand" href="index.html">
@@ -50,7 +51,7 @@
   <a href="#anketa" class="btn">До анкети</a>
 </div></header>
 
-<main class="wrap">
+<main id="main" class="wrap">
   <div class="page-head">
     <h1>Анкета-заявка</h1>
     <div class="sub">Ваш голос має значення для змін</div>
@@ -67,7 +68,7 @@
 
     <!-- Блок 0 -->
     <fieldset class="fblock consent">
-      <span class="legend">Згода на участь</span>
+      <legend class="legend">Згода на участь</legend>
       <p class="bnote">Обов'язкові пункти — без згоди анкета не приймається.</p>
       <div class="opts">
         <label class="opt"><input type="checkbox" name="consent_info" value="так" required> <span><span class="req">*</span> Я ознайомлений(-а) з метою анкети та розумію, що вона є одночасно заявкою на ретрит і частиною дослідження.</span></label>
@@ -75,8 +76,8 @@
         <label class="opt"><input type="checkbox" name="consent_confidential" value="так" required> <span><span class="req">*</span> Я розумію, що мої відповіді конфіденційні, не передаються соціальним службам чи іншим організаціям, а в аналітичному звіті використовуються виключно знеособлено.</span></label>
         <label class="opt"><input type="checkbox" name="consent_contact" value="так" required> <span><span class="req">*</span> Я погоджуюся, що зі мною можуть зв'язатися представники проєкту щодо результатів відбору на ретрит.</span></label>
       </div>
-      <div class="q" style="margin-top:16px">
-        <span class="qlabel">Чи хочете ви подати заявку на участь у ресурсному ретриті? <span class="req">*</span></span>
+      <div class="q" style="margin-top:16px" role="group" aria-labelledby="qg1">
+        <span class="qlabel" id="qg1">Чи хочете ви подати заявку на участь у ресурсному ретриті? <span class="req">*</span></span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="wants_retreat" value="так" required> Так</label>
           <label class="opt"><input type="radio" name="wants_retreat" value="ні"> Ні, лише дослідження</label>
@@ -86,35 +87,35 @@
 
     <!-- Блок 1 -->
     <fieldset class="fblock">
-      <span class="legend">1. Контактні дані та регіон</span>
-      <div class="q"><label class="qlabel" for="f_name">Прізвище, ім'я, по батькові <span class="req">*</span></label><input id="f_name" type="text" name="name" required></div>
-      <div class="q"><label class="qlabel" for="f_email">Email <span class="req">*</span></label><input id="f_email" type="email" name="email" required placeholder="your@email.com"></div>
-      <div class="q"><label class="qlabel" for="f_phone">Контактний телефон <span class="req">*</span></label><input id="f_phone" type="tel" name="phone" required pattern="[+\d][\d\s()\-]{8,}" title="напр. +380XXXXXXXXX" placeholder="+380XXXXXXXXX"></div>
+      <legend class="legend">1. Контактні дані та регіон</legend>
+      <div class="q"><label class="qlabel" for="f_name">Прізвище, ім'я, по батькові <span class="req">*</span></label><input id="f_name" autocomplete="name" type="text" name="name" required></div>
+      <div class="q"><label class="qlabel" for="f_email">Email <span class="req">*</span></label><input id="f_email" autocomplete="email" type="email" name="email" required placeholder="your@email.com"></div>
+      <div class="q"><label class="qlabel" for="f_phone">Контактний телефон <span class="req">*</span></label><input id="f_phone" autocomplete="tel" type="tel" name="phone" required pattern="[+\d][\d\s()\-]{8,}" title="напр. +380XXXXXXXXX" placeholder="+380XXXXXXXXX"></div>
       <div class="q">
         <label class="qlabel" for="f_oblast">Область проживання <span class="req">*</span></label>
-        <select id="f_oblast" name="oblast" required>
+        <select id="f_oblast" autocomplete="address-level1" name="oblast" required>
           <option value="" disabled selected>Оберіть область…</option>
           <option>Вінницька</option><option>Волинська</option><option>Дніпропетровська</option><option>Донецька</option><option>Житомирська</option><option>Закарпатська</option><option>Запорізька</option><option>Івано-Франківська</option><option>Київська</option><option>Кіровоградська</option><option>Луганська</option><option>Львівська</option><option>Миколаївська</option><option>Одеська</option><option>Полтавська</option><option>Рівненська</option><option>Сумська</option><option>Тернопільська</option><option>Харківська</option><option>Херсонська</option><option>Хмельницька</option><option>Черкаська</option><option>Чернівецька</option><option>Чернігівська</option><option>м. Київ</option>
         </select>
       </div>
-      <div class="q"><label class="qlabel" for="f_gromada">Громада / населений пункт <span class="req">*</span></label><input id="f_gromada" type="text" name="gromada" required></div>
-      <div class="q">
-        <span class="qlabel">Тип населеного пункту <span class="req">*</span></span>
+      <div class="q"><label class="qlabel" for="f_gromada">Громада / населений пункт <span class="req">*</span></label><input id="f_gromada" autocomplete="address-level2" type="text" name="gromada" required></div>
+      <div class="q" role="group" aria-labelledby="qg2">
+        <span class="qlabel" id="qg2">Тип населеного пункту <span class="req">*</span></span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="settlement_type" value="місто" required> місто</label>
           <label class="opt"><input type="radio" name="settlement_type" value="смт"> смт</label>
           <label class="opt"><input type="radio" name="settlement_type" value="село"> село</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">Чи є ваша сім'я внутрішньо переміщеною (ВПО)? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg3">
+        <span class="qlabel" id="qg3">Чи є ваша сім'я внутрішньо переміщеною (ВПО)? <span class="req">*</span></span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="idp" value="так" required> Так</label>
           <label class="opt"><input type="radio" name="idp" value="ні"> Ні</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">Як би ви описали безпекову ситуацію у вашому регіоні проживання? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg4">
+        <span class="qlabel" id="qg4">Як би ви описали безпекову ситуацію у вашому регіоні проживання? <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="security" value="Прифронтовий / постраждалий регіон" required> Прифронтовий / постраждалий регіон</label>
           <label class="opt"><input type="radio" name="security" value="Деокупована територія"> Деокупована територія</label>
@@ -125,25 +126,25 @@
 
     <!-- Блок 2 -->
     <fieldset class="fblock">
-      <span class="legend">2. Інформація про сім'ю</span>
-      <div class="q">
-        <span class="qlabel">9. Форма виховання вашої сім'ї <span class="req">*</span></span>
+      <legend class="legend">2. Інформація про сім'ю</legend>
+      <div class="q" role="group" aria-labelledby="qg5">
+        <span class="qlabel" id="qg5">9. Форма виховання вашої сім'ї <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="family_form" value="Прийомна сім'я (ПС)" required> Прийомна сім'я (ПС)</label>
           <label class="opt"><input type="radio" name="family_form" value="Дитячий будинок сімейного типу (ДБСТ)"> Дитячий будинок сімейного типу (ДБСТ)</label>
           <label class="opt"><input type="radio" name="family_form" value="Інше"> Інше (вкажіть):</label>
         </div>
-        <input type="text" name="family_form_other" placeholder="якщо «Інше»" style="margin-top:8px">
+        <input type="text" name="family_form_other" aria-label="Уточніть, якщо обрано «Інше»" placeholder="якщо «Інше»" style="margin-top:8px">
       </div>
-      <div class="q">
-        <span class="qlabel">10. Стать <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg6">
+        <span class="qlabel" id="qg6">10. Стать <span class="req">*</span></span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="gender" value="Жіноча" required> Жіноча</label>
           <label class="opt"><input type="radio" name="gender" value="Чоловіча"> Чоловіча</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">11. Ваш вік <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg7">
+        <span class="qlabel" id="qg7">11. Ваш вік <span class="req">*</span></span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="age" value="20–29" required> 20–29</label>
           <label class="opt"><input type="radio" name="age" value="30–39"> 30–39</label>
@@ -152,8 +153,8 @@
           <label class="opt"><input type="radio" name="age" value="60+"> 60+</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">12. Тривалість шлюбу / партнерства <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg8">
+        <span class="qlabel" id="qg8">12. Тривалість шлюбу / партнерства <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="marriage" value="0–3 роки" required> 0–3 роки</label>
           <label class="opt"><input type="radio" name="marriage" value="3–6 років"> 3–6 років</label>
@@ -163,8 +164,8 @@
           <label class="opt"><input type="radio" name="marriage" value="Виховую самостійно"> Виховую самостійно</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">13. Скільки часу ви опікуєтесь дітьми <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg9">
+        <span class="qlabel" id="qg9">13. Скільки часу ви опікуєтесь дітьми <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="care_duration" value="до 6 місяців" required> до 6 місяців</label>
           <label class="opt"><input type="radio" name="care_duration" value="6–12 місяців"> 6–12 місяців</label>
@@ -194,39 +195,39 @@
           <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>більше</option>
         </select>
       </div>
-      <div class="q">
-        <span class="qlabel">17. Чи є у вашій родині рідні (біологічні) діти? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg10">
+        <span class="qlabel" id="qg10">17. Чи є у вашій родині рідні (біологічні) діти? <span class="req">*</span></span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="bio_children" value="так" required> Так</label>
           <label class="opt"><input type="radio" name="bio_children" value="ні"> Ні</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">18. Чи виховуєте ви дітей з інвалідністю? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg11">
+        <span class="qlabel" id="qg11">18. Чи виховуєте ви дітей з інвалідністю? <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="disability" value="Ні" required> Ні</label>
           <label class="opt"><input type="radio" name="disability" value="Так — 1 дитина"> Так — 1 дитина з інвалідністю</label>
           <label class="opt"><input type="radio" name="disability" value="Так — 2 і більше"> Так — 2 і більше дітей з інвалідністю</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">19. Чи виховуєте ви дітей з особливими освітніми потребами (ООП)? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg12">
+        <span class="qlabel" id="qg12">19. Чи виховуєте ви дітей з особливими освітніми потребами (ООП)? <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="oop" value="Ні" required> Ні</label>
           <label class="opt"><input type="radio" name="oop" value="Так — 1 дитина"> Так — 1 дитина з ООП</label>
           <label class="opt"><input type="radio" name="oop" value="Так — 2 і більше"> Так — 2 і більше дітей з ООП</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">20. Чи є серед ваших дітей такі, що мали досвід інституційного догляду (інтернат, дитячий будинок)? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg13">
+        <span class="qlabel" id="qg13">20. Чи є серед ваших дітей такі, що мали досвід інституційного догляду (інтернат, дитячий будинок)? <span class="req">*</span></span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="institutional" value="Так" required> Так</label>
           <label class="opt"><input type="radio" name="institutional" value="Ні"> Ні</label>
           <label class="opt"><input type="radio" name="institutional" value="Важко відповісти"> Важко відповісти</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">21. Чи зазнала ваша сім'я впливу війни? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
+      <div class="q" role="group" aria-labelledby="qg14">
+        <span class="qlabel" id="qg14">21. Чи зазнала ваша сім'я впливу війни? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="war_impact" value="Внутрішнє переміщення"> Внутрішнє переміщення (евакуація, зміна місця проживання)</label>
           <label class="opt"><input type="checkbox" name="war_impact" value="Бойові дії / окупація / обстріли"> Перебування на території бойових дій, в окупації або під обстрілами</label>
@@ -236,10 +237,10 @@
           <label class="opt"><input type="checkbox" name="war_impact" value="Інше"> Інше (вкажіть):</label>
           <label class="opt"><input type="checkbox" name="war_impact" value="Не зазнала безпосереднього впливу"> Наша сім'я не зазнала безпосереднього впливу війни</label>
         </div>
-        <input type="text" name="war_impact_other" placeholder="якщо «Інше»" style="margin-top:8px">
+        <input type="text" name="war_impact_other" aria-label="Уточніть, якщо обрано «Інше»" placeholder="якщо «Інше»" style="margin-top:8px">
       </div>
-      <div class="q">
-        <span class="qlabel">22. Чи виховуєте ви дітей з числа повернених з депортації або примусового переміщення? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg15">
+        <span class="qlabel" id="qg15">22. Чи виховуєте ви дітей з числа повернених з депортації або примусового переміщення? <span class="req">*</span></span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="deportation_children" value="Так" required> Так</label>
           <label class="opt"><input type="radio" name="deportation_children" value="Ні"> Ні</label>
@@ -250,9 +251,9 @@
 
     <!-- Блок 3 -->
     <fieldset class="fblock">
-      <span class="legend">3. Мотивація та досвід виховання</span>
-      <div class="q">
-        <span class="qlabel">23. Які мотиви вплинули на ваш вибір діяльності, пов'язаної з вихованням дітей? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
+      <legend class="legend">3. Мотивація та досвід виховання</legend>
+      <div class="q" role="group" aria-labelledby="qg16">
+        <span class="qlabel" id="qg16">23. Які мотиви вплинули на ваш вибір діяльності, пов'язаної з вихованням дітей? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="motyvy" value="Надати дітям любов і турботу"> Надати дітям любов і турботу, коли вони залишилися без батьків</label>
           <label class="opt"><input type="checkbox" name="motyvy" value="Емоційне задоволення та значущість"> Отримати емоційне задоволення від виховання та відчуття значущості</label>
@@ -264,8 +265,8 @@
           <label class="opt"><input type="checkbox" name="motyvy" value="Приклад для громади"> Показати позитивний приклад для громади та інших сімей</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">24. Чи легко вам знаходити спільну мову з дитиною/дітьми? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg17">
+        <span class="qlabel" id="qg17">24. Чи легко вам знаходити спільну мову з дитиною/дітьми? <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="common_language" value="Не легко" required> Не легко</label>
           <label class="opt"><input type="radio" name="common_language" value="Здебільшого складно"> Здебільшого складно</label>
@@ -273,8 +274,8 @@
           <label class="opt"><input type="radio" name="common_language" value="Здебільшого легко"> Здебільшого легко</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">25. З якими труднощами у вихованні ви стикаєтеся найчастіше? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
+      <div class="q" role="group" aria-labelledby="qg18">
+        <span class="qlabel" id="qg18">25. З якими труднощами у вихованні ви стикаєтеся найчастіше? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="difficulties" value="Емоційне виснаження"> Емоційне виснаження — постійна втома та стрес через потреби дітей</label>
           <label class="opt"><input type="checkbox" name="difficulties" value="Проблеми адаптації дитини"> Проблеми адаптації дитини — конфлікти, страхи, агресія, сум через розлуку з рідними</label>
@@ -288,8 +289,8 @@
           <label class="opt"><input type="checkbox" name="difficulties" value="Поєднання роботи й виховання"> Складнощі з поєднанням роботи, особистого життя та виховання</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">26. Що, на вашу думку, може бути причиною закриття ДБСТ / припинення опіки? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
+      <div class="q" role="group" aria-labelledby="qg19">
+        <span class="qlabel" id="qg19">26. Що, на вашу думку, може бути причиною закриття ДБСТ / припинення опіки? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="closure_reasons" value="Сімейні кризи у вихователів"> Сімейні кризи у вихователів (розлучення, конфлікти в родині)</label>
           <label class="opt"><input type="checkbox" name="closure_reasons" value="Психологічне виснаження та вигорання"> Психологічне виснаження та емоційне вигорання вихователів</label>
@@ -303,15 +304,15 @@
           <label class="opt"><input type="checkbox" name="closure_reasons" value="Брак підтримки громади"> Відсутність підтримки від громади та близьких</label>
           <label class="opt"><input type="checkbox" name="closure_reasons" value="Інше"> Інше (вкажіть):</label>
         </div>
-        <input type="text" name="closure_other" placeholder="якщо «Інше»" style="margin-top:8px">
+        <input type="text" name="closure_other" aria-label="Уточніть, якщо обрано «Інше»" placeholder="якщо «Інше»" style="margin-top:8px">
       </div>
     </fieldset>
 
     <!-- Блок 4 -->
     <fieldset class="fblock">
-      <span class="legend">4. Самооцінка стану</span>
-      <div class="q">
-        <span class="qlabel">27. Наскільки вас турбує стан фізичного здоров'я на цей момент? <span class="req">*</span></span>
+      <legend class="legend">4. Самооцінка стану</legend>
+      <div class="q" role="group" aria-labelledby="qg20">
+        <span class="qlabel" id="qg20">27. Наскільки вас турбує стан фізичного здоров'я на цей момент? <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="health_concern" value="зовсім не турбує" required> зовсім не турбує</label>
           <label class="opt"><input type="radio" name="health_concern" value="трохи турбує"> трохи турбує</label>
@@ -320,8 +321,8 @@
           <label class="opt"><input type="radio" name="health_concern" value="дуже сильно турбує"> дуже сильно турбує</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">28. Як ви оцінюєте свій фінансовий стан? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg21">
+        <span class="qlabel" id="qg21">28. Як ви оцінюєте свій фінансовий стан? <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="financial" value="Стабільний" required> Стабільний — достатньо коштів для потреб сім'ї та дітей</label>
           <label class="opt"><input type="radio" name="financial" value="Переважно стабільний"> Переважно стабільний — покриваю більшість витрат, іноді бувають труднощі</label>
@@ -329,8 +330,8 @@
           <label class="opt"><input type="radio" name="financial" value="Дуже нестабільний"> Дуже нестабільний — постійний брак коштів, потребую підтримки</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">29. Як ви оцінюєте свій стан психологічного виснаження на цей момент? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg22">
+        <span class="qlabel" id="qg22">29. Як ви оцінюєте свій стан психологічного виснаження на цей момент? <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="exhaustion" value="Виснаження не відчуваю" required> Виснаження не відчуваю</label>
           <label class="opt"><input type="radio" name="exhaustion" value="Легка втома"> Є легка втома</label>
@@ -339,8 +340,8 @@
           <label class="opt"><input type="radio" name="exhaustion" value="Перевтома, виснаження"> Перевтома, відчуваю виснаження</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">30. Як ви оцінюєте свої внутрішні ресурси на цей момент? <span class="req">*</span></span>
+      <div class="q" role="group" aria-labelledby="qg23">
+        <span class="qlabel" id="qg23">30. Як ви оцінюєте свої внутрішні ресурси на цей момент? <span class="req">*</span></span>
         <div class="opts">
           <label class="opt"><input type="radio" name="resources" value="Маю сили" required> Почуваюся впевнено й маю сили для повноцінного виховання дітей</label>
           <label class="opt"><input type="radio" name="resources" value="Справляюся з більшістю"> Здатний/-на справлятися з більшістю проблем</label>
@@ -353,7 +354,7 @@
 
     <!-- Блок 5 -->
     <fieldset class="fblock">
-      <span class="legend">5. Тест на емоційне вигорання</span>
+      <legend class="legend">5. Тест на емоційне вигорання</legend>
       <p class="bnote">22 твердження про почуття, пов'язані з вихованням. Оцініть, як часто ви відчуваєте описане. Довго не замислюйтесь — відповідайте за першим враженням.</p>
       <div class="mbi-legend"><b>Шкала:</b> 0 — ніколи · 1 — дуже рідко · 2 — рідко · 3 — іноді · 4 — часто · 5 — дуже часто · 6 — щодня</div>
       <div id="mbi" class="mbi"></div>
@@ -361,27 +362,27 @@
 
     <!-- Блок 6 -->
     <fieldset class="fblock" id="block6" style="display:none">
-      <span class="legend">6. Деталі заявки на ретрит</span>
-      <div class="q">
-        <span class="qlabel">31. Чи готові ви взяти участь у всіх 8 триденних ретритах (п'ятниця–неділя) протягом року?</span>
+      <legend class="legend">6. Деталі заявки на ретрит</legend>
+      <div class="q" role="group" aria-labelledby="qg24">
+        <span class="qlabel" id="qg24">31. Чи готові ви взяти участь у всіх 8 триденних ретритах (п'ятниця–неділя) протягом року?</span>
         <div class="opts">
           <label class="opt"><input type="radio" name="all8" value="Так, усі 8" data-req> Так, готовий(-а) відвідувати всі 8</label>
           <label class="opt"><input type="radio" name="all8" value="З певними умовами" data-req> Готовий(-а), але з певними умовами (вкажіть нижче)</label>
           <label class="opt"><input type="radio" name="all8" value="Лише частину"> Зможу лише частину зустрічей</label>
           <label class="opt"><input type="radio" name="all8" value="Поки не впевнений"> Поки не впевнений(-на)</label>
         </div>
-        <input type="text" name="all8_conditions" placeholder="якщо є умови — опишіть" style="margin-top:8px">
+        <input type="text" name="all8_conditions" aria-label="Опишіть умови участі, якщо є" placeholder="якщо є умови — опишіть" style="margin-top:8px">
       </div>
-      <div class="q">
-        <span class="qlabel">32. Чи зможуть взяти участь обоє з подружжя/партнерів?</span>
+      <div class="q" role="group" aria-labelledby="qg25">
+        <span class="qlabel" id="qg25">32. Чи зможуть взяти участь обоє з подружжя/партнерів?</span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="partners" value="Так, обоє" data-req> Так, обоє</label>
           <label class="opt"><input type="radio" name="partners" value="Лише я"> Лише я</label>
           <label class="opt"><input type="radio" name="partners" value="Виховую самостійно"> Виховую самостійно</label>
         </div>
       </div>
-      <div class="q">
-        <span class="qlabel">33. Чи потрібен вам трансфер до місця проведення?</span>
+      <div class="q" role="group" aria-labelledby="qg26">
+        <span class="qlabel" id="qg26">33. Чи потрібен вам трансфер до місця проведення?</span>
         <div class="opts row">
           <label class="opt"><input type="radio" name="transfer" value="Так" data-req> Так</label>
           <label class="opt"><input type="radio" name="transfer" value="Ні"> Ні</label>
