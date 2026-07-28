@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   btn.addEventListener('click', function () {
     var open = menu.classList.toggle('open');
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
     btn.textContent = open ? '✕' : '☰';
   });
 
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.target.tagName === 'A') {
       menu.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Відкрити меню');
       btn.textContent = '☰';
     }
   });
