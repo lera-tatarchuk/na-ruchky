@@ -59,10 +59,11 @@
 
   function showSettings() {
     var c = getConsent() || { youtube: false, fonts: false };
+    var opener = document.activeElement; // куди повернути фокус після закриття
     var m = document.createElement('div');
     m.className = 'cookie-modal'; m.id = 'cookie-modal';
     m.innerHTML =
-      '<div class="cbox" role="dialog" aria-label="Налаштування cookies">' +
+      '<div class="cbox" role="dialog" aria-modal="true" aria-label="Налаштування cookies">' +
         '<h3 class="cav">Налаштування cookies</h3>' +
         '<p class="muted" style="margin:0 0 16px">Технічно необхідні cookies працюють завжди. Решту оберіть самі.</p>' +
         '<label class="opt"><input type="checkbox" id="c-fonts"' + (c.fonts ? ' checked' : '') + '> <span><b>Google Fonts</b> — фірмові шрифти сайту (завантажуються з серверів Google).</span></label>' +
@@ -73,14 +74,39 @@
         '</div>' +
       '</div>';
     document.body.appendChild(m);
+    var box = m.querySelector('.cbox');
+
+    function focusable() {
+      return Array.prototype.slice.call(
+        box.querySelectorAll('a[href],button,input,select,textarea,[tabindex]:not([tabindex="-1"])')
+      ).filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+    }
+    function close() {
+      document.removeEventListener('keydown', onKey, true);
+      m.remove();
+      if (opener && typeof opener.focus === 'function') opener.focus(); // повертаємо фокус на елемент-відкривач
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') { e.preventDefault(); close(); if (!getConsent()) showBanner(); return; }
+      if (e.key !== 'Tab') return;
+      var f = focusable(); if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      // focus-trap: не випускаємо фокус за межі діалогу
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+    document.addEventListener('keydown', onKey, true);
+
     m.addEventListener('click', function (e) {
       var a = e.target.getAttribute('data-c');
-      if (e.target === m || a === 'close') { m.remove(); if (!getConsent()) showBanner(); return; }
+      if (e.target === m || a === 'close') { close(); if (!getConsent()) showBanner(); return; }
       if (a === 'save') {
         save({ youtube: document.getElementById('c-yt').checked, fonts: document.getElementById('c-fonts').checked });
-        m.remove();
+        close();
       }
     });
+
+    var f = focusable(); if (f.length) f[0].focus(); // переносимо фокус усередину діалогу
   }
 
   document.addEventListener('DOMContentLoaded', function () {
