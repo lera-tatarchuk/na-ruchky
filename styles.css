@@ -86,6 +86,11 @@ section.block{padding:28px 0}
 .prose ul{padding-left:20px}
 .prose li{margin-bottom:6px}
 
+/* сторінка ретритів */
+.retreat-page .page-head{max-width:860px}
+.retreat-photo{margin:18px 0 34px;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 12px 32px rgba(47,74,63,.10);background:var(--cream)}
+.retreat-photo img{display:block;width:100%;height:auto;aspect-ratio:16/8.44;object-fit:cover;object-position:center}
+
 /* form */
 .formwrap{max-width:640px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;margin-top:8px}
 .field{margin-bottom:16px}
@@ -301,6 +306,8 @@ footer a{color:#fff;text-decoration:underline}
   .hero h1{font-size:40px}
   .page-head h1{font-size:32px}
   .page-head{padding-top:32px}
+  .retreat-photo{margin:12px 0 28px;border-radius:16px}
+  .retreat-photo img{aspect-ratio:4/3;object-position:52% center}
   .mentors{grid-template-columns:repeat(2,minmax(0,1fr))}
   .scale label{flex:1 1 12%}
   .home-cards{grid-template-columns:1fr}
