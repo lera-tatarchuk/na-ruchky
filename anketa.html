@@ -27,7 +27,7 @@
 {"@type":"ListItem","position":3,"name":"Анкета-заявка","item":"https://na-ruchky.tvoya-opora.org/anketa.html"}]}
 </script>
 </head>
-<body>
+<body class="anketa-page">
 <a class="skip-link" href="#main">Перейти до основного вмісту</a>
 
 <header><div class="wrap nav">
@@ -57,17 +57,34 @@
     <div class="sub">Ваш голос має значення для змін</div>
   </div>
 
-  <div class="prose">
+  <div class="prose anketa-intro">
     <p class="lead">Шановні прийомні батьки та батьки-вихователі! Щодня ви берете на себе велику відповідальність — виховуєте дітей, даруєте їм турботу, підтримку й відчуття безпеки. Навіть найсильніші люди втомлюються і потребують відпочинку та відновлення.</p>
-    <p>Ця анкета допоможе дослідити емоційний стан і потреби прийомних батьків та батьків-вихователів. Зібрані відповіді допоможуть підготувати рекомендації для розвитку системи підтримки сімей. Окремо ви зможете зазначити, чи хочете подати заявку на участь у безоплатній програмі психоемоційного відновлення — ресурсному ретриті. Участь у дослідженні не зобов’язує вас подавати заявку на ретрит.</p>
-    <p>Будь ласка, відповідайте відверто — тут немає «правильних» чи «неправильних» відповідей. Надані вами відповіді використовуватимуться для проведення дослідження. У публічних матеріалах результати подаватимуться лише в узагальненому та знеособленому вигляді. Детальні умови обробки, зберігання та захисту персональних даних викладені в <a href="polityka.html">Політиці конфіденційності</a>. Контактні дані використовуватимуться для зв’язку з вами з організаційних питань дослідження та, якщо ви подасте заявку на ретрит, щодо відбору й участі в програмі.</p>
-    <p class="note">Орієнтовний час заповнення: 15–20 хвилин. Як ми обробляємо ваші дані — у <a href="polityka.html">Політиці конфіденційності</a>.</p>
+    <p>Анкета допоможе дослідити емоційний стан і потреби прийомних родин та підготувати рекомендації для розвитку системи підтримки. Окремо можна подати заявку на безоплатну програму психоемоційного відновлення — ресурсний ретрит.</p>
+    <div class="anketa-meta" aria-label="Коротко про анкету">
+      <span>15–20 хвилин</span><span>Конфіденційно</span><span>6 основних розділів</span>
+    </div>
+    <details class="anketa-details">
+      <summary>Як використовуватимуться ваші відповіді</summary>
+      <div class="details-body">
+        <p>Участь у дослідженні не зобов’язує вас подавати заявку на ретрит. Будь ласка, відповідайте відверто — тут немає «правильних» чи «неправильних» відповідей.</p>
+        <p>У публічних матеріалах результати подаватимуться лише в узагальненому та знеособленому вигляді. Контактні дані використовуватимуться для зв’язку з вами з організаційних питань дослідження та, якщо ви подасте заявку на ретрит, щодо відбору й участі в програмі.</p>
+        <p>Детальні умови обробки, зберігання та захисту персональних даних викладені в <a href="polityka.html">Політиці конфіденційності</a>.</p>
+      </div>
+    </details>
   </div>
 
   <form id="anketa" class="sb-form anketa" data-table="anketa_zayavky" data-mode="payload" style="margin-top:18px">
 
+    <nav class="anketa-progress" aria-label="Розділи анкети">
+      <div class="anketa-progress-head"><span id="anketa-progress-label">Початок анкети</span><span>Можна переходити між розділами</span></div>
+      <div class="anketa-progress-track" aria-hidden="true"><span class="anketa-progress-bar"></span></div>
+      <div class="anketa-steps">
+        <a href="#anketa-consent" class="active">Згода</a><a href="#anketa-contact">1. Контакти</a><a href="#anketa-family">2. Сім’я</a><a href="#anketa-experience">3. Досвід</a><a href="#anketa-state">4. Стан</a><a href="#anketa-burnout">5. Вигорання</a><a href="#block6">6. Ретрит</a>
+      </div>
+    </nav>
+
     <!-- Блок 0 -->
-    <fieldset class="fblock consent">
+    <fieldset class="fblock consent" id="anketa-consent" data-step-label="Згода на участь">
       <legend class="legend">Згода на участь</legend>
       <p class="bnote">Обов'язкові пункти — без згоди анкета не приймається.</p>
       <div class="opts">
@@ -95,7 +112,7 @@
     </fieldset>
 
     <!-- Блок 1 -->
-    <fieldset class="fblock">
+    <fieldset class="fblock" id="anketa-contact" data-step-label="1. Контактні дані та регіон">
       <legend class="legend">1. Контактні дані та регіон</legend>
       <div class="q"><label class="qlabel" for="f_name">Прізвище, ім'я, по батькові <span class="req">*</span></label><input id="f_name" autocomplete="name" type="text" name="name" required></div>
       <div class="q"><label class="qlabel" for="f_email">Email <span class="req">*</span></label><input id="f_email" autocomplete="email" type="email" name="email" required placeholder="your@email.com"></div>
@@ -136,7 +153,7 @@
     </fieldset>
 
     <!-- Блок 2 -->
-    <fieldset class="fblock">
+    <fieldset class="fblock" id="anketa-family" data-step-label="2. Інформація про сім’ю">
       <legend class="legend">2. Інформація про сім'ю</legend>
       <div class="q" role="group" aria-labelledby="qg5">
         <span class="qlabel" id="qg5">9. Форма виховання вашої сім'ї <span class="req">*</span></span>
@@ -262,7 +279,7 @@
     </fieldset>
 
     <!-- Блок 3 -->
-    <fieldset class="fblock">
+    <fieldset class="fblock" id="anketa-experience" data-step-label="3. Мотивація та досвід">
       <legend class="legend">3. Мотивація та досвід виховання</legend>
       <div class="q" role="group" aria-labelledby="qg16">
         <span class="qlabel" id="qg16">23. Які мотиви вплинули на ваш вибір діяльності, пов'язаної з вихованням дітей? <span class="req">*</span> <span class="hint" style="display:inline">(оберіть хоча б один варіант)</span></span>
@@ -321,7 +338,7 @@
     </fieldset>
 
     <!-- Блок 4 -->
-    <fieldset class="fblock">
+    <fieldset class="fblock" id="anketa-state" data-step-label="4. Самооцінка стану">
       <legend class="legend">4. Самооцінка стану</legend>
       <div class="q" role="group" aria-labelledby="qg20">
         <span class="qlabel" id="qg20">27. Як часто вас турбує стан вашого фізичного здоров’я на цей момент? <span class="req">*</span></span>
@@ -364,7 +381,7 @@
     </fieldset>
 
     <!-- Блок 5 -->
-    <fieldset class="fblock">
+    <fieldset class="fblock" id="anketa-burnout" data-step-label="5. Тест на емоційне вигорання">
       <legend class="legend">5. Тест на емоційне вигорання</legend>
       <p class="bnote">22 твердження про почуття, пов'язані з вихованням. Оцініть, як часто ви відчуваєте описане. Довго не замислюйтесь — відповідайте за першим враженням.</p>
       <div class="mbi-legend"><b>Шкала:</b> 0 — ніколи · 1 — дуже рідко · 2 — рідко · 3 — іноді · 4 — часто · 5 — дуже часто · 6 — щодня</div>
@@ -372,7 +389,7 @@
     </fieldset>
 
     <!-- Блок 6 -->
-    <fieldset class="fblock" id="block6" style="display:none">
+    <fieldset class="fblock" id="block6" data-step-label="6. Деталі заявки на ретрит" style="display:none">
       <legend class="legend">6. Деталі заявки на ретрит</legend>
       <div class="q" role="group" aria-labelledby="qg24">
         <span class="qlabel" id="qg24">31. Чи готові ви взяти участь у всіх 8 дводенних ретритах протягом року?</span>
@@ -518,5 +535,6 @@
 <script src="cookie.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="forms.js" defer></script>
+<script src="anketa-ui.js" defer></script>
 </body>
 </html>
