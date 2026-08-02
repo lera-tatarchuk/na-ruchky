@@ -91,7 +91,7 @@ section.block{padding:28px 0}
 .partner.empty{color:var(--muted);font-size:13px;font-weight:600;text-align:center;border-style:dashed}
 
 /* mentors */
-.mentors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.mentors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .mentor{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
 .mentor .ph{width:84px;height:84px;border-radius:50%;background:var(--cream);border:1px solid var(--line);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;overflow:hidden}
 .mentor .ph img{width:100%;height:100%;object-fit:cover}
@@ -227,7 +227,11 @@ footer a{color:#fff;text-decoration:underline}
   .navtoggle{display:inline-flex;align-items:center}
   .menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:14px;background:var(--cream);border-bottom:1px solid var(--line);padding:16px 20px;font-size:17px;z-index:30}
   .menu.open{display:flex}
+  .mentors{grid-template-columns:repeat(2,minmax(0,1fr))}
   .scale label{flex:1 1 12%}
+}
+@media(max-width:480px){
+  .mentors{grid-template-columns:1fr}
 }
 /* вузькі екрани: не даємо хедеру переповнюватися по горизонталі */
 @media(max-width:380px){
