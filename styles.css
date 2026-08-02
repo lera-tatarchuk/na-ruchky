@@ -231,6 +231,17 @@ footer a{color:#fff;text-decoration:underline}
 
 /* self-test */
 .test{max-width:760px}
+.selftest-details{max-width:760px;margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.selftest-details summary{list-style:none;cursor:pointer;padding:16px 20px;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.selftest-details summary::-webkit-details-marker{display:none}
+.selftest-details summary::after{content:"+";font-size:24px;line-height:1;color:var(--terracotta);font-weight:600}
+.selftest-details[open] summary{border-bottom:1px solid var(--line)}
+.selftest-details[open] summary::after{content:"−"}
+.selftest-close-label{display:none}
+.selftest-details[open] .selftest-open-label{display:none}
+.selftest-details[open] .selftest-close-label{display:inline}
+.selftest-body{padding:20px}
+.selftest-body .formnote{margin-bottom:18px}
 .test .tq{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;background:#fff;min-width:0}
 .test fieldset.tq{margin-inline:0}
 .test .tq>.qt{display:block;font-weight:600;margin-bottom:9px;font-size:15px;padding:0;border:0}
