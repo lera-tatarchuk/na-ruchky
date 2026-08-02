@@ -66,7 +66,7 @@ header{position:sticky;top:0;background:rgba(254,252,248,.92);backdrop-filter:bl
 section.block{padding:28px 0}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
 /* єдина ширина контенту: контентні сторінки вирівняні по --content (головну з .home-cards не чіпаємо) */
-.page-head,h2.section-title,.stat-grid,.mentors,.cards:not(.home-cards){max-width:var(--content)}
+.page-head,h2.section-title,.stat-grid,.mentors,.viz-note,.formnote,.src,.bnote,.cards:not(.home-cards){max-width:var(--content)}
 .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;transition:border-color .15s,box-shadow .15s}
 .card:hover{border-color:var(--honey);box-shadow:0 4px 16px rgba(227,178,60,.14)}
 .card h3,.card h2{margin:0 0 8px;font-size:20px}
