@@ -140,8 +140,8 @@
           <label class="opt"><input type="radio" name="idp" value="ні"> Ні</label>
         </div>
       </div>
-      <div class="q"><label class="qlabel" for="f_idp_members">Скільки членів вашої сім’ї мають статус ВПО?</label><input id="f_idp_members" type="number" min="0" name="idp_family_members" inputmode="numeric"></div>
-      <div class="q"><label class="qlabel" for="f_idp_children">Скільки з них — діти?</label><input id="f_idp_children" type="number" min="0" name="idp_children" inputmode="numeric"></div>
+      <div class="q"><label class="qlabel" for="f_idp_members">Скільки членів вашої сім’ї мають статус ВПО?</label><input id="f_idp_members" type="number" min="0" step="1" name="idp_family_members" inputmode="numeric" pattern="\d*"></div>
+      <div class="q"><label class="qlabel" for="f_idp_children">Скільки з них — діти?</label><input id="f_idp_children" type="number" min="0" step="1" name="idp_children" inputmode="numeric" pattern="\d*"></div>
       <div class="q" role="group" aria-labelledby="qg4">
         <span class="qlabel" id="qg4">Як би ви описали безпекову ситуацію у вашому регіоні проживання? <span class="req">*</span></span>
         <div class="opts">
@@ -422,6 +422,11 @@
       <div class="q"><label class="qlabel" for="f_why">36. Чому ви хотіли б взяти участь у ретриті? <span class="req">*</span> <span class="hint" style="display:inline">(кілька речень)</span></label><textarea id="f_why" name="why_retreat" data-req></textarea></div>
     </fieldset>
 
+    <fieldset class="fblock">
+      <legend class="legend">Насамкінець</legend>
+      <div class="q"><label class="qlabel" for="f_extra">Можливо, ви хочете додати щось важливе, про що ми вас не запитали?</label><textarea id="f_extra" name="anything_else" placeholder="За бажанням — тут можна написати все, що вважаєте важливим"></textarea></div>
+    </fieldset>
+
     <p class="note" style="max-width:640px">Натискаючи «Надіслати», ви підтверджуєте згоду з умовами, зазначеними вище та в <a href="polityka.html">Політиці конфіденційності</a>.</p>
     <button type="submit" class="btn">Надіслати анкету</button>
   </form>
@@ -508,6 +513,10 @@
   reqIf('input[name="closure_reasons"]', '[name="closure_other"]', function () {
     var i = document.querySelector('input[name="closure_reasons"][value="Інше"]'); return i && i.checked;
   });
+  // ВПО: якщо «Так» — кількість членів і кількість дітей стають обов'язковими
+  function idpYes() { var s = document.querySelector('input[name="idp"]:checked'); return s && s.value === 'так'; }
+  reqIf('input[name="idp"]', '[name="idp_family_members"]', idpYes);
+  reqIf('input[name="idp"]', '[name="idp_children"]', idpYes);
 
   // Блок 6 — показ лише для тих, хто подається на ретрит
   var b6 = document.getElementById('block6');
