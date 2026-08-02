@@ -1,6 +1,6 @@
 /* ==== Хочу на ручки — спільні стилі ==== */
 :root{
-  --terracotta:#C85A3C; --terracotta-dark:#b14e33; --sage:#7BA693; --ink:#2F4A3F;
+  --terracotta:#B14E33; --terracotta-dark:#963E28; --sage:#7BA693; --sage-text:#587A6B; --ink:#2F4A3F;
   --cream:#FBF4EC; --bg:#FEFCF8; --line:#EADFD2; --muted:#66786E;
   --honey:#E3B23C; --honey-dark:#C68A1E; --honey-soft:#FBEFD0; --honey-line:#EBD9A8;
 }
@@ -24,7 +24,7 @@ h2.section-title{font-size:clamp(26px,3vw,30px);line-height:1.25;margin:0 0 18px
 h2.section-title::after{content:"";display:block;width:52px;height:4px;background:var(--honey);border-radius:3px;margin-top:10px}
 .lead{font-size:19px;max-width:760px}
 .muted{color:var(--muted)}
-.tag{color:var(--sage);font-weight:700}
+.tag{color:var(--sage-text);font-weight:700}
 
 /* header */
 header{position:sticky;top:0;background:rgba(254,252,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:20}
@@ -43,7 +43,7 @@ header{position:sticky;top:0;background:rgba(254,252,248,.92);backdrop-filter:bl
 /* hero */
 .hero{padding:34px 0 48px;text-align:center}
 .hero h1{font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:clamp(40px,5vw,52px);line-height:1.12;letter-spacing:-1px;margin:0;color:var(--ink)}
-.hero .sub{font-size:20px;color:var(--sage);font-weight:600;margin:6px 0 22px}
+.hero .sub{font-size:20px;color:var(--sage-text);font-weight:600;margin:6px 0 22px}
 .hero p{max-width:680px;margin:0 auto 26px;font-size:18px}
 .cta{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
 .hero .cta .btn{min-width:210px}
@@ -53,7 +53,7 @@ header{position:sticky;top:0;background:rgba(254,252,248,.92);backdrop-filter:bl
 /* page header (inner pages) */
 .page-head{padding:44px 0 12px}
 .page-head h1{font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:40px;letter-spacing:-.5px;margin:0 0 6px}
-.page-head .sub{color:var(--sage);font-weight:600;font-size:18px}
+.page-head .sub{color:var(--sage-text);font-weight:600;font-size:18px}
 
 /* numbers */
 .nums{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:30px 0 38px}
@@ -144,7 +144,7 @@ footer a{color:#fff;text-decoration:underline}
 .bigstat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px;text-align:center}
 .bigstat b{display:block;font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:38px;color:var(--terracotta);line-height:1.05}
 .bigstat .lbl{font-size:14.5px;color:#46544c;margin-top:8px;font-weight:500;line-height:1.4}
-.bigstat.sage b{color:var(--sage)}
+.bigstat.sage b{color:var(--sage-text)}
 .bigstat.honey b{color:var(--honey-dark)}
 .viz-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;max-width:760px;margin:18px 0}
 .viz-card h3{margin:0 0 16px;font-size:18px}
