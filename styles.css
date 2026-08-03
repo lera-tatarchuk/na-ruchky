@@ -63,7 +63,7 @@ header{position:sticky;top:0;background:rgba(254,252,248,.92);backdrop-filter:bl
 .num span{font-size:14px;color:var(--muted);font-weight:600}
 
 /* sections + cards */
-section.block{padding:28px 0}
+section.block{padding-top:28px;padding-bottom:28px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
 /* єдина ширина контенту: контентні сторінки вирівняні по --content (головну з .home-cards не чіпаємо) */
 .page-head,h2.section-title,.stat-grid,.mentors,.viz-note,.formnote,.src,.bnote,.why-hero,.cards:not(.home-cards){max-width:var(--content)}
@@ -191,7 +191,7 @@ footer a{color:#fff;text-decoration:underline}
 .why-page .barrow .bl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;font-size:15px;line-height:1.45;margin-bottom:8px}
 .why-page .barrow .bl b{font-size:16px;white-space:nowrap}
 .why-page .viz-note,.why-page .src{font-size:14px;line-height:1.58}
-@media(max-width:var(--content)){
+@media(max-width:760px){
   .why-hero{grid-template-columns:1fr;text-align:center}
   .why-hero .illus{max-width:220px;order:-1}
   .pull{font-size:20px}
@@ -322,7 +322,7 @@ footer a{color:#fff;text-decoration:underline}
   .menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:14px;background:var(--cream);border-bottom:1px solid var(--line);padding:16px 20px;font-size:17px;z-index:30}
   .menu.open{display:flex}
 }
-@media(max-width:var(--content)){
+@media(max-width:760px){
   .hero h1{font-size:40px}
   .page-head h1{font-size:32px}
   .page-head{padding-top:32px}
