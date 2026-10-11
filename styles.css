@@ -31,8 +31,11 @@ h2.section-title::after{content:"";display:block;width:52px;height:4px;backgroun
 header{position:sticky;top:0;background:rgba(254,252,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:20}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;padding:10px 0}
 .brand{display:flex;align-items:center;gap:10px}
-.brand .name{font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.5px;color:var(--ink)}
-.menu{display:flex;gap:16px;flex-wrap:wrap;font-weight:500;font-size:15px;line-height:1.35}
+.brand{flex:0 0 auto}
+.brand .name{font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.5px;color:var(--ink);white-space:nowrap}
+.menu{display:flex;gap:13px;flex-wrap:nowrap;font-weight:500;font-size:14.5px;line-height:1.35}
+.menu a{white-space:nowrap}
+header .nav>.btn{flex:0 0 auto;white-space:nowrap}
 .menu a:hover{color:var(--terracotta)}
 .btn{display:inline-block;background:var(--terracotta);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;border:2px solid var(--terracotta);transition:.15s;cursor:pointer}
 .btn:hover{background:var(--terracotta-dark);border-color:var(--terracotta-dark)}
@@ -346,7 +349,7 @@ footer a{color:#fff;text-decoration:underline}
 .scale input{position:absolute;opacity:0;width:0;height:0}
 .scale label:hover{border-color:var(--sage)}
 .scale input:checked+span,.scale label:has(input:checked){background:var(--terracotta);border-color:var(--terracotta);color:#fff;font-weight:600}
-@media(max-width:1100px){
+@media(max-width:1180px){
   .navtoggle{display:inline-flex;align-items:center}
   .menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:14px;background:var(--cream);border-bottom:1px solid var(--line);padding:16px 20px;font-size:17px;z-index:30}
   .menu.open{display:flex}
