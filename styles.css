@@ -216,6 +216,7 @@ footer a{color:#fff;text-decoration:underline}
 .news-item .lnk{color:var(--terracotta);font-weight:600}
 .news-photo{margin:0 0 16px;border-radius:12px;overflow:hidden}
 .news-photo img{display:block;width:100%;height:auto}
+.news-photo figcaption{margin-top:8px;font-size:14px;line-height:1.5;color:var(--muted)}
 .news-more{margin:18px 0 0;max-width:var(--content)}
 .news-more a{color:var(--terracotta);font-weight:600}
 
