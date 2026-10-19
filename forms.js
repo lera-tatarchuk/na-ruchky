@@ -51,8 +51,17 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Не вдалося надіслати. Спробуйте ще раз або напишіть нам на пошту na-ruchky@tvoya-opora.org.ua');
         return;
       }
+      // запамʼятати, що анкету вже надсилали з цього браузера
+      if (table === 'anketa_zayavky') {
+        try { localStorage.setItem('anketa-nadislano', new Date().toISOString()); } catch (err) {}
+      }
+
       var box = form.parentNode;
-      form.innerHTML = '<p style="font-size:18px;color:#2F4A3F">Дякуємо! Ми отримали ваші відповіді і зв\'яжемося з вами щодо результатів. 💛</p>';
+      var dyakuyu = 'Дякуємо! Ми отримали ваші відповіді і зв\'яжемося з вами щодо результатів. 💛';
+      if (table === 'anketa_zayavky') {
+        dyakuyu += '<br><br><span style="font-size:16px;color:#66786E">Помітили помилку? Просто заповніть анкету ще раз — ми врахуємо останню версію.</span>';
+      }
+      form.innerHTML = '<p style="font-size:18px;color:#2F4A3F">' + dyakuyu + '</p>';
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   });

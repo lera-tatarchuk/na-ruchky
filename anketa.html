@@ -76,6 +76,8 @@
 
   <p class="deadline">Анкети приймаємо <b>до 31 жовтня 2026 року</b></p>
 
+  <p class="formnote" id="vzhe-nadislano" hidden>Ви вже надсилали цю анкету <b id="koly-nadislano"></b>. Заповнити ще раз можна — ми врахуємо останню версію. А якщо анкету подає другий із подружжя, просто заповнюйте як зазвичай.</p>
+
   <form id="anketa" class="sb-form anketa" data-table="anketa_zayavky" data-mode="payload" style="margin-top:18px">
 
     <nav class="anketa-progress" aria-label="Розділи анкети">
@@ -546,6 +548,17 @@
   document.querySelectorAll('input[name="all8"]').forEach(function (r) {
     r.addEventListener('change', function () { setReq(b6visible()); });
   });
+
+  // синхронізувати стан при завантаженні: браузер міг відновити вибір сам
+  // (кнопка «назад», автозаповнення, відновлення вкладки) — тоді події change не було,
+  // блок лишався прихованим, а анкета йшла без відповідей про ретрит
+  function syncB6() {
+    var yes = b6visible();
+    b6.style.display = yes ? 'block' : 'none';
+    setReq(yes);
+  }
+  syncB6();
+  window.addEventListener('pageshow', syncB6);
 })();
 </script>
 <script src="nav.js" defer></script>
@@ -553,5 +566,23 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="forms.js" defer></script>
 <script src="anketa-ui.js" defer></script>
+<script>
+// якщо з цього браузера анкету вже надсилали — показати нагадування (не заборону)
+(function () {
+  try {
+    var koly = localStorage.getItem('anketa-nadislano');
+    if (!koly) return;
+    var d = new Date(koly);
+    if (isNaN(d)) return;
+    var misiatsi = ['січня','лютого','березня','квітня','травня','червня',
+                    'липня','серпня','вересня','жовтня','листопада','грудня'];
+    var el = document.getElementById('vzhe-nadislano');
+    var when = document.getElementById('koly-nadislano');
+    if (!el || !when) return;
+    when.textContent = d.getDate() + ' ' + misiatsi[d.getMonth()] + ' ' + d.getFullYear();
+    el.hidden = false;
+  } catch (err) {}
+})();
+</script>
 </body>
 </html>
