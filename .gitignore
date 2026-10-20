@@ -1,0 +1,6 @@
+# службові файли, що самі з'являються в робочій копії
+system-commandline-sentinel-files/
+*.bak
+Thumbs.db
+desktop.ini
+.DS_Store
