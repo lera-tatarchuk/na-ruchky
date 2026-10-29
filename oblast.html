@@ -146,17 +146,15 @@ tr.done .minibar>i{background:#3F6B52}
         <tbody id="obl-body"></tbody>
       </table>
       <p class="hint2">
-        Ціль — <b><span id="obl-cil">—</span> <span id="obl-cil-sl">анкет</span> на регіон</b> для кожного
-        з <span id="obl-skilky">—</span> регіонів: це трохи більше за тисячу, бо план ставимо із запасом<span id="obl-bez"></span>.
         Жовта позначка на смужці — рівень цілі. Стовпчик «#» — місце за кількістю поданих анкет.
         Натисніть на назву області, щоб підсвітити її рядок.
       </p>
       <div class="pravyla">
         <b>Як рахуємо</b>
         <ul>
-          <li>Одна родина — одна анкета. Якщо людина заповнила анкету двічі, це один запис: беремо останню версію.</li>
-          <li>Враховуємо лише цільову групу дослідження — <b>прийомні сімʼї та ДБСТ</b>. Інші форми влаштування в цифри не входять<span id="pr-inshi"></span>.</li>
-          <li>Чоловік і дружина, які подалися окремо, — це дві анкети: дослідження вивчає кожного з батьків.</li>
+          <li><b>Потрібні анкети від обох батьків.</b> Мама й тато заповнюють окремо — це дві анкети, і дослідженню важливі обидві.</li>
+          <li>Одна людина — одна анкета: якщо хтось заповнив її двічі, рахуємо один раз і беремо останню версію.</li>
+          <li>Враховуємо лише цільову групу — <b>прийомні сімʼї та ДБСТ</b>. Інші форми влаштування в цифри не входять<span id="pr-inshi"></span>.</li>
         </ul>
       </div>
     </div>
@@ -218,8 +216,6 @@ tr.done .minibar>i{background:#3F6B52}
     var obl = dani.oblasti || [];
     // ціль на регіон приходить з бази; у окупованих областей вона порожня
     var cilObl = dani.cil_obl || Math.round((dani.cil || 1000) / obl.length);
-    document.getElementById('obl-cil').textContent = cilObl;
-    document.getElementById('obl-cil-sl').textContent = anket(cilObl);
 
     // місце за кількістю рахуємо один раз, воно не залежить від сортування
     var misce = {};
@@ -257,14 +253,6 @@ tr.done .minibar>i{background:#3F6B52}
     document.getElementById('obl-body').innerHTML = rows ||
       '<tr><td colspan="7" class="muted" style="padding:18px 10px">Такої області немає в списку.</td></tr>';
 
-    var zCillyu = obl.filter(function (o) { return o.cil !== null && o.cil !== undefined; }).length;
-    document.getElementById('obl-skilky').textContent = zCillyu;
-    var bez = dani.bez_cili || [];
-    document.getElementById('obl-bez').innerHTML = bez.length
-      ? '. <b>' + bez.join(' і ') + '</b> ' + (bez.length > 1 ? 'області' : 'область') +
-        ' до розподілу не входять — території окуповані. Анкети, які звідти все ж надходять, ' +
-        'ураховуються в загальну тисячу'
-      : '';
   }
 
   function render(d) {
@@ -306,7 +294,8 @@ tr.done .minibar>i{background:#3F6B52}
     var ms = Date.now() - lastOk, s = Math.round(ms / 1000);
     livetext.textContent = s < 5 ? 'оновлено щойно'
       : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
-    var staro = ms > ZASTARILO;
+    // банер показуємо лише тоді, коли є що в ньому написати
+    var staro = ms > ZASTARILO && chasOstannoi;
     document.getElementById('stale').hidden = !staro;
     if (staro) document.getElementById('stale-time').textContent = chasOstannoi;
   }
@@ -320,13 +309,20 @@ tr.done .minibar>i{background:#3F6B52}
   // sproba — лічильник спроб при першому завантаженні
   function refresh(first, sproba) {
     return fetchData().then(function (d) {
-      if (first) { boot.hidden = true; gate.hidden = true; page.hidden = false; }
+      // час фіксуємо до показу: якщо малювання спіткнеться, банер усе одно
+      // знатиме, на коли дані, і не покаже порожній прочерк
+      lastOk = Date.now();
+      chasOstannoi = d.onovleno || '';
       try { localStorage.setItem('ob-key', accessKey); } catch (e) {}
       render(d);
-      lastOk = Date.now();
-      chasOstannoi = d.onovleno;
+      if (first) { boot.hidden = true; gate.hidden = true; page.hidden = false; }
       dot.classList.remove('err'); ago();
     }).catch(function (e) {
+      // помилка показу — це не обрив звʼязку, не плутаємо їх
+      if (lastOk && !/fetch|network|HTTP|42501|доступ|ключ|function/i.test(e.message || '')) {
+        if (window.console) console.error('Помилка показу даних:', e);
+        return;
+      }
       var m = e.message || '';
       var kliuch = /42501|доступ|ключ/i.test(m);
       var nemaFunkcii = /Could not find the function/i.test(m);

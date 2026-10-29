@@ -447,7 +447,8 @@ tr.done .minibar>i{background:#4E7D64}
     var ms = Date.now() - lastOk, s = Math.round(ms / 1000);
     livetext.textContent = s < 5 ? 'оновлено щойно'
       : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
-    var staro = ms > ZASTARILO;
+    // банер показуємо лише тоді, коли є що в ньому написати
+    var staro = ms > ZASTARILO && chasOstannoi;
     document.getElementById('stale').hidden = !staro;
     if (staro) document.getElementById('stale-time').textContent = chasOstannoi;
   }
@@ -460,13 +461,21 @@ tr.done .minibar>i{background:#4E7D64}
 
   function refresh(first, sproba) {
     return fetchData().then(function (d) {
-      if (first) { boot.hidden = true; gate.hidden = true; board.hidden = false; }
+      // час фіксуємо до показу: якщо малювання спіткнеться, банер усе одно
+      // знатиме, на коли дані, і не покаже порожній прочерк
+      lastOk = Date.now(); chasOstannoi = d.onovleno || '';
       try { localStorage.setItem('db-key', accessKey); } catch (e) {}
       render(d);
-      prev = d; lastOk = Date.now(); chasOstannoi = d.onovleno;
+      prev = d;
+      if (first) { boot.hidden = true; gate.hidden = true; board.hidden = false; }
       dot.classList.remove('err'); ago();
     }).catch(function (e) {
       var m = e.message || '';
+      // помилка показу — це не обрив звʼязку, не плутаємо їх
+      if (lastOk && !/fetch|network|HTTP|42501|доступ|ключ|function/i.test(m)) {
+        if (window.console) console.error('Помилка показу даних:', e);
+        return;
+      }
       if (first && /42501|доступ|ключ/i.test(m)) { fail('Невірний ключ доступу.'); return; }
       if (first && /Could not find the function/i.test(m)) {
         fail('У базі ще немає функції дашборда. Запустіть файл ДАШБОРД-SQL.sql у Supabase → SQL Editor.');
