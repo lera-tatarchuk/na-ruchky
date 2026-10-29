@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Анкети по областях — Хочу на ручки</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.ob{max-width:940px;margin:0 auto;padding:0 20px 70px}
+.ob-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:34px 0 20px}
+.ob-head h1{font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:clamp(27px,3.2vw,36px);margin:0 0 6px;letter-spacing:-.6px;max-width:620px;line-height:1.15}
+.ob-head .sub{color:var(--sage-text);font-weight:600;max-width:560px;line-height:1.45}
+.live{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 15px;white-space:nowrap}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--sage);flex:0 0 auto;animation:pulse 2.4s ease-in-out infinite}
+.dot.err{background:var(--terracotta);animation:none}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.78)}}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+
+.cardbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.sumline{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:13px}
+.sumline .big{font-family:'Comfortaa',system-ui,sans-serif;font-size:clamp(38px,5vw,48px);line-height:1;letter-spacing:-1.4px}
+.sumline .big i{font-style:normal;font-size:20px;color:var(--muted);letter-spacing:0}
+.bar{height:20px;background:var(--cream);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--sage),#5E8C76);border-radius:999px;transition:width .7s cubic-bezier(.3,.9,.3,1)}
+.barlab{display:flex;justify-content:space-between;gap:12px;margin-top:9px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+
+h2.ob-t{font-size:20px;margin:32px 0 14px;font-family:'Comfortaa',system-ui,sans-serif;font-weight:700}
+.hint2{color:var(--muted);font-size:13.5px;line-height:1.55;margin:12px 0 0}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.tools input{flex:1 1 220px;min-width:0;padding:11px 15px;border:1px solid var(--line);border-radius:999px;font:inherit;background:#fff}
+.sortbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font:inherit;font-weight:600;font-size:14.5px;color:var(--muted);cursor:pointer}
+.sortbtn.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+table.obl{width:100%;border-collapse:collapse;font-size:14.5px}
+table.obl th{text-align:left;font-weight:600;color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;padding:0 10px 9px;border-bottom:1px solid var(--line)}
+table.obl td{padding:9px 10px;border-bottom:1px solid #F3EDE5;vertical-align:middle}
+table.obl tr:last-child td{border-bottom:0}
+table.obl .rn{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.obl .nm{font-weight:600;white-space:nowrap;position:sticky;left:0;background:#fff;cursor:pointer}
+table.obl th:first-child,table.obl th:nth-child(2){position:sticky;left:0;background:#fff}
+table.obl .pos{width:30px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+tr.zero .nm{color:var(--terracotta)}
+tr.pin td{background:var(--honey-soft)!important}
+tr.pin .nm{background:var(--honey-soft)!important}
+.minibar{position:relative;height:11px;background:var(--cream);border-radius:999px;min-width:80px}
+.minibar>i{display:block;height:100%;background:var(--sage);border-radius:999px;transition:width .6s}
+.minibar>u{position:absolute;top:-3px;width:2px;height:17px;background:var(--honey-dark);border-radius:2px}
+tr.done .minibar>i{background:#3F6B52}
+.tick{color:#2F6B47;font-weight:700}
+
+.cta-ob{background:linear-gradient(140deg,var(--cream),#fff 70%);border:1px solid var(--line);border-radius:16px;padding:26px 24px;margin-top:28px}
+.cta-ob h2{font-family:'Comfortaa',system-ui,sans-serif;font-size:21px;margin:0 0 10px}
+.cta-ob p{margin:0 0 14px;max-width:620px}
+.linkbox{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.linkbox code{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:14px;word-break:break-all}
+
+.gatewrap{max-width:420px;margin:70px auto;text-align:center}
+.gatewrap h1{font-family:'Comfortaa',system-ui,sans-serif;font-size:27px;margin:0 0 8px}
+.gatewrap input{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;font:inherit;margin:18px 0 12px;text-align:center}
+.err{color:var(--terracotta);font-weight:600;margin-top:12px}
+.skel{color:var(--muted);text-align:center;padding:80px 0}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+  <a class="brand" href="index.html">
+    <svg width="40" height="40" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M36 66 Q60 96 84 66" fill="none" stroke="#7BA693" stroke-width="8" stroke-linecap="round"/>
+      <path d="M44 57 Q60 83 76 57" fill="none" stroke="#C85A3C" stroke-width="8" stroke-linecap="round"/>
+      <g transform="translate(51.6 33.6) scale(0.7)" fill="#C85A3C"><path d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z"/></g>
+    </svg>
+    <span class="name">хочу на ручки</span>
+  </a>
+  <a href="anketa.html" class="btn">Заповнити анкету</a>
+</div></header>
+
+<main>
+  <div id="boot" class="skel">Завантажуємо дані…</div>
+
+  <div id="gate" class="gatewrap" hidden>
+    <h1>Анкети по областях</h1>
+    <p class="muted">Сторінка для партнерів проєкту. Введіть ключ доступу або відкрийте повне посилання з ключем.</p>
+    <input type="password" id="gkey" autocomplete="current-password" placeholder="ключ доступу">
+    <button class="btn" id="gbtn" type="button" style="width:100%">Відкрити</button>
+    <p class="err" id="gerr" hidden></p>
+  </div>
+
+  <div id="page" class="ob" hidden>
+
+    <div class="ob-head">
+      <div>
+        <h1>Анкети дослідження по областях</h1>
+        <div class="sub">Скільки родин уже заповнили анкету в кожній області та скільки ще потрібно до цілі. Знайдіть свою область у таблиці.</div>
+      </div>
+      <div class="live"><span class="dot" id="dot"></span><span id="livetext">оновлюємо…</span></div>
+    </div>
+
+    <section class="cardbox">
+      <div class="sumline">
+        <div class="big"><span id="u-vsogo">—</span><i> / <span id="u-cil">1000</span> анкет по Україні</i></div>
+        <div class="muted" id="u-stan">—</div>
+      </div>
+      <div class="bar"><i id="u-bar" style="width:0%"></i></div>
+      <div class="barlab">
+        <span id="u-pct">—</span>
+        <span id="u-dniv">—</span>
+      </div>
+    </section>
+
+    <h2 class="ob-t">Області</h2>
+    <div class="tools">
+      <input type="search" id="q" placeholder="Знайти свою область" aria-label="Знайти область">
+      <button class="sortbtn on" id="s-n" type="button">За кількістю</button>
+      <button class="sortbtn" id="s-a" type="button">За абеткою</button>
+    </div>
+    <div class="cardbox" style="overflow-x:auto">
+      <table class="obl">
+        <thead><tr>
+          <th class="pos">#</th><th>Область</th><th style="width:24%">Виконання цілі</th>
+          <th class="rn">Подано</th><th class="rn">з них ВПО</th>
+          <th class="rn">На ретрит</th><th class="rn">Ще треба</th>
+        </tr></thead>
+        <tbody id="obl-body"></tbody>
+      </table>
+      <p class="hint2">
+        Ціль — <b><span id="obl-cil">40</span> анкет на регіон</b>: 1000 анкет дослідження, рівномірно на 25 регіонів.
+        Жовта позначка на смужці — рівень цілі. Стовпчик «#» — місце за кількістю поданих анкет.
+        Натисніть на назву області, щоб підсвітити її рядок.
+      </p>
+    </div>
+
+    <section class="cta-ob">
+      <h2>Як допомогти своїй області</h2>
+      <p>Анкету заповнюють прийомні батьки та батьки-вихователі ДБСТ. Це 15 хвилин, конфіденційно, відповіді не передаються службам. Поширте, будь ласка, це посилання серед родин вашої області:</p>
+      <div class="linkbox">
+        <code id="cta-link">https://na-ruchky.tvoya-opora.org/anketa.html</code>
+        <button class="btn ghost" id="cta-copy" type="button">Скопіювати</button>
+        <a class="btn" href="anketa.html" target="_blank" rel="noopener">Відкрити анкету</a>
+      </div>
+      <p class="hint2">Питання про проєкт: <a href="mailto:na-ruchky@tvoya-opora.org.ua">na-ruchky@tvoya-opora.org.ua</a> · <a href="tel:+380443210900">+38 (044) 321 09 00</a></p>
+    </section>
+
+    <p class="hint2" style="margin-top:22px">
+      Сторінка оновлюється автоматично щохвилини. Показані лише зведені числа —
+      жодних імен, контактів чи відповідей конкретних родин. Анкети рахуються без повторів.
+    </p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var URL_SB = 'https://xfnjxcbnbhqjhsguldnw.supabase.co';
+  var KEY_SB = 'sb_publishable_ZuZI9ySWyA8hFs2T9kAlIg_M5ttOm_l';
+  var INTERVAL = 60000;
+
+  var boot = document.getElementById('boot');
+  var gate = document.getElementById('gate');
+  var page = document.getElementById('page');
+  var dot = document.getElementById('dot');
+  var livetext = document.getElementById('livetext');
+
+  var accessKey = (location.hash || '').replace(/^#/, '').trim();
+  if (!accessKey) { try { accessKey = localStorage.getItem('ob-key') || ''; } catch (e) {} }
+
+  var lastOk = null, timer = null, tick = null;
+  var dani = null, sortBy = 'n', query = '', pinned = '';
+
+  function n(x) { return (x === null || x === undefined) ? '—' : Number(x).toLocaleString('uk-UA'); }
+
+  // 1 анкета · 2 анкети · 5 анкет
+  function anket(i) {
+    var d = i % 10, s = i % 100;
+    if (s >= 11 && s <= 14) return 'анкет';
+    return d === 1 ? 'анкета' : (d >= 2 && d <= 4 ? 'анкети' : 'анкет');
+  }
+
+  function malyi(s) {
+    // для пошуку: без регістру і без апострофів
+    return String(s).toLowerCase().replace(/['ʼ’`]/g, '');
+  }
+
+  function malyuvatyTablytsiu() {
+    if (!dani) return;
+    var obl = dani.oblasti || [];
+    var cilObl = Math.round((dani.cil || 1000) / obl.length);
+    document.getElementById('obl-cil').textContent = cilObl;
+
+    // місце за кількістю рахуємо один раз, воно не залежить від сортування
+    var misce = {};
+    obl.forEach(function (o, i) { misce[o.nazva] = i + 1; });
+
+    var maxN = Math.max(cilObl, Math.max.apply(null, obl.map(function (o) { return o.n; })));
+    var spysok = obl.slice();
+    if (sortBy === 'a') spysok.sort(function (a, b) { return a.nazva.localeCompare(b.nazva, 'uk'); });
+
+    var q = malyi(query.trim());
+    var rows = spysok.filter(function (o) { return !q || malyi(o.nazva).indexOf(q) !== -1; })
+      .map(function (o) {
+        var treba = Math.max(0, cilObl - o.n);
+        var cls = [];
+        if (o.n === 0) cls.push('zero');
+        if (o.n >= cilObl) cls.push('done');
+        if (o.nazva === pinned) cls.push('pin');
+        return '<tr class="' + cls.join(' ') + '" data-obl="' + o.nazva + '">' +
+          '<td class="pos">' + misce[o.nazva] + '</td>' +
+          '<td class="nm">' + o.nazva + '</td>' +
+          '<td><div class="minibar"><i style="width:' + (o.n / maxN * 100).toFixed(1) + '%"></i>' +
+              '<u style="left:' + (cilObl / maxN * 100).toFixed(1) + '%"></u></div></td>' +
+          '<td class="rn"><b>' + n(o.n) + '</b></td>' +
+          '<td class="rn">' + (o.vpo ? n(o.vpo) : '<span class="muted">—</span>') + '</td>' +
+          '<td class="rn">' + (o.retreat ? n(o.retreat) : '<span class="muted">—</span>') + '</td>' +
+          '<td class="rn">' + (treba ? n(treba) : '<span class="tick">ціль ✓</span>') + '</td></tr>';
+      }).join('');
+
+    document.getElementById('obl-body').innerHTML = rows ||
+      '<tr><td colspan="7" class="muted" style="padding:18px 10px">Такої області немає в списку.</td></tr>';
+  }
+
+  function render(d) {
+    dani = d;
+    var cil = d.cil || 1000;
+    var pct = Math.min(100, d.vsogo / cil * 100);
+    document.getElementById('u-vsogo').textContent = n(d.vsogo);
+    document.getElementById('u-cil').textContent = n(cil);
+    document.getElementById('u-bar').style.width = pct.toFixed(1) + '%';
+    document.getElementById('u-pct').textContent = 'зібрано ' + Math.round(pct) + '%';
+    document.getElementById('u-stan').textContent = 'станом на ' + d.onovleno;
+    document.getElementById('u-dniv').textContent =
+      d.dniv > 0 ? 'до кінця прийому ' + n(d.dniv) + ' дн. — анкети приймаємо до ' + d.dedlajn
+                 : 'прийом анкет завершено ' + d.dedlajn;
+    malyuvatyTablytsiu();
+    document.title = n(d.vsogo) + ' ' + anket(d.vsogo) + ' по областях | Хочу на ручки';
+  }
+
+  function fetchData() {
+    return fetch(URL_SB + '/rest/v1/rpc/oblast_dani', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': KEY_SB, 'Authorization': 'Bearer ' + KEY_SB },
+      body: JSON.stringify({ k: accessKey })
+    }).then(function (r) {
+      return r.json().then(function (j) {
+        if (!r.ok) throw new Error(j.message || ('HTTP ' + r.status));
+        return j;
+      });
+    });
+  }
+
+  function ago() {
+    if (!lastOk) return;
+    var s = Math.round((Date.now() - lastOk) / 1000);
+    livetext.textContent = s < 5 ? 'оновлено щойно'
+      : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
+  }
+
+  function refresh(first) {
+    return fetchData().then(function (d) {
+      if (first) { boot.hidden = true; gate.hidden = true; page.hidden = false; }
+      try { localStorage.setItem('ob-key', accessKey); } catch (e) {}
+      render(d);
+      lastOk = Date.now(); dot.classList.remove('err'); ago();
+    }).catch(function (e) {
+      if (first) {
+        boot.hidden = true; page.hidden = true; gate.hidden = false;
+        if (accessKey) {
+          var g = document.getElementById('gerr');
+          g.hidden = false;
+          g.textContent = /42501|доступ|ключ/i.test(e.message) ? 'Невірний ключ доступу.'
+            : (/Could not find the function/i.test(e.message)
+               ? 'У базі ще немає функції для цієї сторінки. Запустіть ДАШБОРД-SQL.sql у Supabase.'
+               : 'Не вдалося завантажити: ' + e.message);
+        }
+      } else {
+        dot.classList.add('err');
+        livetext.textContent = 'звʼязок утрачено, пробуємо ще';
+      }
+    });
+  }
+
+  function start() {
+    if (timer) clearInterval(timer);
+    if (tick) clearInterval(tick);
+    timer = setInterval(function () { if (!document.hidden) refresh(false); }, INTERVAL);
+    tick = setInterval(ago, 1000);
+  }
+
+  document.getElementById('q').addEventListener('input', function () {
+    query = this.value; malyuvatyTablytsiu();
+  });
+  document.getElementById('s-n').addEventListener('click', function () {
+    sortBy = 'n'; this.classList.add('on');
+    document.getElementById('s-a').classList.remove('on'); malyuvatyTablytsiu();
+  });
+  document.getElementById('s-a').addEventListener('click', function () {
+    sortBy = 'a'; this.classList.add('on');
+    document.getElementById('s-n').classList.remove('on'); malyuvatyTablytsiu();
+  });
+  document.getElementById('obl-body').addEventListener('click', function (e) {
+    var tr = e.target.closest ? e.target.closest('tr') : null;
+    if (!tr || !tr.dataset.obl) return;
+    pinned = (pinned === tr.dataset.obl) ? '' : tr.dataset.obl;
+    try { localStorage.setItem('ob-pin', pinned); } catch (err) {}
+    malyuvatyTablytsiu();
+  });
+  try { pinned = localStorage.getItem('ob-pin') || ''; } catch (e) {}
+
+  document.getElementById('cta-copy').addEventListener('click', function () {
+    var btn = this;
+    var txt = document.getElementById('cta-link').textContent;
+    var done = function () { btn.textContent = 'Скопійовано ✓'; setTimeout(function () { btn.textContent = 'Скопіювати'; }, 2200); };
+    if (navigator.clipboard) { navigator.clipboard.writeText(txt).then(done, function () {}); }
+    else {
+      var ta = document.createElement('textarea');
+      ta.value = txt; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) {}
+      document.body.removeChild(ta);
+    }
+  });
+
+  document.getElementById('gbtn').addEventListener('click', function () {
+    accessKey = document.getElementById('gkey').value.trim();
+    document.getElementById('gerr').hidden = true;
+    refresh(true).then(start);
+  });
+  document.getElementById('gkey').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') document.getElementById('gbtn').click();
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && !page.hidden) refresh(false);
+  });
+
+  if (accessKey) { refresh(true).then(start); }
+  else { boot.hidden = true; gate.hidden = false; }
+})();
+</script>
+</body>
+</html>

@@ -215,6 +215,12 @@ tr.done .minibar>i{background:#4E7D64}
   var prev = null, lastOk = null, timer = null, tick = null;
 
   function n(x) { return (x === null || x === undefined) ? '—' : Number(x).toLocaleString('uk-UA'); }
+  // 1 анкета · 2 анкети · 5 анкет
+  function anket(i) {
+    var d = i % 10, s = i % 100;
+    if (s >= 11 && s <= 14) return 'анкет';
+    return d === 1 ? 'анкета' : (d >= 2 && d <= 4 ? 'анкети' : 'анкет');
+  }
   function setKpi(id, val, extra) {
     var box = document.getElementById(id);
     if (!box) return;
@@ -390,7 +396,7 @@ tr.done .minibar>i{background:#4E7D64}
       document.getElementById('mbi').innerHTML = '<p class="muted">Поки немає повністю заповнених анкет.</p>';
     }
 
-    document.title = n(d.vsogo) + ' анкет — дашборд «Хочу на ручки»';
+    document.title = n(d.vsogo) + ' ' + anket(d.vsogo) + ' — дашборд «Хочу на ручки»';
   }
 
   // ---------- дані ----------
