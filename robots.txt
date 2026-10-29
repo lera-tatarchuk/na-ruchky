@@ -1,34 +1,42 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /dashboard.html
 
 # AI-кролери пошуку та цитування — явно дозволені
 User-agent: GPTBot
 Allow: /
 Disallow: /admin.html
+Disallow: /dashboard.html
 
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /admin.html
+Disallow: /dashboard.html
 
 User-agent: OAI-SearchBot
 Allow: /
 Disallow: /admin.html
+Disallow: /dashboard.html
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /admin.html
+Disallow: /dashboard.html
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /admin.html
+Disallow: /dashboard.html
 
 User-agent: anthropic-ai
 Allow: /
 Disallow: /admin.html
+Disallow: /dashboard.html
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /admin.html
+Disallow: /dashboard.html
 
 Sitemap: https://na-ruchky.tvoya-opora.org/sitemap.xml

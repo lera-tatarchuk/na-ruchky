@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дашборд — Хочу на ручки</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.db{max-width:1180px;margin:0 auto;padding:0 20px 70px}
+.db-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:34px 0 22px}
+.db-head h1{font-family:'Comfortaa',system-ui,sans-serif;font-weight:700;font-size:34px;margin:0 0 4px;letter-spacing:-.5px}
+.db-head .sub{color:var(--sage-text);font-weight:600}
+.live{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 15px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--sage);flex:0 0 auto;animation:pulse 2.4s ease-in-out infinite}
+.dot.err{background:var(--terracotta);animation:none}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.78)}}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+
+.cardbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.g4{grid-template-columns:repeat(2,1fr)}.g3,.g2{grid-template-columns:1fr}}
+@media(max-width:520px){.g4{grid-template-columns:1fr}}
+
+.kpi b{display:block;font-family:'Comfortaa',system-ui,sans-serif;font-size:40px;line-height:1.05;color:var(--ink);letter-spacing:-1px}
+.kpi span{display:block;color:var(--muted);font-size:14px;margin-top:7px;line-height:1.45}
+.kpi .plus{color:var(--sage-text);font-weight:700;font-size:15px}
+.kpi.warn b{color:var(--terracotta)}
+.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%{background:var(--honey-soft)}100%{background:#fff}}
+
+.goal{margin:26px 0 0}
+.goal .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.goal .big{font-family:'Comfortaa',system-ui,sans-serif;font-size:46px;letter-spacing:-1.4px;line-height:1}
+.goal .big i{font-style:normal;font-size:24px;color:var(--muted)}
+.bar{height:20px;background:var(--cream);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--sage),#5E8C76);border-radius:999px;transition:width .7s cubic-bezier(.3,.9,.3,1)}
+.goal .legend{display:flex;justify-content:space-between;color:var(--muted);font-size:13.5px;margin-top:9px}
+
+h2.db-t{font-size:20px;margin:36px 0 14px;font-family:'Comfortaa',system-ui,sans-serif;font-weight:700}
+h2.db-t:first-child{margin-top:0}
+.hint2{color:var(--muted);font-size:13.5px;line-height:1.5;margin:10px 0 0}
+
+table.obl{width:100%;border-collapse:collapse;font-size:14.5px}
+table.obl th{text-align:left;font-weight:600;color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;padding:0 10px 9px;border-bottom:1px solid var(--line)}
+table.obl td{padding:8px 10px;border-bottom:1px solid #F3EDE5;vertical-align:middle}
+table.obl tr:last-child td{border-bottom:0}
+table.obl .rn{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.obl .nm{font-weight:600;white-space:nowrap;position:sticky;left:0;background:#fff}
+table.obl th:first-child{position:sticky;left:0;background:#fff}
+.minibar{position:relative;height:11px;background:var(--cream);border-radius:999px;min-width:90px}
+.minibar>i{display:block;height:100%;background:var(--sage);border-radius:999px;transition:width .6s}
+.minibar>u{position:absolute;top:-3px;width:2px;height:17px;background:var(--honey-dark);border-radius:2px}
+tr.zero .nm{color:var(--terracotta)}
+tr.zero .minibar>i{background:transparent}
+tr.done .minibar>i{background:#4E7D64}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--cream);color:var(--sage-text)}
+.pill.ok{background:#E3F2E7;color:#2F6B47}
+.pill.no{background:#FBE9E3;color:#A33F22}
+
+.chartbox svg{display:block;width:100%;height:auto}
+.leg{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-top:10px}
+.leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+.gauge{margin-bottom:18px}
+.gauge:last-child{margin-bottom:0}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:7px}
+.gauge .lab b{font-size:17px}
+.gauge .track{display:flex;height:13px;border-radius:999px;overflow:hidden;position:relative}
+.gauge .track>s{display:block;height:100%;text-decoration:none}
+.gauge .track>u{position:absolute;top:-4px;width:3px;height:21px;background:var(--ink);border-radius:2px;transition:left .6s}
+.z1{background:#DCEBE1}.z2{background:#FBEFD0}.z3{background:#F3D3C7}
+
+.gatewrap{max-width:420px;margin:70px auto;text-align:center}
+.gatewrap h1{font-family:'Comfortaa',system-ui,sans-serif;font-size:28px;margin:0 0 8px}
+.gatewrap input{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;font:inherit;margin:18px 0 12px;text-align:center}
+.err{color:var(--terracotta);font-weight:600;margin-top:12px}
+.skel{color:var(--muted);text-align:center;padding:80px 0}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+  <a class="brand" href="index.html">
+    <svg width="40" height="40" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M36 66 Q60 96 84 66" fill="none" stroke="#7BA693" stroke-width="8" stroke-linecap="round"/>
+      <path d="M44 57 Q60 83 76 57" fill="none" stroke="#C85A3C" stroke-width="8" stroke-linecap="round"/>
+      <g transform="translate(51.6 33.6) scale(0.7)" fill="#C85A3C"><path d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z"/></g>
+    </svg>
+    <span class="name">хочу на ручки</span>
+  </a>
+</div></header>
+
+<main>
+  <div id="boot" class="skel">Завантажуємо дані…</div>
+
+  <div id="gate" class="gatewrap" hidden>
+    <h1>Дашборд проєкту</h1>
+    <p class="muted">Сторінка для команди й партнерів. Введіть ключ доступу або відкрийте повне посилання з ключем.</p>
+    <input type="password" id="gkey" autocomplete="current-password" placeholder="ключ доступу">
+    <button class="btn" id="gbtn" type="button" style="width:100%">Відкрити</button>
+    <p class="err" id="gerr" hidden></p>
+  </div>
+
+  <div id="board" class="db" hidden>
+
+    <div class="db-head">
+      <div>
+        <h1>Дашборд проєкту</h1>
+        <div class="sub">Анкети дослідження та заявки на ретрити</div>
+      </div>
+      <div class="live"><span class="dot" id="dot"></span><span id="livetext">оновлюємо…</span></div>
+    </div>
+
+    <section class="cardbox goal">
+      <div class="top">
+        <div class="big"><span id="g-now">—</span><i> / <span id="g-cil">1000</span> анкет</i></div>
+        <div class="muted" id="g-right">—</div>
+      </div>
+      <div class="bar"><i id="g-bar" style="width:0%"></i></div>
+      <div class="legend"><span id="g-pct">—</span><span id="g-left">—</span></div>
+    </section>
+
+    <h2 class="db-t">Поточний стан</h2>
+    <div class="grid g4">
+      <div class="cardbox kpi" id="k-dnes"><b>—</b><span>подано сьогодні</span></div>
+      <div class="cardbox kpi" id="k-7"><b>—</b><span>за останні 7 днів</span></div>
+      <div class="cardbox kpi" id="k-retreat"><b>—</b><span>хочуть на ретрит</span></div>
+      <div class="cardbox kpi" id="k-pary"><b>—</b><span>подружніх пар серед них</span></div>
+    </div>
+
+    <h2 class="db-t">Темп і прогноз</h2>
+    <div class="grid g4">
+      <div class="cardbox kpi" id="k-tempo"><b>—</b><span>анкет на день зараз<br>(середнє за 14 днів)</span></div>
+      <div class="cardbox kpi warn" id="k-treba"><b>—</b><span>потрібно на день,<br>щоб дійти до цілі</span></div>
+      <div class="cardbox kpi" id="k-dniv"><b>—</b><span>днів до кінця прийому<br>останній день — <span id="k-dedlajn" style="white-space:nowrap">—</span></span></div>
+      <div class="cardbox kpi" id="k-prognoz"><b>—</b><span>буде на кінець прийому<br>за нинішнім темпом</span></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="cardbox chartbox">
+        <h2 class="db-t">Накопичено анкет</h2>
+        <div id="ch-cum"></div>
+        <div class="leg"><span><i style="background:#5E8C76"></i>накопичено</span><span><i style="background:#EBD9A8"></i>ціль 1000</span></div>
+      </div>
+      <div class="cardbox chartbox">
+        <h2 class="db-t">Надходження по днях</h2>
+        <div id="ch-day"></div>
+        <div class="leg"><span>останні 45 днів</span></div>
+      </div>
+    </div>
+
+    <h2 class="db-t">Області</h2>
+    <div class="cardbox" style="overflow-x:auto">
+      <table class="obl">
+        <thead><tr>
+          <th>Область</th><th style="width:34%">Виконання цілі</th>
+          <th class="rn">Подано</th><th class="rn">ВПО</th>
+          <th class="rn">На ретрит</th><th class="rn">Ще треба</th><th></th>
+        </tr></thead>
+        <tbody id="obl-body"></tbody>
+      </table>
+      <p class="hint2">Ціль розподілена рівномірно: <b><span id="obl-cil">40</span> анкет на регіон</b> (1000 на 25 регіонів). Жовта позначка на смужці — рівень цілі. <span id="obl-inshi"></span></p>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="cardbox">
+        <h2 class="db-t">Хто подається</h2>
+        <div class="grid g3" style="gap:10px">
+          <div class="kpi" id="k-zhin"><b>—</b><span>жінки</span></div>
+          <div class="kpi" id="k-chol"><b>—</b><span>чоловіки</span></div>
+          <div class="kpi" id="k-vpo"><b>—</b><span>ВПО</span></div>
+        </div>
+        <h2 class="db-t" style="margin-top:26px;font-size:16px">Форма виховання</h2>
+        <div id="formy"></div>
+      </div>
+
+      <div class="cardbox">
+        <h2 class="db-t">Вигорання за MBI</h2>
+        <div id="mbi"></div>
+        <p class="hint2" id="mbi-note"></p>
+      </div>
+    </div>
+
+    <p class="hint2" style="margin-top:26px">
+      Дані оновлюються автоматично кожні 30 секунд. Анкети рахуються без дублів: повторне заповнення
+      тією самою людиною в межах області враховується один раз, береться остання версія.
+      Сторінка показує лише зведені числа — жодних імен і контактів.
+    </p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var URL_SB = 'https://xfnjxcbnbhqjhsguldnw.supabase.co';
+  var KEY_SB = 'sb_publishable_ZuZI9ySWyA8hFs2T9kAlIg_M5ttOm_l';
+  var INTERVAL = 30000;
+
+  var boot = document.getElementById('boot');
+  var gate = document.getElementById('gate');
+  var board = document.getElementById('board');
+  var dot = document.getElementById('dot');
+  var livetext = document.getElementById('livetext');
+
+  var accessKey = (location.hash || '').replace(/^#/, '').trim();
+  if (!accessKey) { try { accessKey = localStorage.getItem('db-key') || ''; } catch (e) {} }
+
+  var prev = null, lastOk = null, timer = null, tick = null;
+
+  function n(x) { return (x === null || x === undefined) ? '—' : Number(x).toLocaleString('uk-UA'); }
+  function setKpi(id, val, extra) {
+    var box = document.getElementById(id);
+    if (!box) return;
+    var b = box.querySelector('b');
+    var was = b.textContent;
+    b.textContent = val;
+    if (extra !== undefined) {
+      var s = box.querySelector('.plus');
+      if (!s) { s = document.createElement('span'); s.className = 'plus'; box.appendChild(s); }
+      s.textContent = extra;
+    }
+    if (was !== '—' && was !== val) {
+      box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash');
+    }
+  }
+
+  // ---------- графіки ----------
+  function svgEl(w, h) {
+    var s = '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" xmlns="http://www.w3.org/2000/svg">';
+    return s;
+  }
+  function dmy(iso) { var p = iso.split('-'); return p[2] + '.' + p[1]; }
+
+  function drawCum(data, cil) {
+    var W = 560, H = 250, L = 46, R = 12, T = 14, B = 28;
+    var pw = W - L - R, ph = H - T - B;
+    var max = cil;
+    var step = data.length > 1 ? pw / (data.length - 1) : pw;
+    var pts = data.map(function (d, i) {
+      return [L + i * step, T + ph - (Math.min(d.c, max) / max) * ph];
+    });
+    var s = svgEl(W, H);
+    // сітка
+    [0, 0.25, 0.5, 0.75, 1].forEach(function (f) {
+      var y = T + ph - f * ph;
+      s += '<line x1="' + L + '" y1="' + y + '" x2="' + (W - R) + '" y2="' + y + '" stroke="#EADFD2" stroke-width="1"/>';
+      s += '<text x="' + (L - 8) + '" y="' + (y + 4) + '" text-anchor="end" font-size="11" fill="#66786E">' + Math.round(f * max) + '</text>';
+    });
+    // лінія цілі
+    s += '<line x1="' + L + '" y1="' + T + '" x2="' + (W - R) + '" y2="' + T + '" stroke="#C68A1E" stroke-width="2" stroke-dasharray="5 4"/>';
+    // площа
+    var area = 'M' + L + ',' + (T + ph) + ' ' + pts.map(function (p) { return 'L' + p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ') + ' L' + (L + (data.length - 1) * step).toFixed(1) + ',' + (T + ph) + ' Z';
+    s += '<path d="' + area + '" fill="#5E8C76" fill-opacity="0.14"/>';
+    s += '<polyline points="' + pts.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ') + '" fill="none" stroke="#5E8C76" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    var last = pts[pts.length - 1];
+    s += '<circle cx="' + last[0].toFixed(1) + '" cy="' + last[1].toFixed(1) + '" r="4.5" fill="#5E8C76"/>';
+    // підписи дат
+    data.forEach(function (d, i) {
+      if (i % 11 === 0 || i === data.length - 1) {
+        s += '<text x="' + (L + i * step).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="#66786E">' + dmy(d.d) + '</text>';
+      }
+    });
+    s += '</svg>';
+    return s;
+  }
+
+  function drawDays(data) {
+    var W = 560, H = 250, L = 30, R = 12, T = 14, B = 28;
+    var pw = W - L - R, ph = H - T - B;
+    var max = Math.max(1, Math.max.apply(null, data.map(function (d) { return d.n; })));
+    var slot = pw / data.length, bw = Math.max(3, slot - 3);
+    var s = svgEl(W, H);
+    [0, 0.5, 1].forEach(function (f) {
+      var y = T + ph - f * ph;
+      s += '<line x1="' + L + '" y1="' + y + '" x2="' + (W - R) + '" y2="' + y + '" stroke="#EADFD2" stroke-width="1"/>';
+      s += '<text x="' + (L - 7) + '" y="' + (y + 4) + '" text-anchor="end" font-size="11" fill="#66786E">' + Math.round(f * max) + '</text>';
+    });
+    data.forEach(function (d, i) {
+      var h = (d.n / max) * ph;
+      var x = L + i * slot + (slot - bw) / 2;
+      var col = (i === data.length - 1) ? '#B14E33' : '#7BA693';
+      if (d.n > 0) s += '<rect x="' + x.toFixed(1) + '" y="' + (T + ph - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="2" fill="' + col + '"><title>' + dmy(d.d) + ' — ' + d.n + '</title></rect>';
+    });
+    data.forEach(function (d, i) {
+      if (i % 11 === 0 || i === data.length - 1) {
+        s += '<text x="' + (L + i * slot + slot / 2).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="#66786E">' + dmy(d.d) + '</text>';
+      }
+    });
+    s += '</svg>';
+    return s;
+  }
+
+  function gauge(name, val, max, zones, lowIsBad) {
+    if (val === null || val === undefined) return '';
+    var pos = Math.max(0, Math.min(1, val / max));
+    var rank;
+    if (lowIsBad) rank = val <= zones[0] ? 'високий' : (val <= zones[1] ? 'середній' : 'низький');
+    else rank = val <= zones[0] ? 'низький' : (val <= zones[1] ? 'середній' : 'високий');
+    var bad = lowIsBad ? (val <= zones[0]) : (val > zones[1]);
+    var w1 = (zones[0] / max * 100), w2 = ((zones[1] - zones[0]) / max * 100), w3 = 100 - w1 - w2;
+    var cls = lowIsBad ? ['z3', 'z2', 'z1'] : ['z1', 'z2', 'z3'];
+    return '<div class="gauge"><div class="lab"><span>' + name + '</span>' +
+      '<span><b>' + String(val).replace('.', ',') + '</b> <span class="pill ' + (bad ? 'no' : 'ok') + '">' + rank + '</span></span></div>' +
+      '<div class="track"><s class="' + cls[0] + '" style="width:' + w1 + '%"></s><s class="' + cls[1] + '" style="width:' + w2 + '%"></s><s class="' + cls[2] + '" style="width:' + w3 + '%"></s>' +
+      '<u style="left:calc(' + (pos * 100).toFixed(1) + '% - 1.5px)"></u></div></div>';
+  }
+
+  // ---------- рендер ----------
+  function render(d) {
+    var cil = d.cil || 1000;
+    var pct = Math.min(100, d.vsogo / cil * 100);
+    document.getElementById('g-now').textContent = n(d.vsogo);
+    document.getElementById('g-cil').textContent = n(cil);
+    document.getElementById('g-bar').style.width = pct.toFixed(1) + '%';
+    document.getElementById('g-pct').textContent = 'виконано ' + Math.round(pct) + '%';
+    document.getElementById('g-left').textContent = 'лишилося зібрати ' + n(Math.max(0, cil - d.vsogo));
+    document.getElementById('g-right').textContent = 'станом на ' + d.onovleno;
+
+    setKpi('k-dnes', n(d.dnes), 'вчора було ' + n(d.vchora));
+    setKpi('k-7', n(d.za7), 'за 14 днів — ' + n(d.za14));
+    setKpi('k-retreat', n(d.retreat), d.vsogo ? Math.round(d.retreat / d.vsogo * 100) + '% від усіх' : '');
+    setKpi('k-pary', n(d.pary), '');
+
+    setKpi('k-tempo', String(d.tempo).replace('.', ','), '');
+    setKpi('k-treba', d.treba_den === null ? '—' : String(d.treba_den).replace('.', ','), '');
+    setKpi('k-dniv', n(d.dniv), '');
+    setKpi('k-prognoz', n(d.prognoz), d.prognoz < cil ? 'це ' + Math.round(d.prognoz / cil * 100) + '% цілі' : 'ціль буде досягнута');
+    document.getElementById('k-dedlajn').textContent = d.dedlajn;
+
+    document.getElementById('ch-cum').innerHTML = drawCum(d.dynamika, cil);
+    document.getElementById('ch-day').innerHTML = drawDays(d.dynamika);
+
+    // області
+    var obl = d.oblasti || [];
+    var cilObl = Math.round(cil / obl.length);
+    document.getElementById('obl-cil').textContent = cilObl;
+    var maxN = Math.max(cilObl, Math.max.apply(null, obl.map(function (o) { return o.n; })));
+    var rows = obl.map(function (o) {
+      var treba = Math.max(0, cilObl - o.n);
+      var cls = o.n === 0 ? 'zero' : (o.n >= cilObl ? 'done' : '');
+      var mark = o.n === 0 ? '<span class="pill no">не починали</span>'
+               : (o.n >= cilObl ? '<span class="pill ok">ціль виконано</span>' : '');
+      return '<tr class="' + cls + '">' +
+        '<td class="nm">' + o.nazva + '</td>' +
+        '<td><div class="minibar"><i style="width:' + (o.n / maxN * 100).toFixed(1) + '%"></i>' +
+            '<u style="left:' + (cilObl / maxN * 100).toFixed(1) + '%"></u></div></td>' +
+        '<td class="rn"><b>' + n(o.n) + '</b></td>' +
+        '<td class="rn">' + (o.vpo ? n(o.vpo) : '<span class="muted">—</span>') + '</td>' +
+        '<td class="rn">' + (o.retreat ? n(o.retreat) : '<span class="muted">—</span>') + '</td>' +
+        '<td class="rn">' + (treba ? n(treba) : '<span class="muted">0</span>') + '</td>' +
+        '<td>' + mark + '</td></tr>';
+    }).join('');
+    document.getElementById('obl-body').innerHTML = rows;
+    document.getElementById('obl-inshi').textContent = d.inshi
+      ? 'Ще ' + d.inshi + ' анкет(и) без зазначеної області.' : '';
+
+    setKpi('k-zhin', n(d.zhinky), '');
+    setKpi('k-chol', n(d.choloviky), '');
+    setKpi('k-vpo', n(d.vpo), d.vsogo ? Math.round(d.vpo / d.vsogo * 100) + '%' : '');
+
+    var formy = (d.formy || []).map(function (f) {
+      var w = d.vsogo ? (f.n / d.vsogo * 100) : 0;
+      return '<div style="margin-bottom:11px"><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px">' +
+        '<span>' + f.nazva + '</span><b>' + n(f.n) + '</b></div>' +
+        '<div class="minibar"><i style="width:' + w.toFixed(1) + '%"></i></div></div>';
+    }).join('');
+    document.getElementById('formy').innerHTML = formy || '<p class="muted">—</p>';
+
+    // MBI
+    var m = d.mbi || {};
+    if (m.n) {
+      document.getElementById('mbi').innerHTML =
+        gauge('Емоційне виснаження', m.ee, 54, [15, 24], false) +
+        gauge('Деперсоналізація', m.dp, 30, [5, 10], false) +
+        gauge('Професійна успішність', m.pa, 48, [30, 36], true);
+      document.getElementById('mbi-note').innerHTML =
+        'Анкет із повними відповідями на всі 22 запитання: <b>' + n(m.n) + '</b>. ' +
+        'Високе виснаження — у <b>' + n(m.ee_vys) + '</b>, висока деперсоналізація — у <b>' + n(m.dp_vys) + '</b>, ' +
+        'знижена успішність — у <b>' + n(m.pa_nyz) + '</b>. ' +
+        'Хоча б за однією шкалою в зоні ризику — <b>' + n(m.ryzyk) + '</b> ' +
+        '(' + Math.round(m.ryzyk / m.n * 100) + '% тих, хто відповів).';
+    } else {
+      document.getElementById('mbi').innerHTML = '<p class="muted">Поки немає повністю заповнених анкет.</p>';
+    }
+
+    document.title = n(d.vsogo) + ' анкет — дашборд «Хочу на ручки»';
+  }
+
+  // ---------- дані ----------
+  function fetchData() {
+    return fetch(URL_SB + '/rest/v1/rpc/dashboard_dani', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': KEY_SB, 'Authorization': 'Bearer ' + KEY_SB },
+      body: JSON.stringify({ k: accessKey })
+    }).then(function (r) {
+      return r.json().then(function (j) {
+        if (!r.ok) throw new Error(j.message || ('HTTP ' + r.status));
+        return j;
+      });
+    });
+  }
+
+  function ago() {
+    if (!lastOk) return;
+    var s = Math.round((Date.now() - lastOk) / 1000);
+    livetext.textContent = s < 5 ? 'оновлено щойно'
+      : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
+  }
+
+  function refresh(first) {
+    return fetchData().then(function (d) {
+      if (first) { boot.hidden = true; gate.hidden = true; board.hidden = false; }
+      try { localStorage.setItem('db-key', accessKey); } catch (e) {}
+      render(d);
+      prev = d; lastOk = Date.now(); dot.classList.remove('err'); ago();
+    }).catch(function (e) {
+      if (first) {
+        boot.hidden = true; board.hidden = true; gate.hidden = false;
+        if (accessKey) {
+          var g = document.getElementById('gerr');
+          g.hidden = false;
+          g.textContent = /42501|доступ|ключ/i.test(e.message) ? 'Невірний ключ доступу.'
+            : (/Could not find the function/i.test(e.message)
+               ? 'У базі ще немає функції дашборда. Запустіть файл ДАШБОРД-SQL.sql у Supabase → SQL Editor.'
+               : 'Не вдалося завантажити: ' + e.message);
+        }
+      } else {
+        dot.classList.add('err');
+        livetext.textContent = 'звʼязок утрачено, пробуємо ще';
+      }
+    });
+  }
+
+  function start() {
+    if (timer) clearInterval(timer);
+    if (tick) clearInterval(tick);
+    timer = setInterval(function () { if (!document.hidden) refresh(false); }, INTERVAL);
+    tick = setInterval(ago, 1000);
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && !board.hidden) refresh(false);
+  });
+
+  document.getElementById('gbtn').addEventListener('click', function () {
+    accessKey = document.getElementById('gkey').value.trim();
+    document.getElementById('gerr').hidden = true;
+    refresh(true).then(start);
+  });
+  document.getElementById('gkey').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') document.getElementById('gbtn').click();
+  });
+
+  if (accessKey) { refresh(true).then(start); }
+  else { boot.hidden = true; gate.hidden = false; }
+})();
+</script>
+</body>
+</html>
