@@ -224,7 +224,7 @@ tr.done .minibar>i{background:#4E7D64}
   var accessKey = (location.hash || '').replace(/^#/, '').trim();
   if (!accessKey) { try { accessKey = localStorage.getItem('db-key') || ''; } catch (e) {} }
 
-  var prev = null, lastOk = null, timer = null, tick = null, chasOstannoi = '—';
+  var prev = null, lastOk = null, timer = null, tick = null, chasOstannoi = '', nevdachi = 0;
 
   function n(x) { return (x === null || x === undefined) ? '—' : Number(x).toLocaleString('uk-UA'); }
   // 1 анкета · 2 анкети · 5 анкет
@@ -447,8 +447,9 @@ tr.done .minibar>i{background:#4E7D64}
     var ms = Date.now() - lastOk, s = Math.round(ms / 1000);
     livetext.textContent = s < 5 ? 'оновлено щойно'
       : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
-    // банер показуємо лише тоді, коли є що в ньому написати
-    var staro = ms > ZASTARILO && chasOstannoi;
+    // Банер означає «ми пробували і не змогли», а не «давно не пробували».
+    // Поки вкладка у фоні, ми навмисне не смикаємо базу — це не збій.
+    var staro = nevdachi > 0 && ms > ZASTARILO && chasOstannoi;
     document.getElementById('stale').hidden = !staro;
     if (staro) document.getElementById('stale-time').textContent = chasOstannoi;
   }
@@ -463,7 +464,7 @@ tr.done .minibar>i{background:#4E7D64}
     return fetchData().then(function (d) {
       // час фіксуємо до показу: якщо малювання спіткнеться, банер усе одно
       // знатиме, на коли дані, і не покаже порожній прочерк
-      lastOk = Date.now(); chasOstannoi = d.onovleno || '';
+      lastOk = Date.now(); chasOstannoi = d.onovleno || ''; nevdachi = 0;
       try { localStorage.setItem('db-key', accessKey); } catch (e) {}
       render(d);
       prev = d;
@@ -492,6 +493,7 @@ tr.done .minibar>i{background:#4E7D64}
         fail('Не вдалося завантажити дані: ' + m + '. Спробуйте оновити сторінку.');
         return;
       }
+      nevdachi++;
       dot.classList.add('err');
       livetext.textContent = 'звʼязок утрачено, пробуємо ще';
       ago();
@@ -505,9 +507,14 @@ tr.done .minibar>i{background:#4E7D64}
     tick = setInterval(ago, 1000);
   }
 
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden && !board.hidden) refresh(false);
-  });
+  // Щойно людина повертається до сторінки — одразу тягнемо свіжі дані.
+  // Ловимо всі випадки: перемикання вкладки, відкриття кришки ноутбука,
+  // повернення з історії браузера, появу мережі.
+  function ozhyvyty() { if (!document.hidden && !board.hidden) refresh(false); }
+  document.addEventListener('visibilitychange', ozhyvyty);
+  window.addEventListener('focus', ozhyvyty);
+  window.addEventListener('online', ozhyvyty);
+  window.addEventListener('pageshow', ozhyvyty);
 
   document.getElementById('gbtn').addEventListener('click', function () {
     accessKey = document.getElementById('gkey').value.trim();

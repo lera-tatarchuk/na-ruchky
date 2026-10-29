@@ -194,7 +194,7 @@ tr.done .minibar>i{background:#3F6B52}
   var accessKey = (location.hash || '').replace(/^#/, '').trim();
   if (!accessKey) { try { accessKey = localStorage.getItem('ob-key') || ''; } catch (e) {} }
 
-  var lastOk = null, timer = null, tick = null, chasOstannoi = '—';
+  var lastOk = null, timer = null, tick = null, chasOstannoi = '', nevdachi = 0;
   var dani = null, sortBy = 'n', query = '', pinned = '';
 
   function n(x) { return (x === null || x === undefined) ? '—' : Number(x).toLocaleString('uk-UA'); }
@@ -294,8 +294,10 @@ tr.done .minibar>i{background:#3F6B52}
     var ms = Date.now() - lastOk, s = Math.round(ms / 1000);
     livetext.textContent = s < 5 ? 'оновлено щойно'
       : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
-    // банер показуємо лише тоді, коли є що в ньому написати
-    var staro = ms > ZASTARILO && chasOstannoi;
+    // Банер означає «ми пробували і не змогли», а не «давно не пробували».
+    // Поки вкладка у фоні, ми навмисне не смикаємо базу — це не збій,
+    // і лякати людину нема чим.
+    var staro = nevdachi > 0 && ms > ZASTARILO && chasOstannoi;
     document.getElementById('stale').hidden = !staro;
     if (staro) document.getElementById('stale-time').textContent = chasOstannoi;
   }
@@ -313,6 +315,7 @@ tr.done .minibar>i{background:#3F6B52}
       // знатиме, на коли дані, і не покаже порожній прочерк
       lastOk = Date.now();
       chasOstannoi = d.onovleno || '';
+      nevdachi = 0;
       try { localStorage.setItem('ob-key', accessKey); } catch (e) {}
       render(d);
       if (first) { boot.hidden = true; gate.hidden = true; page.hidden = false; }
@@ -343,6 +346,7 @@ tr.done .minibar>i{background:#3F6B52}
         return;
       }
 
+      nevdachi++;
       dot.classList.add('err');
       livetext.textContent = 'звʼязок утрачено, пробуємо ще';
       ago();
@@ -398,9 +402,14 @@ tr.done .minibar>i{background:#3F6B52}
     if (e.key === 'Enter') document.getElementById('gbtn').click();
   });
 
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden && !page.hidden) refresh(false);
-  });
+  // Щойно людина повертається до сторінки — одразу тягнемо свіжі дані.
+  // Ловимо всі випадки: перемикання вкладки, відкриття кришки ноутбука,
+  // повернення з історії браузера, появу мережі.
+  function ozhyvyty() { if (!document.hidden && !page.hidden) refresh(false); }
+  document.addEventListener('visibilitychange', ozhyvyty);
+  window.addEventListener('focus', ozhyvyty);
+  window.addEventListener('online', ozhyvyty);
+  window.addEventListener('pageshow', ozhyvyty);
 
   if (accessKey) { refresh(true).then(start); }
   else { boot.hidden = true; gate.hidden = false; }
