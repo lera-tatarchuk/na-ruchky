@@ -59,6 +59,8 @@ table.obl th:first-child{position:sticky;left:0;background:#fff}
 .minibar>i{display:block;height:100%;background:var(--sage);border-radius:999px;transition:width .6s}
 .minibar>u{position:absolute;top:-3px;width:2px;height:17px;background:var(--honey-dark);border-radius:2px}
 tr.zero .nm{color:var(--terracotta)}
+tr.nocil .nm,tr.nocil .rn{color:var(--muted)}
+tr.nocil td{background:#FAFAF8}
 tr.zero .minibar>i{background:transparent}
 tr.done .minibar>i{background:#4E7D64}
 .pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--cream);color:var(--sage-text)}
@@ -77,6 +79,9 @@ tr.done .minibar>i{background:#4E7D64}
 .gauge .track>s{display:block;height:100%;text-decoration:none}
 .gauge .track>u{position:absolute;top:-4px;width:3px;height:21px;background:var(--ink);border-radius:2px;transition:left .6s}
 .z1{background:#DCEBE1}.z2{background:#FBEFD0}.z3{background:#F3D3C7}
+
+.stale{display:flex;gap:10px;align-items:flex-start;background:#FBE9E3;border:1px solid #E8C4B6;color:#8F3618;border-radius:12px;padding:13px 16px;font-size:14.5px;line-height:1.5;margin-bottom:16px}
+.stale b{white-space:nowrap}
 
 .gatewrap{max-width:420px;margin:70px auto;text-align:center}
 .gatewrap h1{font-family:'Comfortaa',system-ui,sans-serif;font-size:28px;margin:0 0 8px}
@@ -110,6 +115,12 @@ tr.done .minibar>i{background:#4E7D64}
   </div>
 
   <div id="board" class="db" hidden>
+
+    <div class="stale" id="stale" hidden>
+      <span>⚠</span>
+      <span>Дані могли застаріти: остання вдала перевірка — <b id="stale-time">—</b>.
+        Схоже, пропало зʼєднання. Сторінка далі пробує оновитися сама.</span>
+    </div>
 
     <div class="db-head">
       <div>
@@ -167,7 +178,7 @@ tr.done .minibar>i{background:#4E7D64}
         </tr></thead>
         <tbody id="obl-body"></tbody>
       </table>
-      <p class="hint2">Ціль розподілена рівномірно: <b><span id="obl-cil">40</span> анкет на регіон</b> (1000 на 25 регіонів). Жовта позначка на смужці — рівень цілі. <span id="obl-inshi"></span></p>
+      <p class="hint2">Ціль розподілена рівномірно: <b><span id="obl-cil">—</span> <span id="obl-cil-sl">анкет</span> на регіон</b> для <span id="obl-skilky">—</span> регіонів, разом <span id="obl-plan">—</span> — план із запасом над тисячею<span id="obl-bez"></span>. Жовта позначка на смужці — рівень цілі. <span id="obl-inshi"></span></p>
     </div>
 
     <div class="grid g2" style="margin-top:16px">
@@ -190,9 +201,10 @@ tr.done .minibar>i{background:#4E7D64}
     </div>
 
     <p class="hint2" style="margin-top:26px">
-      Дані оновлюються автоматично кожні 30 секунд. Анкети рахуються без дублів: повторне заповнення
-      тією самою людиною в межах області враховується один раз, береться остання версія.
-      Сторінка показує лише зведені числа — жодних імен і контактів.
+      Дані оновлюються автоматично кожні 30 секунд. Рахуємо лише цільову групу дослідження —
+      прийомні сімʼї та ДБСТ; форма «Інше» <span id="d-inshi"></span>у цифри не входить.
+      Анкети без дублів: повторне заповнення тією самою людиною в межах області враховується
+      один раз, береться остання версія. Сторінка показує лише зведені числа — жодних імен і контактів.
     </p>
   </div>
 </main>
@@ -212,7 +224,7 @@ tr.done .minibar>i{background:#4E7D64}
   var accessKey = (location.hash || '').replace(/^#/, '').trim();
   if (!accessKey) { try { accessKey = localStorage.getItem('db-key') || ''; } catch (e) {} }
 
-  var prev = null, lastOk = null, timer = null, tick = null;
+  var prev = null, lastOk = null, timer = null, tick = null, chasOstannoi = '—';
 
   function n(x) { return (x === null || x === undefined) ? '—' : Number(x).toLocaleString('uk-UA'); }
   // 1 анкета · 2 анкети · 5 анкет
@@ -345,25 +357,37 @@ tr.done .minibar>i{background:#4E7D64}
 
     // області
     var obl = d.oblasti || [];
-    var cilObl = Math.round(cil / obl.length);
+    var cilObl = d.cil_obl || Math.round(cil / obl.length);
     document.getElementById('obl-cil').textContent = cilObl;
+    document.getElementById('obl-cil-sl').textContent = anket(cilObl);
     var maxN = Math.max(cilObl, Math.max.apply(null, obl.map(function (o) { return o.n; })));
     var rows = obl.map(function (o) {
-      var treba = Math.max(0, cilObl - o.n);
-      var cls = o.n === 0 ? 'zero' : (o.n >= cilObl ? 'done' : '');
-      var mark = o.n === 0 ? '<span class="pill no">не починали</span>'
-               : (o.n >= cilObl ? '<span class="pill ok">ціль виконано</span>' : '');
+      var oc = (o.cil === null || o.cil === undefined) ? null : o.cil;
+      var treba = oc === null ? null : Math.max(0, oc - o.n);
+      var cls = oc === null ? 'nocil' : (o.n === 0 ? 'zero' : (o.n >= oc ? 'done' : ''));
+      var mark = oc === null ? '<span class="pill">ціль не ставимо</span>'
+               : (o.n === 0 ? '<span class="pill no">не починали</span>'
+               : (o.n >= oc ? '<span class="pill ok">ціль виконано</span>' : ''));
+      var smuzhka = oc === null ? '<span class="muted" style="font-size:13px">—</span>'
+        : '<div class="minibar"><i style="width:' + (o.n / maxN * 100).toFixed(1) + '%"></i>' +
+          '<u style="left:' + (oc / maxN * 100).toFixed(1) + '%"></u></div>';
       return '<tr class="' + cls + '">' +
         '<td class="nm">' + o.nazva + '</td>' +
-        '<td><div class="minibar"><i style="width:' + (o.n / maxN * 100).toFixed(1) + '%"></i>' +
-            '<u style="left:' + (cilObl / maxN * 100).toFixed(1) + '%"></u></div></td>' +
+        '<td>' + smuzhka + '</td>' +
         '<td class="rn"><b>' + n(o.n) + '</b></td>' +
         '<td class="rn">' + (o.vpo ? n(o.vpo) : '<span class="muted">—</span>') + '</td>' +
         '<td class="rn">' + (o.retreat ? n(o.retreat) : '<span class="muted">—</span>') + '</td>' +
-        '<td class="rn">' + (treba ? n(treba) : '<span class="muted">0</span>') + '</td>' +
+        '<td class="rn">' + (oc === null ? '<span class="muted">—</span>'
+              : (treba ? n(treba) : '<span class="muted">0</span>')) + '</td>' +
         '<td>' + mark + '</td></tr>';
     }).join('');
     document.getElementById('obl-body').innerHTML = rows;
+    var zCillyu = obl.filter(function (o) { return o.cil !== null && o.cil !== undefined; }).length;
+    document.getElementById('obl-skilky').textContent = zCillyu;
+    document.getElementById('obl-plan').textContent = n(zCillyu * cilObl);
+    var bez = d.bez_cili || [];
+    document.getElementById('obl-bez').textContent = bez.length
+      ? '; ' + bez.join(' і ') + ' — без цілі, території окуповані' : '';
     document.getElementById('obl-inshi').textContent = d.inshi
       ? 'Ще ' + d.inshi + ' анкет(и) без зазначеної області.' : '';
 
@@ -396,6 +420,8 @@ tr.done .minibar>i{background:#4E7D64}
       document.getElementById('mbi').innerHTML = '<p class="muted">Поки немає повністю заповнених анкет.</p>';
     }
 
+    document.getElementById('d-inshi').textContent =
+      d.inshi_formy ? '(' + n(d.inshi_formy) + ' анкет) ' : '';
     document.title = n(d.vsogo) + ' ' + anket(d.vsogo) + ' — дашборд «Хочу на ручки»';
   }
 
@@ -413,34 +439,53 @@ tr.done .minibar>i{background:#4E7D64}
     });
   }
 
+  // Дані вважаємо застарілими, якщо остання вдала перевірка була давніше 3 хвилин.
+  var ZASTARILO = 180000;
+
   function ago() {
     if (!lastOk) return;
-    var s = Math.round((Date.now() - lastOk) / 1000);
+    var ms = Date.now() - lastOk, s = Math.round(ms / 1000);
     livetext.textContent = s < 5 ? 'оновлено щойно'
       : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
+    var staro = ms > ZASTARILO;
+    document.getElementById('stale').hidden = !staro;
+    if (staro) document.getElementById('stale-time').textContent = chasOstannoi;
   }
 
-  function refresh(first) {
+  function fail(msg) {
+    boot.hidden = true; board.hidden = true; gate.hidden = false;
+    var g = document.getElementById('gerr');
+    g.hidden = false; g.textContent = msg;
+  }
+
+  function refresh(first, sproba) {
     return fetchData().then(function (d) {
       if (first) { boot.hidden = true; gate.hidden = true; board.hidden = false; }
       try { localStorage.setItem('db-key', accessKey); } catch (e) {}
       render(d);
-      prev = d; lastOk = Date.now(); dot.classList.remove('err'); ago();
+      prev = d; lastOk = Date.now(); chasOstannoi = d.onovleno;
+      dot.classList.remove('err'); ago();
     }).catch(function (e) {
-      if (first) {
-        boot.hidden = true; board.hidden = true; gate.hidden = false;
-        if (accessKey) {
-          var g = document.getElementById('gerr');
-          g.hidden = false;
-          g.textContent = /42501|доступ|ключ/i.test(e.message) ? 'Невірний ключ доступу.'
-            : (/Could not find the function/i.test(e.message)
-               ? 'У базі ще немає функції дашборда. Запустіть файл ДАШБОРД-SQL.sql у Supabase → SQL Editor.'
-               : 'Не вдалося завантажити: ' + e.message);
-        }
-      } else {
-        dot.classList.add('err');
-        livetext.textContent = 'звʼязок утрачено, пробуємо ще';
+      var m = e.message || '';
+      if (first && /42501|доступ|ключ/i.test(m)) { fail('Невірний ключ доступу.'); return; }
+      if (first && /Could not find the function/i.test(m)) {
+        fail('У базі ще немає функції дашборда. Запустіть файл ДАШБОРД-SQL.sql у Supabase → SQL Editor.');
+        return;
       }
+      if (first) {
+        sproba = (sproba || 0) + 1;
+        if (sproba <= 6) {
+          boot.hidden = false;
+          boot.textContent = 'Не вдається зʼєднатися із сервером. Пробуємо ще… (' + sproba + ' з 6)';
+          return new Promise(function (r) { setTimeout(r, 3000); })
+            .then(function () { return refresh(true, sproba); });
+        }
+        fail('Не вдалося завантажити дані: ' + m + '. Спробуйте оновити сторінку.');
+        return;
+      }
+      dot.classList.add('err');
+      livetext.textContent = 'звʼязок утрачено, пробуємо ще';
+      ago();
     });
   }
 

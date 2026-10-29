@@ -46,6 +46,8 @@ table.obl .nm{font-weight:600;white-space:nowrap;position:sticky;left:0;backgrou
 table.obl th:first-child,table.obl th:nth-child(2){position:sticky;left:0;background:#fff}
 table.obl .pos{width:30px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
 tr.zero .nm{color:var(--terracotta)}
+tr.nocil .nm,tr.nocil .rn{color:var(--muted)}
+tr.nocil td{background:#FAFAF8}
 tr.pin td{background:var(--honey-soft)!important}
 tr.pin .nm{background:var(--honey-soft)!important}
 .minibar{position:relative;height:11px;background:var(--cream);border-radius:999px;min-width:80px}
@@ -59,6 +61,13 @@ tr.done .minibar>i{background:#3F6B52}
 .cta-ob p{margin:0 0 14px;max-width:620px}
 .linkbox{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .linkbox code{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:14px;word-break:break-all}
+
+.stale{display:flex;gap:10px;align-items:flex-start;background:#FBE9E3;border:1px solid #E8C4B6;color:#8F3618;border-radius:12px;padding:13px 16px;font-size:14.5px;line-height:1.5;margin-bottom:16px}
+.stale b{white-space:nowrap}
+.pravyla{background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:14px;font-size:14px;line-height:1.6;color:#46544C}
+.pravyla b{color:var(--ink)}
+.pravyla ul{margin:8px 0 0;padding-left:20px}
+.pravyla li{margin-bottom:5px}
 
 .gatewrap{max-width:420px;margin:70px auto;text-align:center}
 .gatewrap h1{font-family:'Comfortaa',system-ui,sans-serif;font-size:27px;margin:0 0 8px}
@@ -93,6 +102,13 @@ tr.done .minibar>i{background:#3F6B52}
   </div>
 
   <div id="page" class="ob" hidden>
+
+    <div class="stale" id="stale" hidden>
+      <span>⚠</span>
+      <span>Дані могли застаріти: остання вдала перевірка — <b id="stale-time">—</b>.
+        Схоже, пропало зʼєднання. Сторінка далі пробує оновитися сама,
+        але поки що числа нижче показують стан саме на той час.</span>
+    </div>
 
     <div class="ob-head">
       <div>
@@ -130,10 +146,19 @@ tr.done .minibar>i{background:#3F6B52}
         <tbody id="obl-body"></tbody>
       </table>
       <p class="hint2">
-        Ціль — <b><span id="obl-cil">40</span> анкет на регіон</b>: 1000 анкет дослідження, рівномірно на 25 регіонів.
+        Ціль — <b><span id="obl-cil">—</span> <span id="obl-cil-sl">анкет</span> на регіон</b> для кожного
+        з <span id="obl-skilky">—</span> регіонів: це трохи більше за тисячу, бо план ставимо із запасом<span id="obl-bez"></span>.
         Жовта позначка на смужці — рівень цілі. Стовпчик «#» — місце за кількістю поданих анкет.
         Натисніть на назву області, щоб підсвітити її рядок.
       </p>
+      <div class="pravyla">
+        <b>Як рахуємо</b>
+        <ul>
+          <li>Одна родина — одна анкета. Якщо людина заповнила анкету двічі, це один запис: беремо останню версію.</li>
+          <li>Враховуємо лише цільову групу дослідження — <b>прийомні сімʼї та ДБСТ</b>. Інші форми влаштування в цифри не входять<span id="pr-inshi"></span>.</li>
+          <li>Чоловік і дружина, які подалися окремо, — це дві анкети: дослідження вивчає кожного з батьків.</li>
+        </ul>
+      </div>
     </div>
 
     <section class="cta-ob">
@@ -148,8 +173,10 @@ tr.done .minibar>i{background:#3F6B52}
     </section>
 
     <p class="hint2" style="margin-top:22px">
-      Сторінка оновлюється автоматично щохвилини. Показані лише зведені числа —
-      жодних імен, контактів чи відповідей конкретних родин. Анкети рахуються без повторів.
+      Сторінка оновлюється автоматично щохвилини просто з бази даних дослідження — те, що ви
+      бачите, і є поточний стан. Якщо зʼєднання пропаде, вгорі зʼявиться попередження, щоб ви
+      не прийняли старі числа за свіжі. Показані лише зведені числа — жодних імен, контактів
+      чи відповідей конкретних родин.
     </p>
   </div>
 </main>
@@ -169,7 +196,7 @@ tr.done .minibar>i{background:#3F6B52}
   var accessKey = (location.hash || '').replace(/^#/, '').trim();
   if (!accessKey) { try { accessKey = localStorage.getItem('ob-key') || ''; } catch (e) {} }
 
-  var lastOk = null, timer = null, tick = null;
+  var lastOk = null, timer = null, tick = null, chasOstannoi = '—';
   var dani = null, sortBy = 'n', query = '', pinned = '';
 
   function n(x) { return (x === null || x === undefined) ? '—' : Number(x).toLocaleString('uk-UA'); }
@@ -189,8 +216,10 @@ tr.done .minibar>i{background:#3F6B52}
   function malyuvatyTablytsiu() {
     if (!dani) return;
     var obl = dani.oblasti || [];
-    var cilObl = Math.round((dani.cil || 1000) / obl.length);
+    // ціль на регіон приходить з бази; у окупованих областей вона порожня
+    var cilObl = dani.cil_obl || Math.round((dani.cil || 1000) / obl.length);
     document.getElementById('obl-cil').textContent = cilObl;
+    document.getElementById('obl-cil-sl').textContent = anket(cilObl);
 
     // місце за кількістю рахуємо один раз, воно не залежить від сортування
     var misce = {};
@@ -203,24 +232,39 @@ tr.done .minibar>i{background:#3F6B52}
     var q = malyi(query.trim());
     var rows = spysok.filter(function (o) { return !q || malyi(o.nazva).indexOf(q) !== -1; })
       .map(function (o) {
-        var treba = Math.max(0, cilObl - o.n);
+        var cil = (o.cil === null || o.cil === undefined) ? null : o.cil;
+        var treba = cil === null ? null : Math.max(0, cil - o.n);
         var cls = [];
-        if (o.n === 0) cls.push('zero');
-        if (o.n >= cilObl) cls.push('done');
+        if (o.n === 0 && cil !== null) cls.push('zero');
+        if (cil !== null && o.n >= cil) cls.push('done');
+        if (cil === null) cls.push('nocil');
         if (o.nazva === pinned) cls.push('pin');
+        var smuzhka = cil === null
+          ? '<span class="muted" style="font-size:13px">ціль не ставимо</span>'
+          : '<div class="minibar"><i style="width:' + (o.n / maxN * 100).toFixed(1) + '%"></i>' +
+            '<u style="left:' + (cil / maxN * 100).toFixed(1) + '%"></u></div>';
         return '<tr class="' + cls.join(' ') + '" data-obl="' + o.nazva + '">' +
           '<td class="pos">' + misce[o.nazva] + '</td>' +
           '<td class="nm">' + o.nazva + '</td>' +
-          '<td><div class="minibar"><i style="width:' + (o.n / maxN * 100).toFixed(1) + '%"></i>' +
-              '<u style="left:' + (cilObl / maxN * 100).toFixed(1) + '%"></u></div></td>' +
+          '<td>' + smuzhka + '</td>' +
           '<td class="rn"><b>' + n(o.n) + '</b></td>' +
           '<td class="rn">' + (o.vpo ? n(o.vpo) : '<span class="muted">—</span>') + '</td>' +
           '<td class="rn">' + (o.retreat ? n(o.retreat) : '<span class="muted">—</span>') + '</td>' +
-          '<td class="rn">' + (treba ? n(treba) : '<span class="tick">ціль ✓</span>') + '</td></tr>';
+          '<td class="rn">' + (cil === null ? '<span class="muted">—</span>'
+                : (treba ? n(treba) : '<span class="tick">ціль ✓</span>')) + '</td></tr>';
       }).join('');
 
     document.getElementById('obl-body').innerHTML = rows ||
       '<tr><td colspan="7" class="muted" style="padding:18px 10px">Такої області немає в списку.</td></tr>';
+
+    var zCillyu = obl.filter(function (o) { return o.cil !== null && o.cil !== undefined; }).length;
+    document.getElementById('obl-skilky').textContent = zCillyu;
+    var bez = dani.bez_cili || [];
+    document.getElementById('obl-bez').innerHTML = bez.length
+      ? '. <b>' + bez.join(' і ') + '</b> ' + (bez.length > 1 ? 'області' : 'область') +
+        ' до розподілу не входять — території окуповані. Анкети, які звідти все ж надходять, ' +
+        'ураховуються в загальну тисячу'
+      : '';
   }
 
   function render(d) {
@@ -235,6 +279,8 @@ tr.done .minibar>i{background:#3F6B52}
     document.getElementById('u-dniv').textContent =
       d.dniv > 0 ? 'до кінця прийому ' + n(d.dniv) + ' дн. — анкети приймаємо до ' + d.dedlajn
                  : 'прийом анкет завершено ' + d.dedlajn;
+    document.getElementById('pr-inshi').textContent =
+      d.inshi_formy ? ' (таких анкет ' + n(d.inshi_formy) + ')' : '';
     malyuvatyTablytsiu();
     document.title = n(d.vsogo) + ' ' + anket(d.vsogo) + ' по областях | Хочу на ручки';
   }
@@ -252,34 +298,58 @@ tr.done .minibar>i{background:#3F6B52}
     });
   }
 
+  // Дані вважаємо застарілими, якщо остання вдала перевірка була давніше 3 хвилин.
+  var ZASTARILO = 180000;
+
   function ago() {
     if (!lastOk) return;
-    var s = Math.round((Date.now() - lastOk) / 1000);
+    var ms = Date.now() - lastOk, s = Math.round(ms / 1000);
     livetext.textContent = s < 5 ? 'оновлено щойно'
       : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
+    var staro = ms > ZASTARILO;
+    document.getElementById('stale').hidden = !staro;
+    if (staro) document.getElementById('stale-time').textContent = chasOstannoi;
   }
 
-  function refresh(first) {
+  function fail(msg) {
+    boot.hidden = true; page.hidden = true; gate.hidden = false;
+    var g = document.getElementById('gerr');
+    g.hidden = false; g.textContent = msg;
+  }
+
+  // sproba — лічильник спроб при першому завантаженні
+  function refresh(first, sproba) {
     return fetchData().then(function (d) {
       if (first) { boot.hidden = true; gate.hidden = true; page.hidden = false; }
       try { localStorage.setItem('ob-key', accessKey); } catch (e) {}
       render(d);
-      lastOk = Date.now(); dot.classList.remove('err'); ago();
+      lastOk = Date.now();
+      chasOstannoi = d.onovleno;
+      dot.classList.remove('err'); ago();
     }).catch(function (e) {
+      var m = e.message || '';
+      var kliuch = /42501|доступ|ключ/i.test(m);
+      var nemaFunkcii = /Could not find the function/i.test(m);
+
+      if (first && kliuch) { fail('Невірний ключ доступу.'); return; }
+      if (first && nemaFunkcii) { fail('У базі ще немає функції для цієї сторінки. Запустіть ДАШБОРД-SQL.sql у Supabase.'); return; }
+
       if (first) {
-        boot.hidden = true; page.hidden = true; gate.hidden = false;
-        if (accessKey) {
-          var g = document.getElementById('gerr');
-          g.hidden = false;
-          g.textContent = /42501|доступ|ключ/i.test(e.message) ? 'Невірний ключ доступу.'
-            : (/Could not find the function/i.test(e.message)
-               ? 'У базі ще немає функції для цієї сторінки. Запустіть ДАШБОРД-SQL.sql у Supabase.'
-               : 'Не вдалося завантажити: ' + e.message);
+        // мережа могла моргнути — не лякаємо людину формою ключа, а пробуємо ще
+        sproba = (sproba || 0) + 1;
+        if (sproba <= 6) {
+          boot.hidden = false;
+          boot.textContent = 'Не вдається зʼєднатися із сервером. Пробуємо ще… (' + sproba + ' з 6)';
+          return new Promise(function (r) { setTimeout(r, 3000); })
+            .then(function () { return refresh(true, sproba); });
         }
-      } else {
-        dot.classList.add('err');
-        livetext.textContent = 'звʼязок утрачено, пробуємо ще';
+        fail('Не вдалося завантажити дані: ' + m + '. Спробуйте оновити сторінку.');
+        return;
       }
+
+      dot.classList.add('err');
+      livetext.textContent = 'звʼязок утрачено, пробуємо ще';
+      ago();
     });
   }
 
