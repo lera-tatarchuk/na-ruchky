@@ -80,8 +80,6 @@ tr.done .minibar>i{background:#4E7D64}
 .gauge .track>u{position:absolute;top:-4px;width:3px;height:21px;background:var(--ink);border-radius:2px;transition:left .6s}
 .z1{background:#DCEBE1}.z2{background:#FBEFD0}.z3{background:#F3D3C7}
 
-.stale{display:flex;gap:10px;align-items:flex-start;background:#FBE9E3;border:1px solid #E8C4B6;color:#8F3618;border-radius:12px;padding:13px 16px;font-size:14.5px;line-height:1.5;margin-bottom:16px}
-.stale b{white-space:nowrap}
 
 .gatewrap{max-width:420px;margin:70px auto;text-align:center}
 .gatewrap h1{font-family:'Comfortaa',system-ui,sans-serif;font-size:28px;margin:0 0 8px}
@@ -115,12 +113,6 @@ tr.done .minibar>i{background:#4E7D64}
   </div>
 
   <div id="board" class="db" hidden>
-
-    <div class="stale" id="stale" hidden>
-      <span>⚠</span>
-      <span>Дані могли застаріти: остання вдала перевірка — <b id="stale-time">—</b>.
-        Схоже, пропало зʼєднання. Сторінка далі пробує оновитися сама.</span>
-    </div>
 
     <div class="db-head">
       <div>
@@ -224,7 +216,7 @@ tr.done .minibar>i{background:#4E7D64}
   var accessKey = (location.hash || '').replace(/^#/, '').trim();
   if (!accessKey) { try { accessKey = localStorage.getItem('db-key') || ''; } catch (e) {} }
 
-  var prev = null, lastOk = null, timer = null, tick = null, chasOstannoi = '', nevdachi = 0;
+  var prev = null, lastOk = null, timer = null, tick = null;
 
   function n(x) { return (x === null || x === undefined) ? '—' : Number(x).toLocaleString('uk-UA'); }
   // 1 анкета · 2 анкети · 5 анкет
@@ -439,19 +431,11 @@ tr.done .minibar>i{background:#4E7D64}
     });
   }
 
-  // Дані вважаємо застарілими, якщо остання вдала перевірка була давніше 3 хвилин.
-  var ZASTARILO = 180000;
-
   function ago() {
     if (!lastOk) return;
     var ms = Date.now() - lastOk, s = Math.round(ms / 1000);
     livetext.textContent = s < 5 ? 'оновлено щойно'
       : (s < 60 ? 'оновлено ' + s + ' с тому' : 'оновлено ' + Math.round(s / 60) + ' хв тому');
-    // Банер означає «ми пробували і не змогли», а не «давно не пробували».
-    // Поки вкладка у фоні, ми навмисне не смикаємо базу — це не збій.
-    var staro = nevdachi > 0 && ms > ZASTARILO && chasOstannoi;
-    document.getElementById('stale').hidden = !staro;
-    if (staro) document.getElementById('stale-time').textContent = chasOstannoi;
   }
 
   function fail(msg) {
@@ -464,7 +448,7 @@ tr.done .minibar>i{background:#4E7D64}
     return fetchData().then(function (d) {
       // час фіксуємо до показу: якщо малювання спіткнеться, банер усе одно
       // знатиме, на коли дані, і не покаже порожній прочерк
-      lastOk = Date.now(); chasOstannoi = d.onovleno || ''; nevdachi = 0;
+      lastOk = Date.now();
       try { localStorage.setItem('db-key', accessKey); } catch (e) {}
       render(d);
       prev = d;
@@ -493,7 +477,6 @@ tr.done .minibar>i{background:#4E7D64}
         fail('Не вдалося завантажити дані: ' + m + '. Спробуйте оновити сторінку.');
         return;
       }
-      nevdachi++;
       dot.classList.add('err');
       livetext.textContent = 'звʼязок утрачено, пробуємо ще';
       ago();
